@@ -6,8 +6,6 @@ extern uint32_t lastDisconnectedFlash;
 extern bool disconnectedFlashState;
 
 extern int32_t rawADCValue;
-extern float batteryVoltage;
-extern int32_t batteryPercentage;
 
 
 extern bool event_connection_state_flag_bo;
@@ -39,16 +37,13 @@ extern const int32_t g_interval_i32;  // 500ms
 
 extern uint32_t g_ultrasonic_distance_cm;
 
-extern int32_t g_battery_raw_adc;
-extern float g_battery_voltage;
-extern int32_t g_battery_percentage;
 
 extern uint32_t g_elapsed_time_startup_millis;
 extern uint32_t g_elapsed_time_hours;
 extern uint32_t g_elapsed_time_minutes;
 extern uint32_t g_elapsed_time_seconds;
 
-extern int16_t g_remotexy_sound1_val;
+
 
 extern uint32_t g_joystick_speed_pct;  // 0-100, updated by tasks_joysticks(), sent by tasks_remotexy()
 

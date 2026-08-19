@@ -2,7 +2,7 @@
 #define __DEF_INCLUDE_CONFIG_H__
 
 
-#define CONFIG_BLE_DEVICE_NAME "diy_app_b3"
+#define CONFIG_BLE_DEVICE_NAME "diy_app_s2"
 
 #define DEF_DERIAL_DEBUG
 
@@ -19,7 +19,7 @@
 // WiFiManager remembers the last network it joined (its own NVS storage),
 // and opens a setup access point for you to enter new credentials from a
 // phone whenever it can't reconnect — see 17_ota.cpp.
-#define CONFIG_OTA_HOSTNAME          "wdiy-robot-b3"
+#define CONFIG_OTA_HOSTNAME          "wdiy-servo-sonar"
 #define CONFIG_OTA_HOLD_MS           3000
 #define CONFIG_OTA_SETUP_AP_NAME     "WDIY-Robot-Setup"
 #define CONFIG_OTA_PORTAL_TIMEOUT_S  180
@@ -27,40 +27,6 @@
 // forget the saved WiFi network and force the setup portal open — the
 // normal path just reconnects to whatever's already saved.
 #define CONFIG_OTA_FORGET_HOLD_MS    8000
-
-// --------------------------------------
-// buzzer
-#define CONFIG_PIN_BUZZER 4
-#define CONFIG_BUZZER_FREQ 4000
-
-// battery level
-#define CONFIG_PIN_BATTERY_LEVEL 4
-
-#define BATTERY_MIN_V 3.3  // Minimum battery voltage (adjust according to your battery)
-//#define BATTERY_MAX_V 4.2  // Maximum battery voltage (adjust according to your battery)
-#define BATTERY_MAX_V 4.5  // Maximum battery voltage (adjust according to your battery)
-
-// --------------------------------------
-// neopixel
-
-#define CONFIG_NEOPIXELS_MAX_LEDS 256      // Max supported (array size)
-
-#if 1
-  #define CONFIG_PIN_NEOPIXEL 5
-  #define CONFIG_NEOPIXELS_NB_LEDS 4       // Active LED count
-#else
-  #define CONFIG_PIN_NEOPIXEL 10            // external strip
-  #define CONFIG_NEOPIXELS_NB_LEDS 16       // Active LED count
-#endif
-
-#define CONFIG_NEOPIXELS_BRIGHTNESS 15       // Brightness (0-255)
-
-
-
-// --------------------------------------
-// I2C pins
-#define CONFIG_PIN_OLED_SDA 8
-#define CONFIG_PIN_OLED_SCL 9
 
 // --------------------------------------
 // Ultrasonic sensor pins
@@ -76,24 +42,14 @@
 #define CONFIG_SERVO_SPEED_STOP_LEFT_OFFSET    5
 #define CONFIG_SERVO_SPEED_STOP_RIGHT_OFFSET    5
 
-#define CONFIG_PIN_SERVO_LEFT  6   // GPIO 6 for left servo
-#define CONFIG_PIN_SERVO_RIGHT 3   // GPIO 3 for right servo
-
-// #define CONFIG_PIN_SERVO_LEFT  7   // GPIO 6 for left servo
-// #define CONFIG_PIN_SERVO_RIGHT 2   // GPIO 3 for right servo
-
-// #define CONFIG_PIN_SERVO_LEFT  10   // GPIO 6 for left servo
-// #define CONFIG_PIN_SERVO_RIGHT 1   // GPIO 3 for right servo
-
-#define CONFIG_PIN_LED_RED 10   //
-#define CONFIG_PIN_LED_GREEN 1   //
-
-// #define LED_PIN_1 2
-// #define LED_PIN_2 6
-
-// OLED config
-#define SCREEN_WIDTH 128
-#define SCREEN_HEIGHT 64
-#define OLED_RESET    -1  // Reset pin not used
+// This board wires J2 pin 3 to GPIO10 and J3 pin 3 to GPIO7 (schematic
+// 34_richa_c3_servo_sonar, rev v1). b3 uses GPIO6/3 instead, which is the one
+// pin difference between the two robots. GPIO10 is free here only because this
+// board has no LEDs and no external NeoPixel strip -- on b3 that pin is
+// CONFIG_PIN_LED_RED and the strip output.
+// Swap these two if the robot drives backwards or spins on the spot: which
+// physical connector is "left" depends on how the servos are mounted.
+#define CONFIG_PIN_SERVO_LEFT  10  // J2
+#define CONFIG_PIN_SERVO_RIGHT 7   // J3
 
 #endif // __DEF_INCLUDE_CONFIG_H__

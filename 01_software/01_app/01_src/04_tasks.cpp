@@ -1,12 +1,6 @@
 #include "01_includes.h"
 
 // ===========================================================================
-void tasks_buzzer(void) {
-// ===========================================================================
-
-}
-
-// ===========================================================================
 void tasks_connect(void) {
 // ===========================================================================
   events_connection_state_enum l_currentState;
@@ -17,56 +11,22 @@ void tasks_connect(void) {
       return;
     }
     
-    if(l_currentState == EVENTS_CONNECTION_CONNECTED) {
-      buzzer_beep();
-      return;
-    } 
-    
-    if(l_currentState == EVENTS_CONNECTION_DISCONNECTED) {
-     
-      buzzer_beep();  // Single beep      
-    }  
+    // b3 beeps on connect and disconnect. This board has no buzzer, so the
+    // transition is only consumed to clear the flag -- the app still shows the
+    // link state, and the servos are stopped by tasks_joysticks() whenever
+    // remotexy_get_connect_flag() is false.
+    (void)l_currentState;
 }
 
 // ===========================================================================
 void tasks_buttons(void) {
 // ===========================================================================
-  if( remotexy_get_button_01()) {
-    g_remotexy_sound1_val = REMOTEXY_SOUND_ALARM;
-    neopixels_all_blink(CRGB::Green, 1, 20);    
-    buzzer_beep();
-
-    //remotexy_set_joystick_01_x( map(CONFIG_SERVO_SPEED_STOP_LEFT, 0, 180, -100, 100));
-    //remotexy_set_joystick_01_y(map(CONFIG_SERVO_SPEED_STOP_RIGHT, 0, 180, -100, 100 ));
-    
-  }  
-  if( button_pressed() ) {
-    g_remotexy_sound1_val = REMOTEXY_SOUND_BEEP_SHORT;
-    neopixels_all_blink(CRGB::Red, 1, 20);
-    buzzer_beep();  
-        
-  }  
-}
-
-// ===========================================================================
-void tasks_rmotexy_sound(void) {
-// ===========================================================================
-  static uint32_t s_previous_millis_u32 =0;
-  static uint8_t s_state_u8 =0;
-
-  uint32_t l_current = millis(); 
-
-  if ( g_remotexy_sound1_val ) {
-    remotexy_set_sound_01(g_remotexy_sound1_val);
-    g_remotexy_sound1_val = 0;
-    s_previous_millis_u32 = l_current; 
-    return;
-  }
-
-  if (l_current - s_previous_millis_u32 >= 2000) {
-    s_previous_millis_u32 = l_current; 
-    remotexy_set_sound_01(g_remotexy_sound1_val);
-  }     
+  // The app button and the BOOT button both used to beep and flash the strip.
+  // Neither exists here, so the presses are simply read -- button_pressed() is
+  // edge-triggered and must still be called every loop so the OTA long-press
+  // detector in 17_ota.cpp sees a consistent button state.
+  (void)remotexy_get_button_01();
+  (void)button_pressed();
 }
 
 // ===========================================================================
@@ -135,14 +95,6 @@ void tasks_joysticks(void) {
 }
 
 // ===========================================================================
-void tasks_battery(void) {
-// ===========================================================================
-  g_battery_raw_adc = analogRead(CONFIG_PIN_BATTERY_LEVEL);
-  g_battery_voltage = readBatteryVoltage();
-  g_battery_percentage = calculateBatteryPercentage(g_battery_voltage);
-}
-
-// ===========================================================================
 void tasks_elapsed_time(void) {
 // ===========================================================================
   uint32_t l_millis;
@@ -165,7 +117,6 @@ void tasks_remotexy(void) {
 // ===========================================================================
   remotexy_set_onlineGraph_01_distance(g_ultrasonic_distance_cm);
   remotexy_set_onlineGraph_02_speed(g_joystick_speed_pct);
-  remotexy_set_onlineGraph_03_battery(g_battery_percentage);
 
   // Widgets added with the zoned layout. Each one self-gates on the Telemetry
   // level, so this list stays flat rather than nesting the whole block.
@@ -175,8 +126,6 @@ void tasks_remotexy(void) {
   remotexy_send_button_state();
   remotexy_send_link_rssi();
   remotexy_send_control_echo();
-  remotexy_send_oled_mirror();
-  remotexy_send_led_state();
   // Must stay last: ends the forced full refresh that follows a CFG transfer.
   remotexy_telemetry_end();
 }
