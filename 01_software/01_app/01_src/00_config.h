@@ -39,8 +39,21 @@
 #define CONFIG_SERVO_SPEED_STOP_LEFT    90
 #define CONFIG_SERVO_SPEED_STOP_RIGHT   90
 
-#define CONFIG_SERVO_SPEED_STOP_LEFT_OFFSET    5
-#define CONFIG_SERVO_SPEED_STOP_RIGHT_OFFSET    5
+// Per-wheel straight-line trim, in degrees of servo pulse. Positive = that
+// wheel drives MORE forward. Applied in the same physical direction on both
+// sides (see tasks_joysticks(), which subtracts on the mirrored right channel).
+//
+// Zero is the correct default: with both at 0 the two wheels get equal and
+// opposite full-scale commands, so anything left is real mechanical or
+// servo-tolerance error -- which is exactly what these are for. They were both
+// 5, inherited from b3, which given the sign bug actively caused the veer.
+//
+// To tune: drive forward on a flat floor. If it pulls RIGHT, the right wheel is
+// slower -- raise RIGHT_OFFSET by 2 and retest. If it pulls LEFT, raise
+// LEFT_OFFSET. Expect single digits; more than ~10 usually means a mechanical
+// problem rather than a calibration one.
+#define CONFIG_SERVO_SPEED_STOP_LEFT_OFFSET    0
+#define CONFIG_SERVO_SPEED_STOP_RIGHT_OFFSET   0
 
 // This board wires J2 pin 3 to GPIO10 and J3 pin 3 to GPIO7 (schematic
 // 34_richa_c3_servo_sonar, rev v1). b3 uses GPIO6/3 instead, which is the one

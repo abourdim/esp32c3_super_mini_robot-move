@@ -308,7 +308,7 @@ static bool s_joyIsXY       = false;
 // Reported to the app in the SYSTEM zone's Firmware label. Bump on release.
 // Kept the B3_ prefix so this file still diffs cleanly against b3's copy --
 // only the value distinguishes the two robots in the app's Firmware label.
-#define B3_FIRMWARE_VERSION "S2-v2"
+#define B3_FIRMWARE_VERSION "S2-v3"
 
 // ---------------------------------------------------------------------------
 // Widget state owned by the app (see 03_bit-rxy.h for the accessors).

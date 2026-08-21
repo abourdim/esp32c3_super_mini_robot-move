@@ -91,7 +91,17 @@ void tasks_joysticks(void) {
   // inverted pulse range to actually spin the same physical direction.
   int rightPulse = map(rightSpeed, -100, 100, 180, 0);
 
-  moveServos(leftPulse+CONFIG_SERVO_SPEED_STOP_LEFT_OFFSET, rightPulse+CONFIG_SERVO_SPEED_STOP_RIGHT_OFFSET);
+  // Trim is a raw pulse offset, so it lands in each servo's OWN frame -- and
+  // the right channel's frame is inverted by the map() above. Adding the same
+  // +N to both therefore pushed the two wheels in OPPOSITE physical directions:
+  // at full forward the left reached 180 (full speed) while the right sat at
+  // 0+N, which is N degrees SHORT of its full speed, so the robot curved right.
+  // At rest it was worse -- 90+N on the left creeps forward while 90+N on the
+  // right creeps backward, so an idle robot slowly turned on the spot.
+  // Subtracting on the inverted side makes a positive trim mean "more forward"
+  // on both wheels, which is the only reading that makes the constants usable.
+  moveServos(leftPulse  + CONFIG_SERVO_SPEED_STOP_LEFT_OFFSET,
+             rightPulse - CONFIG_SERVO_SPEED_STOP_RIGHT_OFFSET);
 }
 
 // ===========================================================================
