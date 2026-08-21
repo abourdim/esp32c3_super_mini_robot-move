@@ -65,10 +65,27 @@ def build(title, zones, extra=()):
                 errs.append(f"{cid} under the {g['label']} header")
     for a, b in itertools.combinations(groups, 2):
         if ov(a, b): errs.append(f"group overlap {a['label']} ~ {b['label']}")
+    # `extra` widgets sit outside every group but must still not collide with
+    # one, and must fit the canvas with room for the margin.
+    for e in list(extra):
+        for o in groups + controls:
+            if ov(e, o): errs.append(f"{e['id']} overlaps {o['id']}")
     for a, b in itertools.combinations(controls, 2):
         if ov(a, b): errs.append(f"control overlap {a['id']} ~ {b['id']}")
     assert not errs, f"{title}: {errs}"
     return cfg
+
+
+# 110, not the 60 b3 used. Measured in the browser: this label renders its text
+# at 75px for two lines inside a 60px box, so the last line was clipped on both
+# test panels. The extra room also absorbs a longer translation.
+HINT_H = 110
+
+
+def hint(x, y, w, text):
+    """The one-line instruction under a test panel. Deliberately outside the
+    group: it explains the exercise, it is not part of it."""
+    return W("lbl_hint", "label", x, y, w, HINT_H, label=text, value=text, model="card")
 
 
 LOGO = lambda x, y: W("logo", "image", x, y, 192, 164, label="Workshop-DIY",
@@ -127,7 +144,35 @@ expert = build("WDIY Servo-Sonar - Expert", [
     ]),
 ])
 
-NEW = {"BEGINNER": beginner, "EXPERT": expert}
+# ── TEST PANELS ─────────────────────────────────────────────────────────────
+# One subsystem each, big targets, one instruction. Rebuilt here rather than
+# carried over from b3 so they go through the same checks as the other two --
+# carrying them over unvalidated is exactly how the clipped hint shipped.
+test_drive = build("Servo-Sonar - Drive test", [
+    ("grp_test", "MOTORS", "#00d4ff", [
+        W("dpad_drive", "dpad", 80, 100, 300, 300, label="Drive", model="classic"),
+        W("spd", "slider", 420, 100, 90, 200, label="Speed",
+          min=0, max=100, step=5, value=100),
+        W("btn_stop", "button", 420, 330, 120, 120, label="STOP"),
+        W("gauge_speed", "gauge", 570, 100, 150, 190, label="Speed %",
+          min=0, max=100, decimals=0, model="min"),
+        W("level", "select", 80, 490, 200, 70, label="Test", options=LEVELS),
+    ]),
+], extra=[hint(80, 600, 640, "Press an arrow. The wheels should turn that way.")])
+
+test_distance = build("Servo-Sonar - Distance test", [
+    ("grp_test", "DISTANCE", "#ffb020", [
+        W("gauge_distance", "gauge", 80, 100, 150, 190, label="Distance cm",
+          min=0, max=200, units="cm", decimals=0, model="classic"),
+        W("alert", "notification", 260, 110, 110, 110, label="Obstacle"),
+        W("graph_dist", "graph", 80, 320, 380, 200, label="Distance cm",
+          model="grid", windowSec=30, series=1),
+        W("level", "select", 80, 560, 200, 70, label="Test", options=LEVELS),
+    ]),
+], extra=[hint(80, 670, 380, "Move your hand in front of the sensor.")])
+
+NEW = {"BEGINNER": beginner, "EXPERT": expert,
+       "TEST_DRIVE": test_drive, "TEST_DISTANCE": test_distance}
 
 # ── splice ──────────────────────────────────────────────────────────────────
 src = open(SRC, encoding="utf-8").read()
@@ -153,17 +198,7 @@ def emit(name, cfg):
 report = []
 for name in ("BEGINNER", "EXPERT", "TEST_DRIVE", "TEST_DISTANCE"):
     m, old_b64 = blob_of(name)
-    if name in NEW:
-        cfg = NEW[name]
-    else:
-        # Both test panels are already free of absent hardware; they only need
-        # the Level options re-pointed at the four panels that now exist, and
-        # the title moved off b3.
-        cfg = json.loads(base64.b64decode(old_b64).decode())
-        cfg["title"] = cfg["title"].replace("b3 - ", "Servo-Sonar - ").replace("Motors", "Drive")
-        for w in cfg["widgets"]:
-            if w["id"] == "level":
-                w["options"] = LEVELS
+    cfg = NEW[name]
     text, n = emit(name, cfg)
     src = src[:m.start()] + text + src[m.end():]
     ids = [w["id"] for w in cfg["widgets"] if w["t"] not in ("group", "separator")]
