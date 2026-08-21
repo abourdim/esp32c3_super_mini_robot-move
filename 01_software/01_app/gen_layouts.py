@@ -39,6 +39,23 @@ def group(gid, label, color, members):
                 children=[m["id"] for m in members])
 
 
+# Smallest box each widget type renders its own chrome in without clipping,
+# measured against the real app rather than guessed: a button clips at 90x90 but
+# fits at 100, and a card label clips at 50 tall but fits at 60. Three widgets
+# shipped just under these floors, which is what "the text overlaps" was.
+#
+# This is a floor, not a text-fit test. It cannot see a long string wrapping to
+# more lines than its box allows -- only rendering can, which is why the hint
+# height is a measured constant. Keep a margin above these numbers.
+MIN_SIZE = {
+    "button": (100, 100),
+    "label":  (80, 60),
+    "select": (120, 60),
+    "gauge":  (120, 120),
+    "led":    (60, 60),
+}
+
+
 def build(title, zones, extra=()):
     groups, controls = [], []
     for gid, label, color, members in zones:
@@ -54,6 +71,11 @@ def build(title, zones, extra=()):
         a1, b1, a2, b2 = box(a); c1, d1, c2, d2 = box(b)
         return not (a2 <= c1 or c2 <= a1 or b2 <= d1 or d2 <= b1)
     errs = []
+    for w in list(controls) + list(extra):
+        mw, mh = MIN_SIZE.get(w["t"], (0, 0))
+        if w["w"] < mw or w["h"] < mh:
+            errs.append(f"{w['id']} is {w['w']}x{w['h']}, below the {mw}x{mh} "
+                        f"floor for {w['t']} -- its text will clip")
     by = {w["id"]: w for w in widgets}
     for g in groups:
         gx1, gy1, gx2, gy2 = box(g)
@@ -119,28 +141,34 @@ expert = build("WDIY Servo-Sonar - Expert", [
         W("joy_drive", "joystick", 440, 100, 300, 300, label="Steer"),
         W("spd", "slider", 790, 100, 90, 220, label="Speed",
           min=0, max=100, step=5, value=100),
-        W("btn_stop", "button", 790, 350, 90, 90, label="STOP"),
+        W("btn_stop", "button", 790, 350, 110, 110, label="STOP"),
         W("gauge_speed", "gauge", 940, 110, 200, 190, label="Speed",
           min=0, max=100, decimals=0, model="min"),
+        # Steering-only pad. On a differential drive, left/right with no forward
+        # component spins the robot on the spot -- the one movement the 4-way
+        # pad makes awkward, since it needs a held direction and constant
+        # correction. Its bits merge with dpad_drive's in the firmware, so
+        # holding forward there and left here is an arc turn, not a fight.
+        W("dpad_turn", "dpad", 80, 470, 300, 120, label="Turn", model="leftright"),
     ]),
     ("grp_dist", "DISTANCE", "#ffb020", [
-        W("gauge_distance", "gauge", 80, 600, 220, 200, label="Distance",
+        W("gauge_distance", "gauge", 80, 760, 220, 200, label="Distance",
           min=0, max=200, units="cm", decimals=0, model="classic"),
-        W("alert", "notification", 330, 610, 90, 90, label="Obstacle"),
-        W("graph_dist", "graph", 460, 600, 480, 210, label="Distance cm",
+        W("alert", "notification", 330, 770, 90, 90, label="Obstacle"),
+        W("graph_dist", "graph", 460, 760, 480, 210, label="Distance cm",
           model="grid", windowSec=30, series=1),
-        W("sound_alert", "sound", 980, 610, 90, 90, label="Alert"),
+        W("sound_alert", "sound", 980, 770, 90, 90, label="Alert"),
     ]),
     ("grp_sys", "SYSTEM", "#3ddc97", [
-        W("lbl_ver", "label", 80, 950, 200, 50, label="Firmware", model="card"),
-        W("lbl_uptime", "label", 80, 1030, 200, 50, label="Uptime", model="card"),
-        W("upd", "select", 320, 950, 160, 70, label="Telemetry", options="Off,Basic,All"),
-        LEVEL(320, 1040),
-        W("led_button", "led", 520, 960, 80, 80, label="Button",
+        W("lbl_ver", "label", 80, 1110, 200, 70, label="Firmware", model="card"),
+        W("lbl_uptime", "label", 80, 1200, 200, 70, label="Uptime", model="card"),
+        W("upd", "select", 320, 1110, 160, 70, label="Telemetry", options="Off,Basic,All"),
+        LEVEL(320, 1200),
+        W("led_button", "led", 520, 1120, 80, 80, label="Button",
           model="dot", colorOn="#00ff88"),
-        W("gauge_rssi", "gauge", 640, 950, 189, 190, label="Signal",
+        W("gauge_rssi", "gauge", 640, 1110, 189, 190, label="Signal",
           min=-100, max=-30, units="dBm", decimals=0, model="classic"),
-        LOGO(870, 960),
+        LOGO(870, 1120),
     ]),
 ])
 
@@ -156,9 +184,11 @@ test_drive = build("Servo-Sonar - Drive test", [
         W("btn_stop", "button", 420, 330, 120, 120, label="STOP"),
         W("gauge_speed", "gauge", 570, 100, 150, 190, label="Speed %",
           min=0, max=100, decimals=0, model="min"),
-        W("level", "select", 80, 490, 200, 70, label="Test", options=LEVELS),
+        W("dpad_turn", "dpad", 80, 490, 260, 120, label="Turn", model="leftright"),
+        W("level", "select", 380, 505, 200, 70, label="Test", options=LEVELS),
     ]),
-], extra=[hint(80, 600, 640, "Press an arrow. The wheels should turn that way.")])
+], extra=[hint(80, 660, 640,
+               "Arrows drive. The two Turn buttons spin the robot on the spot.")])
 
 test_distance = build("Servo-Sonar - Distance test", [
     ("grp_test", "DISTANCE", "#ffb020", [
@@ -208,7 +238,7 @@ open(SRC, "w", encoding="utf-8", newline="\n").write(src)
 
 # Every id must have a handler or a telemetry sender; anything else is a dead
 # control on the panel.
-HANDLED = {"joy_drive", "dpad_drive", "spd", "btn_stop", "level", "upd"}
+HANDLED = {"joy_drive", "dpad_drive", "dpad_turn", "spd", "btn_stop", "level", "upd"}
 SENT = {"gauge_distance", "gauge_speed", "graph_dist", "alert", "sound_alert",
         "lbl_ver", "lbl_uptime", "gauge_rssi", "led_button"}
 DECOR = {"logo", "lbl_hint"}
