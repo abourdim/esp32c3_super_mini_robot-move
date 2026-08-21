@@ -110,6 +110,17 @@ def hint(x, y, w, text):
     return W("lbl_hint", "label", x, y, w, HINT_H, label=text, value=text, model="card")
 
 
+# Straight-line calibration, one per wheel. Kept next to the drive controls
+# rather than in a settings corner: you tune these WHILE driving the robot
+# forward and watching which way it pulls. -20..20 because past that it is a
+# mechanical fault, not a trim.
+def trim(x, y, w, h):
+    return [W("trim_l", "slider", x, y, w, h, label="Trim L",
+              min=-20, max=20, step=1, value=0),
+            W("trim_r", "slider", x + w + 20, y, w, h, label="Trim R",
+              min=-20, max=20, step=1, value=0)]
+
+
 LOGO = lambda x, y: W("logo", "image", x, y, 192, 164, label="Workshop-DIY",
                       imageSrc="assets/workshop-diy-logo.svg")
 LEVEL = lambda x, y: W("level", "select", x, y, 160, 70, label="Level", options=LEVELS)
@@ -150,6 +161,7 @@ expert = build("WDIY Servo-Sonar - Expert", [
         # correction. Its bits merge with dpad_drive's in the firmware, so
         # holding forward there and left here is an arc turn, not a fight.
         W("dpad_turn", "dpad", 80, 470, 300, 120, label="Turn", model="leftright"),
+        *trim(440, 470, 90, 160),
     ]),
     ("grp_dist", "DISTANCE", "#ffb020", [
         W("gauge_distance", "gauge", 80, 760, 220, 200, label="Distance",
@@ -186,9 +198,10 @@ test_drive = build("Servo-Sonar - Drive test", [
           min=0, max=100, decimals=0, model="min"),
         W("dpad_turn", "dpad", 80, 490, 260, 120, label="Turn", model="leftright"),
         W("level", "select", 380, 505, 200, 70, label="Test", options=LEVELS),
+        *trim(600, 330, 90, 200),
     ]),
-], extra=[hint(80, 660, 640,
-               "Arrows drive. The two Turn buttons spin the robot on the spot.")])
+], extra=[hint(80, 660, 710,
+               "Drive forward. If it curves right, raise Trim R until it runs straight.")])
 
 test_distance = build("Servo-Sonar - Distance test", [
     ("grp_test", "DISTANCE", "#ffb020", [
@@ -238,7 +251,8 @@ open(SRC, "w", encoding="utf-8", newline="\n").write(src)
 
 # Every id must have a handler or a telemetry sender; anything else is a dead
 # control on the panel.
-HANDLED = {"joy_drive", "dpad_drive", "dpad_turn", "spd", "btn_stop", "level", "upd"}
+HANDLED = {"joy_drive", "dpad_drive", "dpad_turn", "spd", "btn_stop", "level",
+           "upd", "trim_l", "trim_r"}
 SENT = {"gauge_distance", "gauge_speed", "graph_dist", "alert", "sound_alert",
         "lbl_ver", "lbl_uptime", "gauge_rssi", "led_button"}
 DECOR = {"logo", "lbl_hint"}

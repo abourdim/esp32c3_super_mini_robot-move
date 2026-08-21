@@ -33,6 +33,12 @@ extern void remotexy_set_connect_flag( uint8_t p_connect_flag);
 // DRIVE — 0..100 ceiling applied to the drive mix in tasks_joysticks().
 extern uint8_t remotexy_get_speed_cap(void);
 
+// DRIVE — per-wheel straight-line trim in degrees of servo pulse, positive =
+// more forward on that wheel. Set from the app and kept in NVS, so a robot
+// stays straight across power cycles without a reflash.
+extern int8_t remotexy_get_trim_left(void);
+extern int8_t remotexy_get_trim_right(void);
+
 // SYSTEM — telemetry verbosity chosen from the Telemetry select.
 enum { UPD_OFF = 0, UPD_BASIC, UPD_ALL };
 extern uint8_t remotexy_get_upd_level(void);

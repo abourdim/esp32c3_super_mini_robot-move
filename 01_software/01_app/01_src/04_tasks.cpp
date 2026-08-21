@@ -100,8 +100,12 @@ void tasks_joysticks(void) {
   // right creeps backward, so an idle robot slowly turned on the spot.
   // Subtracting on the inverted side makes a positive trim mean "more forward"
   // on both wheels, which is the only reading that makes the constants usable.
-  moveServos(leftPulse  + CONFIG_SERVO_SPEED_STOP_LEFT_OFFSET,
-             rightPulse - CONFIG_SERVO_SPEED_STOP_RIGHT_OFFSET);
+  // Trim now comes from the app (and NVS) rather than the compile-time
+  // constants, which remain only as the factory default for a fresh chip.
+  // Still subtracted on the right: that channel's pulse range is inverted, so
+  // this is what makes a positive trim mean "more forward" on both wheels.
+  moveServos(leftPulse  + remotexy_get_trim_left(),
+             rightPulse - remotexy_get_trim_right());
 }
 
 // ===========================================================================

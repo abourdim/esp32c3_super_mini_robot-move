@@ -162,81 +162,93 @@ static const char* LAYOUT_CFG_BEGINNER_BASE64 =
 static const char* LAYOUT_CFG_EXPERT_BASE64 =
   "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6IldESVkgU2Vydm8tU29uYXIgLSBFeHBlcnQi"
   "LCJ3aWRnZXRzIjpbeyJpZCI6ImdycF9kcml2ZSIsInQiOiJncm91cCIsImxhYmVsIjoiRFJJ"
-  "VkUiLCJjb2xvciI6IiMwMGQ0ZmYiLCJ4Ijo1NiwieSI6NDIsInciOjExMDgsImgiOjU3Miwi"
+  "VkUiLCJjb2xvciI6IiMwMGQ0ZmYiLCJ4Ijo1NiwieSI6NDIsInciOjExMDgsImgiOjYxMiwi"
   "Y2hpbGRyZW4iOlsiZHBhZF9kcml2ZSIsImpveV9kcml2ZSIsInNwZCIsImJ0bl9zdG9wIiwi"
-  "Z2F1Z2Vfc3BlZWQiLCJkcGFkX3R1cm4iXX0seyJpZCI6ImdycF9kaXN0IiwidCI6Imdyb3Vw"
-  "IiwibGFiZWwiOiJESVNUQU5DRSIsImNvbG9yIjoiI2ZmYjAyMCIsIngiOjU2LCJ5Ijo3MDIs"
-  "InciOjEwMzgsImgiOjI5MiwiY2hpbGRyZW4iOlsiZ2F1Z2VfZGlzdGFuY2UiLCJhbGVydCIs"
-  "ImdyYXBoX2Rpc3QiLCJzb3VuZF9hbGVydCJdfSx7ImlkIjoiZ3JwX3N5cyIsInQiOiJncm91"
-  "cCIsImxhYmVsIjoiU1lTVEVNIiwiY29sb3IiOiIjM2RkYzk3IiwieCI6NTYsInkiOjEwNTIs"
-  "InciOjEwMzAsImgiOjI3MiwiY2hpbGRyZW4iOlsibGJsX3ZlciIsImxibF91cHRpbWUiLCJ1"
-  "cGQiLCJsZXZlbCIsImxlZF9idXR0b24iLCJnYXVnZV9yc3NpIiwibG9nbyJdfSx7ImlkIjoi"
-  "ZHBhZF9kcml2ZSIsInQiOiJkcGFkIiwieCI6ODAsInkiOjEwMCwidyI6MzIwLCJoIjozMjAs"
-  "ImxhYmVsIjoiRHJpdmUiLCJtb2RlbCI6ImNsYXNzaWMiLCJncm91cElkIjoiZ3JwX2RyaXZl"
-  "In0seyJpZCI6ImpveV9kcml2ZSIsInQiOiJqb3lzdGljayIsIngiOjQ0MCwieSI6MTAwLCJ3"
-  "IjozMDAsImgiOjMwMCwibGFiZWwiOiJTdGVlciIsImdyb3VwSWQiOiJncnBfZHJpdmUifSx7"
-  "ImlkIjoic3BkIiwidCI6InNsaWRlciIsIngiOjc5MCwieSI6MTAwLCJ3Ijo5MCwiaCI6MjIw"
-  "LCJsYWJlbCI6IlNwZWVkIiwibWluIjowLCJtYXgiOjEwMCwic3RlcCI6NSwidmFsdWUiOjEw"
-  "MCwiZ3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJidG5fc3RvcCIsInQiOiJidXR0b24i"
-  "LCJ4Ijo3OTAsInkiOjM1MCwidyI6MTEwLCJoIjoxMTAsImxhYmVsIjoiU1RPUCIsImdyb3Vw"
-  "SWQiOiJncnBfZHJpdmUifSx7ImlkIjoiZ2F1Z2Vfc3BlZWQiLCJ0IjoiZ2F1Z2UiLCJ4Ijo5"
-  "NDAsInkiOjExMCwidyI6MjAwLCJoIjoxOTAsImxhYmVsIjoiU3BlZWQiLCJtaW4iOjAsIm1h"
-  "eCI6MTAwLCJkZWNpbWFscyI6MCwibW9kZWwiOiJtaW4iLCJncm91cElkIjoiZ3JwX2RyaXZl"
-  "In0seyJpZCI6ImRwYWRfdHVybiIsInQiOiJkcGFkIiwieCI6ODAsInkiOjQ3MCwidyI6MzAw"
-  "LCJoIjoxMjAsImxhYmVsIjoiVHVybiIsIm1vZGVsIjoibGVmdHJpZ2h0IiwiZ3JvdXBJZCI6"
-  "ImdycF9kcml2ZSJ9LHsiaWQiOiJnYXVnZV9kaXN0YW5jZSIsInQiOiJnYXVnZSIsIngiOjgw"
-  "LCJ5Ijo3NjAsInciOjIyMCwiaCI6MjAwLCJsYWJlbCI6IkRpc3RhbmNlIiwibWluIjowLCJt"
-  "YXgiOjIwMCwidW5pdHMiOiJjbSIsImRlY2ltYWxzIjowLCJtb2RlbCI6ImNsYXNzaWMiLCJn"
-  "cm91cElkIjoiZ3JwX2Rpc3QifSx7ImlkIjoiYWxlcnQiLCJ0Ijoibm90aWZpY2F0aW9uIiwi"
-  "eCI6MzMwLCJ5Ijo3NzAsInciOjkwLCJoIjo5MCwibGFiZWwiOiJPYnN0YWNsZSIsImdyb3Vw"
-  "SWQiOiJncnBfZGlzdCJ9LHsiaWQiOiJncmFwaF9kaXN0IiwidCI6ImdyYXBoIiwieCI6NDYw"
-  "LCJ5Ijo3NjAsInciOjQ4MCwiaCI6MjEwLCJsYWJlbCI6IkRpc3RhbmNlIGNtIiwibW9kZWwi"
-  "OiJncmlkIiwid2luZG93U2VjIjozMCwic2VyaWVzIjoxLCJncm91cElkIjoiZ3JwX2Rpc3Qi"
-  "fSx7ImlkIjoic291bmRfYWxlcnQiLCJ0Ijoic291bmQiLCJ4Ijo5ODAsInkiOjc3MCwidyI6"
-  "OTAsImgiOjkwLCJsYWJlbCI6IkFsZXJ0IiwiZ3JvdXBJZCI6ImdycF9kaXN0In0seyJpZCI6"
-  "ImxibF92ZXIiLCJ0IjoibGFiZWwiLCJ4Ijo4MCwieSI6MTExMCwidyI6MjAwLCJoIjo3MCwi"
-  "bGFiZWwiOiJGaXJtd2FyZSIsIm1vZGVsIjoiY2FyZCIsImdyb3VwSWQiOiJncnBfc3lzIn0s"
-  "eyJpZCI6ImxibF91cHRpbWUiLCJ0IjoibGFiZWwiLCJ4Ijo4MCwieSI6MTIwMCwidyI6MjAw"
-  "LCJoIjo3MCwibGFiZWwiOiJVcHRpbWUiLCJtb2RlbCI6ImNhcmQiLCJncm91cElkIjoiZ3Jw"
-  "X3N5cyJ9LHsiaWQiOiJ1cGQiLCJ0Ijoic2VsZWN0IiwieCI6MzIwLCJ5IjoxMTEwLCJ3Ijox"
-  "NjAsImgiOjcwLCJsYWJlbCI6IlRlbGVtZXRyeSIsIm9wdGlvbnMiOiJPZmYsQmFzaWMsQWxs"
-  "IiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7ImlkIjoibGV2ZWwiLCJ0Ijoic2VsZWN0IiwieCI6"
-  "MzIwLCJ5IjoxMjAwLCJ3IjoxNjAsImgiOjcwLCJsYWJlbCI6IkxldmVsIiwib3B0aW9ucyI6"
-  "IkJlZ2lubmVyLEV4cGVydCxEcml2ZSxEaXN0YW5jZSIsImdyb3VwSWQiOiJncnBfc3lzIn0s"
-  "eyJpZCI6ImxlZF9idXR0b24iLCJ0IjoibGVkIiwieCI6NTIwLCJ5IjoxMTIwLCJ3Ijo4MCwi"
-  "aCI6ODAsImxhYmVsIjoiQnV0dG9uIiwibW9kZWwiOiJkb3QiLCJjb2xvck9uIjoiIzAwZmY4"
-  "OCIsImdyb3VwSWQiOiJncnBfc3lzIn0seyJpZCI6ImdhdWdlX3Jzc2kiLCJ0IjoiZ2F1Z2Ui"
-  "LCJ4Ijo2NDAsInkiOjExMTAsInciOjE4OSwiaCI6MTkwLCJsYWJlbCI6IlNpZ25hbCIsIm1p"
-  "biI6LTEwMCwibWF4IjotMzAsInVuaXRzIjoiZEJtIiwiZGVjaW1hbHMiOjAsIm1vZGVsIjoi"
-  "Y2xhc3NpYyIsImdyb3VwSWQiOiJncnBfc3lzIn0seyJpZCI6ImxvZ28iLCJ0IjoiaW1hZ2Ui"
-  "LCJ4Ijo4NzAsInkiOjExMjAsInciOjE5MiwiaCI6MTY0LCJsYWJlbCI6IldvcmtzaG9wLURJ"
-  "WSIsImltYWdlU3JjIjoiYXNzZXRzL3dvcmtzaG9wLWRpeS1sb2dvLnN2ZyIsImdyb3VwSWQi"
-  "OiJncnBfc3lzIn1dLCJjYW52YXMiOnsidyI6MTIyMCwiaCI6MTM4MH19";
+  "Z2F1Z2Vfc3BlZWQiLCJkcGFkX3R1cm4iLCJ0cmltX2wiLCJ0cmltX3IiXX0seyJpZCI6Imdy"
+  "cF9kaXN0IiwidCI6Imdyb3VwIiwibGFiZWwiOiJESVNUQU5DRSIsImNvbG9yIjoiI2ZmYjAy"
+  "MCIsIngiOjU2LCJ5Ijo3MDIsInciOjEwMzgsImgiOjI5MiwiY2hpbGRyZW4iOlsiZ2F1Z2Vf"
+  "ZGlzdGFuY2UiLCJhbGVydCIsImdyYXBoX2Rpc3QiLCJzb3VuZF9hbGVydCJdfSx7ImlkIjoi"
+  "Z3JwX3N5cyIsInQiOiJncm91cCIsImxhYmVsIjoiU1lTVEVNIiwiY29sb3IiOiIjM2RkYzk3"
+  "IiwieCI6NTYsInkiOjEwNTIsInciOjEwMzAsImgiOjI3MiwiY2hpbGRyZW4iOlsibGJsX3Zl"
+  "ciIsImxibF91cHRpbWUiLCJ1cGQiLCJsZXZlbCIsImxlZF9idXR0b24iLCJnYXVnZV9yc3Np"
+  "IiwibG9nbyJdfSx7ImlkIjoiZHBhZF9kcml2ZSIsInQiOiJkcGFkIiwieCI6ODAsInkiOjEw"
+  "MCwidyI6MzIwLCJoIjozMjAsImxhYmVsIjoiRHJpdmUiLCJtb2RlbCI6ImNsYXNzaWMiLCJn"
+  "cm91cElkIjoiZ3JwX2RyaXZlIn0seyJpZCI6ImpveV9kcml2ZSIsInQiOiJqb3lzdGljayIs"
+  "IngiOjQ0MCwieSI6MTAwLCJ3IjozMDAsImgiOjMwMCwibGFiZWwiOiJTdGVlciIsImdyb3Vw"
+  "SWQiOiJncnBfZHJpdmUifSx7ImlkIjoic3BkIiwidCI6InNsaWRlciIsIngiOjc5MCwieSI6"
+  "MTAwLCJ3Ijo5MCwiaCI6MjIwLCJsYWJlbCI6IlNwZWVkIiwibWluIjowLCJtYXgiOjEwMCwi"
+  "c3RlcCI6NSwidmFsdWUiOjEwMCwiZ3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJidG5f"
+  "c3RvcCIsInQiOiJidXR0b24iLCJ4Ijo3OTAsInkiOjM1MCwidyI6MTEwLCJoIjoxMTAsImxh"
+  "YmVsIjoiU1RPUCIsImdyb3VwSWQiOiJncnBfZHJpdmUifSx7ImlkIjoiZ2F1Z2Vfc3BlZWQi"
+  "LCJ0IjoiZ2F1Z2UiLCJ4Ijo5NDAsInkiOjExMCwidyI6MjAwLCJoIjoxOTAsImxhYmVsIjoi"
+  "U3BlZWQiLCJtaW4iOjAsIm1heCI6MTAwLCJkZWNpbWFscyI6MCwibW9kZWwiOiJtaW4iLCJn"
+  "cm91cElkIjoiZ3JwX2RyaXZlIn0seyJpZCI6ImRwYWRfdHVybiIsInQiOiJkcGFkIiwieCI6"
+  "ODAsInkiOjQ3MCwidyI6MzAwLCJoIjoxMjAsImxhYmVsIjoiVHVybiIsIm1vZGVsIjoibGVm"
+  "dHJpZ2h0IiwiZ3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJ0cmltX2wiLCJ0Ijoic2xp"
+  "ZGVyIiwieCI6NDQwLCJ5Ijo0NzAsInciOjkwLCJoIjoxNjAsImxhYmVsIjoiVHJpbSBMIiwi"
+  "bWluIjotMjAsIm1heCI6MjAsInN0ZXAiOjEsInZhbHVlIjowLCJncm91cElkIjoiZ3JwX2Ry"
+  "aXZlIn0seyJpZCI6InRyaW1fciIsInQiOiJzbGlkZXIiLCJ4Ijo1NTAsInkiOjQ3MCwidyI6"
+  "OTAsImgiOjE2MCwibGFiZWwiOiJUcmltIFIiLCJtaW4iOi0yMCwibWF4IjoyMCwic3RlcCI6"
+  "MSwidmFsdWUiOjAsImdyb3VwSWQiOiJncnBfZHJpdmUifSx7ImlkIjoiZ2F1Z2VfZGlzdGFu"
+  "Y2UiLCJ0IjoiZ2F1Z2UiLCJ4Ijo4MCwieSI6NzYwLCJ3IjoyMjAsImgiOjIwMCwibGFiZWwi"
+  "OiJEaXN0YW5jZSIsIm1pbiI6MCwibWF4IjoyMDAsInVuaXRzIjoiY20iLCJkZWNpbWFscyI6"
+  "MCwibW9kZWwiOiJjbGFzc2ljIiwiZ3JvdXBJZCI6ImdycF9kaXN0In0seyJpZCI6ImFsZXJ0"
+  "IiwidCI6Im5vdGlmaWNhdGlvbiIsIngiOjMzMCwieSI6NzcwLCJ3Ijo5MCwiaCI6OTAsImxh"
+  "YmVsIjoiT2JzdGFjbGUiLCJncm91cElkIjoiZ3JwX2Rpc3QifSx7ImlkIjoiZ3JhcGhfZGlz"
+  "dCIsInQiOiJncmFwaCIsIngiOjQ2MCwieSI6NzYwLCJ3Ijo0ODAsImgiOjIxMCwibGFiZWwi"
+  "OiJEaXN0YW5jZSBjbSIsIm1vZGVsIjoiZ3JpZCIsIndpbmRvd1NlYyI6MzAsInNlcmllcyI6"
+  "MSwiZ3JvdXBJZCI6ImdycF9kaXN0In0seyJpZCI6InNvdW5kX2FsZXJ0IiwidCI6InNvdW5k"
+  "IiwieCI6OTgwLCJ5Ijo3NzAsInciOjkwLCJoIjo5MCwibGFiZWwiOiJBbGVydCIsImdyb3Vw"
+  "SWQiOiJncnBfZGlzdCJ9LHsiaWQiOiJsYmxfdmVyIiwidCI6ImxhYmVsIiwieCI6ODAsInki"
+  "OjExMTAsInciOjIwMCwiaCI6NzAsImxhYmVsIjoiRmlybXdhcmUiLCJtb2RlbCI6ImNhcmQi"
+  "LCJncm91cElkIjoiZ3JwX3N5cyJ9LHsiaWQiOiJsYmxfdXB0aW1lIiwidCI6ImxhYmVsIiwi"
+  "eCI6ODAsInkiOjEyMDAsInciOjIwMCwiaCI6NzAsImxhYmVsIjoiVXB0aW1lIiwibW9kZWwi"
+  "OiJjYXJkIiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7ImlkIjoidXBkIiwidCI6InNlbGVjdCIs"
+  "IngiOjMyMCwieSI6MTExMCwidyI6MTYwLCJoIjo3MCwibGFiZWwiOiJUZWxlbWV0cnkiLCJv"
+  "cHRpb25zIjoiT2ZmLEJhc2ljLEFsbCIsImdyb3VwSWQiOiJncnBfc3lzIn0seyJpZCI6Imxl"
+  "dmVsIiwidCI6InNlbGVjdCIsIngiOjMyMCwieSI6MTIwMCwidyI6MTYwLCJoIjo3MCwibGFi"
+  "ZWwiOiJMZXZlbCIsIm9wdGlvbnMiOiJCZWdpbm5lcixFeHBlcnQsRHJpdmUsRGlzdGFuY2Ui"
+  "LCJncm91cElkIjoiZ3JwX3N5cyJ9LHsiaWQiOiJsZWRfYnV0dG9uIiwidCI6ImxlZCIsIngi"
+  "OjUyMCwieSI6MTEyMCwidyI6ODAsImgiOjgwLCJsYWJlbCI6IkJ1dHRvbiIsIm1vZGVsIjoi"
+  "ZG90IiwiY29sb3JPbiI6IiMwMGZmODgiLCJncm91cElkIjoiZ3JwX3N5cyJ9LHsiaWQiOiJn"
+  "YXVnZV9yc3NpIiwidCI6ImdhdWdlIiwieCI6NjQwLCJ5IjoxMTEwLCJ3IjoxODksImgiOjE5"
+  "MCwibGFiZWwiOiJTaWduYWwiLCJtaW4iOi0xMDAsIm1heCI6LTMwLCJ1bml0cyI6ImRCbSIs"
+  "ImRlY2ltYWxzIjowLCJtb2RlbCI6ImNsYXNzaWMiLCJncm91cElkIjoiZ3JwX3N5cyJ9LHsi"
+  "aWQiOiJsb2dvIiwidCI6ImltYWdlIiwieCI6ODcwLCJ5IjoxMTIwLCJ3IjoxOTIsImgiOjE2"
+  "NCwibGFiZWwiOiJXb3Jrc2hvcC1ESVkiLCJpbWFnZVNyYyI6ImFzc2V0cy93b3Jrc2hvcC1k"
+  "aXktbG9nby5zdmciLCJncm91cElkIjoiZ3JwX3N5cyJ9XSwiY2FudmFzIjp7InciOjEyMjAs"
+  "ImgiOjEzODB9fQ==";
 
 static const char* LAYOUT_CFG_TEST_DRIVE_BASE64 =
   "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6IlNlcnZvLVNvbmFyIC0gRHJpdmUgdGVzdCIs"
   "IndpZGdldHMiOlt7ImlkIjoiZ3JwX3Rlc3QiLCJ0IjoiZ3JvdXAiLCJsYWJlbCI6Ik1PVE9S"
-  "UyIsImNvbG9yIjoiIzAwZDRmZiIsIngiOjU2LCJ5Ijo0MiwidyI6Njg4LCJoIjo1OTIsImNo"
+  "UyIsImNvbG9yIjoiIzAwZDRmZiIsIngiOjU2LCJ5Ijo0MiwidyI6NzY4LCJoIjo1OTIsImNo"
   "aWxkcmVuIjpbImRwYWRfZHJpdmUiLCJzcGQiLCJidG5fc3RvcCIsImdhdWdlX3NwZWVkIiwi"
-  "ZHBhZF90dXJuIiwibGV2ZWwiXX0seyJpZCI6ImxibF9oaW50IiwidCI6ImxhYmVsIiwieCI6"
-  "ODAsInkiOjY2MCwidyI6NjQwLCJoIjoxMTAsImxhYmVsIjoiQXJyb3dzIGRyaXZlLiBUaGUg"
-  "dHdvIFR1cm4gYnV0dG9ucyBzcGluIHRoZSByb2JvdCBvbiB0aGUgc3BvdC4iLCJ2YWx1ZSI6"
-  "IkFycm93cyBkcml2ZS4gVGhlIHR3byBUdXJuIGJ1dHRvbnMgc3BpbiB0aGUgcm9ib3Qgb24g"
-  "dGhlIHNwb3QuIiwibW9kZWwiOiJjYXJkIn0seyJpZCI6ImRwYWRfZHJpdmUiLCJ0IjoiZHBh"
-  "ZCIsIngiOjgwLCJ5IjoxMDAsInciOjMwMCwiaCI6MzAwLCJsYWJlbCI6IkRyaXZlIiwibW9k"
-  "ZWwiOiJjbGFzc2ljIiwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6InNwZCIsInQiOiJz"
-  "bGlkZXIiLCJ4Ijo0MjAsInkiOjEwMCwidyI6OTAsImgiOjIwMCwibGFiZWwiOiJTcGVlZCIs"
-  "Im1pbiI6MCwibWF4IjoxMDAsInN0ZXAiOjUsInZhbHVlIjoxMDAsImdyb3VwSWQiOiJncnBf"
-  "dGVzdCJ9LHsiaWQiOiJidG5fc3RvcCIsInQiOiJidXR0b24iLCJ4Ijo0MjAsInkiOjMzMCwi"
-  "dyI6MTIwLCJoIjoxMjAsImxhYmVsIjoiU1RPUCIsImdyb3VwSWQiOiJncnBfdGVzdCJ9LHsi"
-  "aWQiOiJnYXVnZV9zcGVlZCIsInQiOiJnYXVnZSIsIngiOjU3MCwieSI6MTAwLCJ3IjoxNTAs"
-  "ImgiOjE5MCwibGFiZWwiOiJTcGVlZCAlIiwibWluIjowLCJtYXgiOjEwMCwiZGVjaW1hbHMi"
-  "OjAsIm1vZGVsIjoibWluIiwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6ImRwYWRfdHVy"
-  "biIsInQiOiJkcGFkIiwieCI6ODAsInkiOjQ5MCwidyI6MjYwLCJoIjoxMjAsImxhYmVsIjoi"
-  "VHVybiIsIm1vZGVsIjoibGVmdHJpZ2h0IiwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6"
-  "ImxldmVsIiwidCI6InNlbGVjdCIsIngiOjM4MCwieSI6NTA1LCJ3IjoyMDAsImgiOjcwLCJs"
-  "YWJlbCI6IlRlc3QiLCJvcHRpb25zIjoiQmVnaW5uZXIsRXhwZXJ0LERyaXZlLERpc3RhbmNl"
-  "IiwiZ3JvdXBJZCI6ImdycF90ZXN0In1dLCJjYW52YXMiOnsidyI6ODAwLCJoIjo4MjZ9fQ==";
+  "ZHBhZF90dXJuIiwibGV2ZWwiLCJ0cmltX2wiLCJ0cmltX3IiXX0seyJpZCI6ImxibF9oaW50"
+  "IiwidCI6ImxhYmVsIiwieCI6ODAsInkiOjY2MCwidyI6NzEwLCJoIjoxMTAsImxhYmVsIjoi"
+  "RHJpdmUgZm9yd2FyZC4gSWYgaXQgY3VydmVzIHJpZ2h0LCByYWlzZSBUcmltIFIgdW50aWwg"
+  "aXQgcnVucyBzdHJhaWdodC4iLCJ2YWx1ZSI6IkRyaXZlIGZvcndhcmQuIElmIGl0IGN1cnZl"
+  "cyByaWdodCwgcmFpc2UgVHJpbSBSIHVudGlsIGl0IHJ1bnMgc3RyYWlnaHQuIiwibW9kZWwi"
+  "OiJjYXJkIn0seyJpZCI6ImRwYWRfZHJpdmUiLCJ0IjoiZHBhZCIsIngiOjgwLCJ5IjoxMDAs"
+  "InciOjMwMCwiaCI6MzAwLCJsYWJlbCI6IkRyaXZlIiwibW9kZWwiOiJjbGFzc2ljIiwiZ3Jv"
+  "dXBJZCI6ImdycF90ZXN0In0seyJpZCI6InNwZCIsInQiOiJzbGlkZXIiLCJ4Ijo0MjAsInki"
+  "OjEwMCwidyI6OTAsImgiOjIwMCwibGFiZWwiOiJTcGVlZCIsIm1pbiI6MCwibWF4IjoxMDAs"
+  "InN0ZXAiOjUsInZhbHVlIjoxMDAsImdyb3VwSWQiOiJncnBfdGVzdCJ9LHsiaWQiOiJidG5f"
+  "c3RvcCIsInQiOiJidXR0b24iLCJ4Ijo0MjAsInkiOjMzMCwidyI6MTIwLCJoIjoxMjAsImxh"
+  "YmVsIjoiU1RPUCIsImdyb3VwSWQiOiJncnBfdGVzdCJ9LHsiaWQiOiJnYXVnZV9zcGVlZCIs"
+  "InQiOiJnYXVnZSIsIngiOjU3MCwieSI6MTAwLCJ3IjoxNTAsImgiOjE5MCwibGFiZWwiOiJT"
+  "cGVlZCAlIiwibWluIjowLCJtYXgiOjEwMCwiZGVjaW1hbHMiOjAsIm1vZGVsIjoibWluIiwi"
+  "Z3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6ImRwYWRfdHVybiIsInQiOiJkcGFkIiwieCI6"
+  "ODAsInkiOjQ5MCwidyI6MjYwLCJoIjoxMjAsImxhYmVsIjoiVHVybiIsIm1vZGVsIjoibGVm"
+  "dHJpZ2h0IiwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6ImxldmVsIiwidCI6InNlbGVj"
+  "dCIsIngiOjM4MCwieSI6NTA1LCJ3IjoyMDAsImgiOjcwLCJsYWJlbCI6IlRlc3QiLCJvcHRp"
+  "b25zIjoiQmVnaW5uZXIsRXhwZXJ0LERyaXZlLERpc3RhbmNlIiwiZ3JvdXBJZCI6ImdycF90"
+  "ZXN0In0seyJpZCI6InRyaW1fbCIsInQiOiJzbGlkZXIiLCJ4Ijo2MDAsInkiOjMzMCwidyI6"
+  "OTAsImgiOjIwMCwibGFiZWwiOiJUcmltIEwiLCJtaW4iOi0yMCwibWF4IjoyMCwic3RlcCI6"
+  "MSwidmFsdWUiOjAsImdyb3VwSWQiOiJncnBfdGVzdCJ9LHsiaWQiOiJ0cmltX3IiLCJ0Ijoi"
+  "c2xpZGVyIiwieCI6NzEwLCJ5IjozMzAsInciOjkwLCJoIjoyMDAsImxhYmVsIjoiVHJpbSBS"
+  "IiwibWluIjotMjAsIm1heCI6MjAsInN0ZXAiOjEsInZhbHVlIjowLCJncm91cElkIjoiZ3Jw"
+  "X3Rlc3QifV0sImNhbnZhcyI6eyJ3Ijo4ODAsImgiOjgyNn19";
 
 static const char* LAYOUT_CFG_TEST_DISTANCE_BASE64 =
   "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6IlNlcnZvLVNvbmFyIC0gRGlzdGFuY2UgdGVz"
@@ -312,7 +324,7 @@ static bool s_joyIsXY       = false;
 // Reported to the app in the SYSTEM zone's Firmware label. Bump on release.
 // Kept the B3_ prefix so this file still diffs cleanly against b3's copy --
 // only the value distinguishes the two robots in the app's Firmware label.
-#define B3_FIRMWARE_VERSION "S2-v4"
+#define B3_FIRMWARE_VERSION "S2-v5"
 
 // ---------------------------------------------------------------------------
 // Widget state owned by the app (see 03_bit-rxy.h for the accessors).
@@ -353,6 +365,54 @@ static void layoutLevelStore(uint8_t lvl) {
 uint8_t remotexy_get_layout_level(void) { return s_layout_level; }
 
 // ---------------------------------------------------------------------------
+// Straight-line trim, one value per wheel, in degrees of servo pulse. Positive
+// means that wheel drives MORE forward. Lives here rather than in a #define so
+// a robot can be straightened on the floor from the app instead of over USB --
+// continuous-rotation servos vary unit to unit, so this is per-robot
+// calibration, not a constant.
+//
+// Seeded from the config values, which are the factory default for a fresh
+// chip; NVS overrides them once anything has been saved.
+// ---------------------------------------------------------------------------
+#define TRIM_LIMIT 20            // beyond this it is a mechanical fault, not trim
+static int8_t s_trim_l = CONFIG_SERVO_SPEED_STOP_LEFT_OFFSET;
+static int8_t s_trim_r = CONFIG_SERVO_SPEED_STOP_RIGHT_OFFSET;
+
+// Dragging a slider emits a SET per step. Writing NVS on each one would burn
+// flash endurance for values the user is still scrubbing past, so the write is
+// deferred until the value has been still for a moment. remotexy_handler()
+// flushes it.
+static bool     s_trimDirty  = false;
+static uint32_t s_trimSettleAt = 0;
+#define TRIM_SETTLE_MS 1500
+
+static void trimLoad(void) {
+  if (s_prefs.begin("b3", true)) {
+    s_trim_l = (int8_t)s_prefs.getChar("trimL", s_trim_l);
+    s_trim_r = (int8_t)s_prefs.getChar("trimR", s_trim_r);
+    s_prefs.end();
+  }
+  s_trim_l = constrain(s_trim_l, -TRIM_LIMIT, TRIM_LIMIT);
+  s_trim_r = constrain(s_trim_r, -TRIM_LIMIT, TRIM_LIMIT);
+}
+
+static void trimFlush(void) {
+  if (!s_trimDirty || (int32_t)(millis() - s_trimSettleAt) < 0) return;
+  s_trimDirty = false;
+  if (s_prefs.begin("b3", false)) {
+    s_prefs.putChar("trimL", s_trim_l);
+    s_prefs.putChar("trimR", s_trim_r);
+    s_prefs.end();
+    #ifdef DEF_DERIAL_DEBUG
+    Serial.printf("[TRIM] saved L=%d R=%d\n", (int)s_trim_l, (int)s_trim_r);
+    #endif
+  }
+}
+
+int8_t remotexy_get_trim_left(void)  { return s_trim_l; }
+int8_t remotexy_get_trim_right(void) { return s_trim_r; }
+
+// ---------------------------------------------------------------------------
 // Telemetry is sent on change, not every cycle. With the expert layout the
 // naive version pushed 11 notifications per cycle for values that mostly do
 // not move — and this radio has a documented history of drowning in rc=6
@@ -387,6 +447,7 @@ static bool     s_verSent         = false;
 // ---------------------------------------------------------------------------
 #define T_DIST   (1u<<0)
 #define T_SPEED  (1u<<1)
+#define T_TRIM   (1u<<2)   // freed when battery telemetry was removed
 #define T_GRAPH  (1u<<3)
 #define T_ALERT  (1u<<4)
 #define T_VER    (1u<<5)
@@ -405,7 +466,7 @@ static const char* const LAYOUT_BLOBS[LAYOUT_COUNT] = {
 static const uint16_t LAYOUT_TELEM[LAYOUT_COUNT] = {
   /* Beginner */ T_DIST | T_SPEED,
   /* Expert   */ 0xFFFF,
-  /* Drive    */ T_SPEED,
+  /* Drive    */ T_SPEED | T_TRIM,
   /* Distance */ T_DIST | T_GRAPH | T_ALERT,
 };
 
@@ -757,6 +818,20 @@ static void handleWidget(const String& id, const String& val) {
   // forward on dpad_drive and left here therefore gives an arc turn rather
   // than the two pads fighting, and no extra state is needed.
   if (id == "dpad_turn")   { handleDpad(val); return; }
+  // Trim sliders. Held in RAM immediately so the next drive command already
+  // uses the new value -- the child sees the effect while still dragging --
+  // and only committed to NVS once the value settles.
+  if (id == "trim_l" || id == "trim_r") {
+    const int8_t v = (int8_t)constrain(val.toInt(), -TRIM_LIMIT, TRIM_LIMIT);
+    int8_t& slot = (id == "trim_l") ? s_trim_l : s_trim_r;
+    if (v != slot) {
+      slot = v;
+      s_trimDirty = true;
+      s_trimSettleAt = millis() + TRIM_SETTLE_MS;
+    }
+    return;
+  }
+
   if (id == "spd")         { s_speed_cap = (uint8_t)constrain(val.toInt(), 0, 100); return; }
   if (id == "btn_stop") {
     if (val != "1") return;   // act on press, ignore the release
@@ -809,6 +884,7 @@ void remotexy_init(void) {
   // Restore the Beginner/Expert choice before advertising, so the very first
   // GETCFG after a power cycle already answers with the right layout.
   layoutLevelLoad();
+  trimLoad();
   #ifdef DEF_DERIAL_DEBUG
   Serial.printf("[BLE] layout level: %s\n",
                 LEVEL_NAMES[s_layout_level]);
@@ -877,6 +953,8 @@ void remotexy_handler(void) {
   }
 
   // One short notification, and on a cache hit it replaces the entire transfer.
+  trimFlush();
+
   if (s_getCfgVerRequested) {
     s_getCfgVerRequested = false;
     const String rev = layoutRevision();
@@ -1044,6 +1122,14 @@ void remotexy_send_control_echo(void) {
   if (!s_telemForce) return;   // only after a CFG transfer; they cannot drift
   // `level` is in BOTH layouts — it is the way back — so it is always echoed.
   sendValue("level", LEVEL_NAMES[s_layout_level]);
+  // Without this the sliders would snap back to their default position on every
+  // connect while the robot kept driving with the saved value -- the panel would
+  // be lying about the robot's calibration.
+  if (modeHas(T_TRIM)) {
+    sendValue("trim_l", String((int)s_trim_l));
+    sendValue("trim_r", String((int)s_trim_r));
+  }
+
   // `upd` only exists in the expert layout.
   if (!modeHas(T_UPDSEL)) return;
   sendValue("upd", s_upd_level == UPD_OFF   ? "Off"
