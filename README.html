@@ -117,6 +117,15 @@ they simply have no connector to plug into.</p>
 why the OLED needs wires rather than a plug. b3's own buzzer/battery pin
 collision on GPIO 4 is preserved rather than fixed — the Power panel puts a
 Buzz button next to the live voltage for exactly that reason.</p>
+<p><strong>The screen is expected here, not optional.</strong> SDA to GPIO 8, SCL to GPIO 9,
+and <strong>VCC to 3V3 rather than 5V</strong> — the module's own pull-ups follow whatever
+you feed it, and the C3 is not 5V tolerant. Full wiring and the strapping-pin
+reasoning are in <a href="02_hardware/README.md#attaching-the-oled"><code>02_hardware/README.md</code></a>.</p>
+<p>The firmware degrades gracefully if it is missing — it probes <code>0x3C</code> at boot and
+re-probes every five seconds, so a bodge wire that seats late or works loose
+recovers on its own rather than needing a power cycle. Everything else keeps
+running meanwhile. What it will not do is drive a bus with nothing on it, which
+is what hung the app at "Checking layout version" the first time out.</p>
 <p>Board source and the full netlist-derived pin map: <a href="02_hardware/"><code>02_hardware/</code></a>.</p>
 <h2>The 3-pin headers double as FET gates</h2>
 <p>J6, J7, J8 and J9 carry the same nets as Q1–Q4's gates, which drive the J1–J4

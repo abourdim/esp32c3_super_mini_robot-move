@@ -29,6 +29,26 @@ static bool s_oled_present = true;
 void oled_set_present(bool present) { s_oled_present = present; }
 bool oled_present(void) { return s_oled_present; }
 
+// How often to look again once the screen has been declared absent. On b3 the
+// panel is soldered down and one probe at boot settles it forever. Here it is
+// four wires to the module's pads, and the realistic failure is one of them
+// making contact a moment late or working loose -- a case where "no screen
+// until you power-cycle" is a worse answer than looking again.
+//
+// The cost is one short transaction every five seconds. On a bus with nothing
+// on it that is a single timeout, which is nothing at this interval; it is the
+// ~1KB per frame at 100ms that had to be stopped, not the probing.
+#define OLED_REPROBE_MS 5000
+
+static bool oled_try_attach(void) {
+  Wire.beginTransmission(0x3C);
+  if (Wire.endTransmission() != 0) return false;
+  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) return false;
+  display.clearDisplay();
+  display.setTextColor(SSD1306_WHITE);
+  return true;
+}
+
 // ===========================================================================
 void oled_init(void) {
 // ===========================================================================
@@ -694,7 +714,19 @@ uint8_t l_count;
 // ===========================================================================
 void oled_update( ) {
 // ===========================================================================
-  if (!s_oled_present) return;   // no screen on the bus -- see oled_set_present()
+  // Absent at boot is not a life sentence -- see OLED_REPROBE_MS. Everything
+  // below stays skipped until a screen actually answers.
+  if (!s_oled_present) {
+    static uint32_t s_probe_at = 0;
+    const uint32_t t = millis();
+    if (t - s_probe_at < OLED_REPROBE_MS) return;
+    s_probe_at = t;
+    if (!oled_try_attach()) return;
+    s_oled_present = true;
+    #ifdef DEF_DERIAL_DEBUG
+    Serial.println("[OLED] appeared on the bus - screen enabled");
+    #endif
+  }
 
   const uint32_t now = millis();
 

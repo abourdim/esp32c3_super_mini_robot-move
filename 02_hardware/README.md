@@ -68,10 +68,33 @@ input terminal rather than through the SuperMini's 5 V pin, so servo current
 does not run through the module. Without this the rail dips and the C3 browns
 out mid-drive, which reads as a random reboot.
 
-## No OLED
+## Attaching the OLED
 
-GPIO 2, 8 and 9 reach the SuperMini's pads and no connector. b3 puts its
-SSD1306 on I²C 8/9, so the screen is not portable to this board without wires
-soldered to the module itself. That is what v2's "oled connector" note is for.
+GPIO 2, 8 and 9 reach the SuperMini's pads and no connector, so the SSD1306 is
+four wires soldered to the module itself. This is what v2's "oled connector"
+note is meant to fix.
+
+| OLED pin | goes to |
+|---|---|
+| SDA | module **GPIO 8** |
+| SCL | module **GPIO 9** |
+| VCC | module **3V3** — *not* 5V, see below |
+| GND | any GND |
+
+**Take VCC from 3V3, not 5V.** Most SSD1306 modules accept either, but the
+module's own I2C pull-up resistors go to whatever you feed it. On 5V those
+pull-ups would hold SDA and SCL at 5V, and the C3's GPIOs are not 5V tolerant.
+
+**The pull-ups are also what make the board boot.** GPIO 8 and 9 are both
+strapping pins on the ESP32-C3, and both need to be high at reset — GPIO 9 low
+at reset is what selects download mode. The module's pull-ups hold them there,
+which is exactly why this pin pair works on b3 too. Flashing still works
+normally: the module's BOOT button pulls GPIO 9 low against the pull-up.
+
+The firmware probes `0x3C` at boot and re-probes every five seconds while no
+screen is answering, so a wire that makes contact late or works loose recovers
+without a power cycle. Watch serial for `[OLED] found` or `[OLED] appeared on
+the bus`. If you get neither, the usual cause is a module strapped to **0x3D**
+instead of 0x3C — some boards have a solder jumper for it.
 
 Powered by [Workshop-DIY.org](https://workshop-diy.org)
