@@ -24,21 +24,27 @@
 // just CONFIG_OTA_HOLD_MS (3s) to forget the saved network and force the
 // setup portal open even though a working one is already saved.
 //
-// b3 reports OTA progress on its NeoPixels and OLED. This board has neither,
-// so the same status goes to Serial only. That is enough to work with: the
-// setup AP name is fixed (CONFIG_OTA_SETUP_AP_NAME) and the device is
-// reachable by hostname, so you never have to read an IP off the robot.
+// Feedback is on both the NeoPixels (color/blink, readable from across a
+// room) and the OLED (exact text — setup AP name, IP address, percent
+// complete — that a color alone can't convey).
 // ===========================================================================
 
-// Same signature as b3's OLED version so the call sites below are unchanged
-// and stay easy to diff against it.
+extern Adafruit_SSD1306 display;
+
+// Two-line status screen, big enough to read at a glance. Kept separate
+// from oled_update()'s normal driving readout — OTA mode never returns to
+// loop(), so the two never run concurrently.
 static void otaShowStatus(const String& line1, const String& line2 = "") {
-  #ifdef DEF_DERIAL_DEBUG
-  Serial.print("[OTA] ");
-  Serial.print(line1);
-  if (line2.length()) { Serial.print(" | "); Serial.print(line2); }
-  Serial.println();
-  #endif
+  display.clearDisplay();
+  display.setTextSize(2);
+  display.setCursor(0, 0);
+  display.print(line1);
+  if (line2.length()) {
+    display.setTextSize(1);
+    display.setCursor(0, 24);
+    display.print(line2);
+  }
+  display.display();
 }
 
 // Tracks an in-progress hold across successive loop() calls. Returns true
@@ -86,6 +92,7 @@ static void otaEnterAndBlock() {
   Serial.println("[OTA] Button held — entering OTA mode");
   #endif
 
+  neopixels_all_blink(CRGB::Blue, 2, 100);
   otaShowStatus("OTA mode", "Hold to forget WiFi...");
 
   WiFiManager wm;
@@ -96,6 +103,7 @@ static void otaEnterAndBlock() {
     Serial.println("[OTA] Button held through forget window — clearing saved WiFi");
     #endif
     wm.resetSettings();
+    neopixels_all_blink(CRGB::White, 2, 150);
     otaShowStatus("WiFi forgotten", "Opening setup...");
   } else {
     otaShowStatus("OTA mode", "Connecting WiFi...");
@@ -103,12 +111,13 @@ static void otaEnterAndBlock() {
 
   // Fires only if there's no saved network or it can't be reached — i.e.
   // the setup portal is about to open. Told apart from "just connecting to
-  // the usual network" so the status line can say which one is happening.
+  // the usual network" so the OLED/NeoPixels can say which one is happening.
   wm.setAPCallback([](WiFiManager* mgr) {
     #ifdef DEF_DERIAL_DEBUG
     Serial.printf("[OTA] No saved WiFi — setup AP '%s' at %s\n",
                    CONFIG_OTA_SETUP_AP_NAME, WiFi.softAPIP().toString().c_str());
     #endif
+    neopixels_all_blink(CRGB::Purple, 3, 150);
     otaShowStatus("Join WiFi:", CONFIG_OTA_SETUP_AP_NAME);
   });
 
@@ -118,6 +127,7 @@ static void otaEnterAndBlock() {
     #ifdef DEF_DERIAL_DEBUG
     Serial.println("[OTA] Setup portal timed out — rebooting into normal mode");
     #endif
+    neopixels_all_blink(CRGB::Red, 3, 150);
     otaShowStatus("Setup timed out", "Rebooting...");
     ESP.restart();
   }
@@ -125,6 +135,7 @@ static void otaEnterAndBlock() {
   #ifdef DEF_DERIAL_DEBUG
   Serial.printf("[OTA] WiFi connected, IP: %s\n", WiFi.localIP().toString().c_str());
   #endif
+  neopixels_all_blink(CRGB::Green, 2, 100);
   otaShowStatus("OTA ready", WiFi.localIP().toString());
 
   ArduinoOTA.setHostname(CONFIG_OTA_HOSTNAME);
@@ -133,17 +144,27 @@ static void otaEnterAndBlock() {
     #ifdef DEF_DERIAL_DEBUG
     Serial.println("[OTA] Update starting");
     #endif
+    neopixels_all_clear(CRGB::Black);
     otaShowStatus("Uploading...", "0%");
   });
   ArduinoOTA.onEnd([]() {
     #ifdef DEF_DERIAL_DEBUG
     Serial.println("\n[OTA] Update complete — rebooting");
     #endif
+    neopixels_all_blink(CRGB::Green, 4, 80);
     otaShowStatus("Done!", "Rebooting...");
   });
   ArduinoOTA.onProgress([](unsigned int progress, unsigned int total) {
-    // Only report when the whole percent changes — this callback fires many
-    // times a second and a line per call would swamp the serial log.
+    // Light one more pixel as progress advances, wrapping if there are
+    // fewer LEDs than progress steps — just a visual heartbeat, not a
+    // precise gauge.
+    uint8_t idx = (progress * CONFIG_NEOPIXELS_NB_LEDS / total) % CONFIG_NEOPIXELS_NB_LEDS;
+    neopixels_pulse(idx, CRGB::White);
+    FastLED.show();
+
+    // Only redraw the OLED when the whole percent changes — this fires many
+    // times a second, and the I2C display write is slow enough to matter
+    // if done on every single callback.
     static int8_t s_lastPct = -1;
     int8_t pct = (int8_t)((progress * 100UL) / total);
     if (pct != s_lastPct) {
@@ -155,6 +176,7 @@ static void otaEnterAndBlock() {
     #ifdef DEF_DERIAL_DEBUG
     Serial.printf("[OTA] Error[%u]\n", error);
     #endif
+    neopixels_all_blink(CRGB::Red, 5, 100);
     otaShowStatus("Error!", "code " + String((int)error));
   });
 

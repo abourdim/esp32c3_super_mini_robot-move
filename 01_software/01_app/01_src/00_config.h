@@ -2,52 +2,57 @@
 #define __DEF_INCLUDE_CONFIG_H__
 
 
-// Distinct from b3 ("diy_app_b3") and the servo-sonar board ("diy_app_s2"), so
-// the three robots are told apart in the app's scanner list when more than one
-// is powered on in the same room -- which, in a workshop, is the normal case.
+// Distinct from b3 ("diy_app_b3") so the two are told apart in the app's
+// scanner when both are powered on in the same room.
 #define CONFIG_BLE_DEVICE_NAME "diy_app_mv"
 
 #define DEF_DERIAL_DEBUG
 
 
 // ===========================================================================
-// Board: 30_esp32_c3_move rev v1  (01_kicad/30_esp32_c3_move/v1)
+// Board: 30_esp32_c3_move rev v1  (02_hardware/v1)
 // ===========================================================================
-// This is NOT the servo-sonar board this firmware was forked from -- every pin
-// moved. The map below was read out of the PCB netlist rather than the
-// schematic, because the schematic labels every net `gpio_NN` and says nothing
+// This is a port of b3, kept faithful to it: every module b3 has is still
+// here. What changed is the pin map, because the two carrier boards share an
+// MCU and nothing else. The map below was read out of the PCB netlist, not the
+// schematic -- the schematic names every net `gpio_NN` and records nothing
 // about what it drives.
 //
-// What the board gives us:
+// The board's connectors:
 //
-//   J5  -- 3-pin, GPIO 5,  through the TXB0104 level shifter  -> LEFT drive servo
-//   J12 -- 3-pin, GPIO 10, through the TXB0104 level shifter  -> RIGHT drive servo
-//   J10 -- 4-pin, GPIO 6/7, through the TXB0104               -> HC-SR04
-//   J6  -- 3-pin, GPIO 1,  RAW 3.3V, no level shifter         -> HEAD servo
-//   SW1 -- GPIO 3, 10k pull-up to 3V3, switch to GND          -> button / OTA
-//   SW2 -- GPIO 4, 10k pull-up to 3V3, switch to GND          -> spare
-//   J1..J4 -- screw terminals, low-side 2N7002 switches on GPIO 1/0/21/20
+//   J5  -- 3-pin, GPIO 5,  via TXB0104 level shifter   -> LEFT drive servo
+//   J12 -- 3-pin, GPIO 10, via TXB0104 level shifter   -> RIGHT drive servo
+//   J10 -- 4-pin, GPIO 6/7, via TXB0104                -> HC-SR04
+//   J6  -- 3-pin, GPIO 1,  raw 3.3V                    -> HEAD servo
+//   J7  -- 3-pin, GPIO 0   (also Q2 gate -> J2)        -> GREEN led
+//   J8  -- 3-pin, GPIO 21  (also Q3 gate -> J3)        -> RED led
+//   J9  -- 3-pin, GPIO 20  (also Q4 gate -> J4)        -> NeoPixel strip
+//   SW1 -- GPIO 3, 10k pull-up R10                     -> button / OTA
+//   SW2 -- GPIO 4, 10k pull-up R11                     -> buzzer + battery
 //
-// GPIO 2, 8 and 9 reach the SuperMini's pads and nothing else -- there is no
-// connector on any of them. That is why this board has no OLED: b3 puts the
-// screen on I2C 8/9, and here those pins go nowhere.
+// THE 3-PIN HEADERS DOUBLE AS FET GATES. J6/J7/J8/J9 carry the same net as
+// Q1/Q2/Q3/Q4's gates, which drive the J1/J2/J3/J4 screw terminals and their
+// yellow indicator LEDs. Anything plugged into a 3-pin header switches its
+// paired screw terminal in sympathy. Leave J1-J4 UNPOPULATED. The upside: the
+// onboard yellow LEDs (D6-D9) become free activity indicators for whatever is
+// on the header.
+//
+// THREE FEATURES NEED WIRES. GPIO 2, 8 and 9 reach the SuperMini's pads and no
+// connector at all, and the board has no buzzer and no battery divider. The
+// OLED, buzzer and battery sense below are therefore bodge-only -- see the
+// notes at each. Every other b3 feature lands on a real connector.
 // ===========================================================================
 
 
 // --------------------------------------
 // button
 //
-// SW1 on the carrier board, NOT the module's BOOT button. b3 and the
-// servo-sonar board both use GPIO 0 for this, but on THIS board GPIO 0 is
-// Q2's gate: holding BOOT for the OTA gesture would switch the J2 screw
-// terminal on for three seconds along the way. SW1 is a real button with its
-// own 10k pull-up (R10) and drives nothing else.
+// SW1 on the carrier board. b3 uses GPIO 0, the module's own BOOT button, and
+// that button physically exists here too -- but on THIS board GPIO 0 is Q2's
+// gate, so the three-second OTA hold would switch the J2 output on for the
+// duration of the hold, and GPIO 0 is more useful as the green LED. SW1 is a
+// real button with its own pull-up that drives nothing else.
 #define CONFIG_PIN_BUTTON 3
-
-// SW2. Wired, pulled up (R11), and currently unused -- no layout offers a
-// second button yet. Defined here so the next person does not have to re-read
-// the netlist to find out it exists.
-#define CONFIG_PIN_BUTTON_2 4
 
 // --------------------------------------
 // WiFi OTA — off by default (no WiFi during normal BLE-driven play). Hold
@@ -66,11 +71,64 @@
 #define CONFIG_OTA_FORGET_HOLD_MS    8000
 
 // --------------------------------------
-// Ultrasonic sensor pins — J10, the dedicated 4-pin HC-SR04 connector
-// (VCC / TRIG / ECHO / GND). Both lines run through the TXB0104, so ECHO
-// arrives as a clean 3.3V edge instead of the 5V the sensor actually drives.
-// This is the one part of this board that is unambiguously better than b3's,
-// where ECHO goes straight to the pin.
+// buzzer
+//
+// BODGE ONLY -- there is no buzzer footprint on this board. GPIO 4 is SW2's
+// pin, so a passive buzzer solders to SW2's pads; SW2 then reads as pressed
+// whenever the line is driven low, which nothing uses. Kept on GPIO 4 because
+// that is b3's buzzer pin, so the module itself is unchanged.
+#define CONFIG_PIN_BUZZER 4
+#define CONFIG_BUZZER_FREQ 4000
+
+// battery level
+//
+// BODGE ONLY, and it shares GPIO 4 with the buzzer exactly as b3 does. b3's
+// board has a divider feeding this pin; THIS board has none, so without one
+// wired to SW2's pads the reading is meaningless rather than merely noisy.
+// The Power test panel puts a Buzz button next to the live voltage for the
+// same reason it does on b3: the interaction is visible, not hidden.
+#define CONFIG_PIN_BATTERY_LEVEL 4
+
+#define BATTERY_MIN_V 3.3  // Minimum battery voltage (adjust according to your battery)
+//#define BATTERY_MAX_V 4.2  // Maximum battery voltage (adjust according to your battery)
+#define BATTERY_MAX_V 4.5  // Maximum battery voltage (adjust according to your battery)
+
+// --------------------------------------
+// neopixel
+
+#define CONFIG_NEOPIXELS_MAX_LEDS 256      // Max supported (array size)
+
+// J9 is a genuine strip connector -- signal, 5V and GND on one 3-pin header --
+// so unlike b3 there is no onboard/external split here. Both cases are the
+// same connector; only the active LED count differs.
+#if 1
+  #define CONFIG_PIN_NEOPIXEL 20
+  #define CONFIG_NEOPIXELS_NB_LEDS 4       // Active LED count
+#else
+  #define CONFIG_PIN_NEOPIXEL 20           // external strip, same connector
+  #define CONFIG_NEOPIXELS_NB_LEDS 16      // Active LED count
+#endif
+
+#define CONFIG_NEOPIXELS_BRIGHTNESS 15       // Brightness (0-255)
+
+
+
+// --------------------------------------
+// I2C pins
+//
+// BODGE ONLY. Unchanged from b3, and for the same reason they work there: on a
+// C3 both are strapping pins, and I2C pull-ups hold them high, which is the
+// correct boot state. What this board lacks is copper -- GPIO 8 and 9 reach
+// the SuperMini's pads and stop. Four wires (SDA, SCL, 3V3, GND) soldered to
+// the module bring the whole screen back, eyes and all.
+#define CONFIG_PIN_OLED_SDA 8
+#define CONFIG_PIN_OLED_SCL 9
+
+// --------------------------------------
+// Ultrasonic sensor pins — J10, the dedicated 4-pin HC-SR04 connector.
+// Both lines run through the TXB0104, so ECHO arrives as a clean 3.3V edge
+// instead of the 5V b3 feeds straight to a pin. This is the one part of this
+// board that is unambiguously better than b3's.
 #define CONFIG_PIN_SR04_TRIG 6   // J10 pin 2
 #define CONFIG_PIN_SR04_ECHO 7   // J10 pin 3
 
@@ -80,54 +138,46 @@
 #define CONFIG_SERVO_SPEED_STOP_LEFT    90
 #define CONFIG_SERVO_SPEED_STOP_RIGHT   90
 
-// Per-wheel straight-line trim, in degrees of servo pulse. Positive = that
-// wheel drives MORE forward. Applied in the same physical direction on both
-// sides (see tasks_joysticks(), which subtracts on the mirrored right channel).
-//
-// Zero is the correct default: with both at 0 the two wheels get equal and
-// opposite full-scale commands, so anything left is real mechanical or
-// servo-tolerance error -- which is exactly what these are for.
-//
-// To tune: drive forward on a flat floor. If it pulls RIGHT, the right wheel is
-// slower -- raise RIGHT_OFFSET by 2 and retest. If it pulls LEFT, raise
-// LEFT_OFFSET. Expect single digits; more than ~10 usually means a mechanical
-// problem rather than a calibration one.
-#define CONFIG_SERVO_SPEED_STOP_LEFT_OFFSET    0
-#define CONFIG_SERVO_SPEED_STOP_RIGHT_OFFSET   0
+#define CONFIG_SERVO_SPEED_STOP_LEFT_OFFSET    5
+#define CONFIG_SERVO_SPEED_STOP_RIGHT_OFFSET    5
 
-// Drive servos. Both go through the TXB0104, so they see real 5V pulses --
-// swap these two if the robot drives backwards or spins on the spot, since
-// which connector is "left" depends on how the servos are mounted.
+// Drive servos. Both go through the TXB0104, so they see real 5V pulses.
+// Swap these two if the robot drives backwards or spins on the spot: which
+// physical connector is "left" depends on how the servos are mounted.
 #define CONFIG_PIN_SERVO_LEFT  5    // J5,  level-shifted
 #define CONFIG_PIN_SERVO_RIGHT 10   // J12, level-shifted
 
 // --------------------------------------
-// Head servo — J6. Pans the HC-SR04 so the app's radar widget has an angle to
-// plot against; a sweep builds a picture of the room instead of flashing one
-// number.
+// Head servo — J6. b3 has no third servo; this board has the connector for it,
+// so the HC-SR04 can pan and the app's radar widget has a bearing to plot
+// against instead of one number that changes for invisible reasons.
 //
-// TWO THINGS ABOUT J6 THAT ARE NOT TRUE OF J5/J12:
-//
-//   1. GPIO 1 is ALSO Q1's gate, which drives the J1 screw terminal and its
-//      yellow indicator LED (D6). Every servo pulse switches that FET. Leave
-//      J1 UNPOPULATED whenever a head servo is fitted -- otherwise whatever is
-//      wired to it pulses at 50Hz along with the head, and D6 flickers
-//      continuously. The reverse also holds: use J1 as an output and the head
-//      servo will twitch.
-//
-//   2. J6 does NOT go through the TXB0104. It carries the raw 3.3V GPIO. Most
-//      hobby servos accept a 3.3V pulse, but this is the one connector on the
-//      board where a fussy unit may need the level shifter it does not have.
+// J6 does NOT go through the TXB0104 -- it carries the raw 3.3V GPIO. Most
+// hobby servos accept that; this is the one connector where a fussy unit may
+// want the level shifter it does not have.
 #define CONFIG_PIN_SERVO_HEAD 1     // J6, NOT level-shifted
 
 // Where the head points at boot and on STOP. 90 = straight ahead.
 #define CONFIG_SERVO_HEAD_CENTER 90
 
-// Mechanical travel limits. A pan mount usually cannot reach the full 0..180
-// without the sensor fouling the chassis or pulling its own wires out, and a
-// servo told to go there will sit there straining. Narrow these to what your
-// mount actually clears.
+// Mechanical travel limits of the pan mount, not the servo's 0..180. A servo
+// told to go past its stop sits there stalled, drawing full stall current off
+// the same rail as the C3 -- which is the brownout that reads as a random
+// reboot mid-sweep. Narrow these to what your mount actually clears.
 #define CONFIG_SERVO_HEAD_MIN 10
 #define CONFIG_SERVO_HEAD_MAX 170
+
+// --------------------------------------
+// Board LEDs. b3 has these on GPIO 10 and 1; both are servos here, so they
+// move to two of the spare 3-pin headers. Each header's paired yellow onboard
+// LED (D7 for J7, D8 for J8) lights along with it, which makes the link
+// indicator visible even with nothing plugged in.
+#define CONFIG_PIN_LED_RED 21    // J8
+#define CONFIG_PIN_LED_GREEN 0   // J7
+
+// OLED config
+#define SCREEN_WIDTH 128
+#define SCREEN_HEIGHT 64
+#define OLED_RESET    -1  // Reset pin not used
 
 #endif // __DEF_INCLUDE_CONFIG_H__

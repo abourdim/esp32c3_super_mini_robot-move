@@ -1,8 +1,8 @@
-# 🤖 esp32c3_super_mini_robot-move — drive servos, a panning sonar head, BLE control
+# 🤖 esp32c3_super_mini_robot-move — b3 on the `30_esp32_c3_move` board
 
-An ESP32-C3 SuperMini robot on the **`30_esp32_c3_move`** carrier board: two
-continuous-rotation drive servos, an HC-SR04 on a **servo head that turns**, and
-four spare low-side switched outputs. Driven over Bluetooth Low Energy from the
+A port of [`esp32c3_super_mini_robot-bit-rxy`](https://github.com/abourdim/esp32c3_super_mini_robot-bit-rxy)
+("b3") onto the **`30_esp32_c3_move`** carrier board, plus a panning sonar head
+the original does not have. Driven over Bluetooth Low Energy from the
 [rxy web app](https://github.com/abourdim/rxy_web) — no install, no account, no
 WiFi.
 
@@ -10,82 +10,87 @@ WiFi.
 the robot for its panel, and draws whatever comes back. There is no per-robot
 build of the app.
 
-## Lineage
+## Faithful to b3
 
-Forked from
-[`esp32c3_super_mini_servo_sonar-rxy`](https://github.com/abourdim/esp32c3_super_mini_servo_sonar-rxy)
-("S2") with its full history, which was itself forked from
-[`esp32c3_super_mini_robot-bit-rxy`](https://github.com/abourdim/esp32c3_super_mini_robot-bit-rxy)
-("b3"). Fixes cherry-pick along that chain rather than being hand-copied.
+Every module b3 has is still here — buzzer, NeoPixels, battery sense, board
+LEDs, OLED, the two NeoPixel demos, all eight panels. Nothing was subtracted.
+What changed is the pin map, because the two carrier boards share an MCU and
+nothing else.
 
-S2 was the right base because it had already subtracted everything this board
-cannot feed — buzzer, NeoPixels, battery sense, board LEDs, OLED. What this
-board adds back is the head servo, which S2 never had.
+Three features need **wires**, because the board has no footprint for them.
+They are wired in software and will work the moment the hardware is attached;
+they simply have no connector to plug into.
 
-| | b3 | S2 | **this board** |
+| feature | b3 | here | needs |
 |---|---|---|---|
-| drive servos | GPIO 6 / 3 | GPIO 10 / 7 | **GPIO 5 / 10**, level-shifted |
-| HC-SR04 | 21 / 20 | 21 / 20 | **6 / 7**, level-shifted |
-| head servo | — | — | **GPIO 1** |
-| button / OTA | GPIO 0 (module BOOT) | GPIO 0 | **GPIO 3** (SW1 on the board) |
-| buzzer | GPIO 4 | — | — |
-| battery sense | GPIO 4 | — | — |
-| NeoPixel strip | GPIO 5 (or 10) | — | — |
-| 2 board LEDs | GPIO 10 / 1 | — | — |
-| OLED | I²C 8 / 9 | — | — (pins go nowhere) |
+| drive servos | GPIO 6 / 3 | **5 / 10** — J5 / J12, level-shifted | — |
+| HC-SR04 | 21 / 20 | **6 / 7** — J10, level-shifted | — |
+| head servo | *(none)* | **1** — J6 | — |
+| green LED | 1 | **0** — J7 | — |
+| red LED | 10 | **21** — J8 | — |
+| NeoPixel strip | 5 (or 10) | **20** — J9 | — |
+| button / OTA | 0 (module BOOT) | **3** — SW1 | — |
+| buzzer | 4 | 4 — SW2 pads | 🔧 a buzzer, soldered |
+| battery sense | 4 | 4 — SW2 pads | 🔧 a divider, soldered |
+| OLED | I²C 8 / 9 | 8 / 9 — module pads | 🔧 4 wires to the module |
 
-Board source and the full pin map: [`02_hardware/`](02_hardware/).
+GPIO 2, 8 and 9 reach the SuperMini's pads and no connector at all, which is
+why the OLED needs wires rather than a plug. b3's own buzzer/battery pin
+collision on GPIO 4 is preserved rather than fixed — the Power panel puts a
+Buzz button next to the live voltage for exactly that reason.
+
+Board source and the full netlist-derived pin map: [`02_hardware/`](02_hardware/).
+
+## The 3-pin headers double as FET gates
+
+J6, J7, J8 and J9 carry the same nets as Q1–Q4's gates, which drive the J1–J4
+screw terminals and their yellow indicator LEDs. Anything plugged into a 3-pin
+header switches its paired screw terminal in sympathy, so **leave J1–J4
+unpopulated**. The upside is free activity indicators: D6–D9 light along with
+whatever is on the header, which makes the link LEDs visible even with nothing
+plugged in.
 
 ## Why the button moved off GPIO 0
 
-Both older robots use the SuperMini's own BOOT button for the three-second OTA
-hold. On this board GPIO 0 is Q2's gate, so that gesture would switch the J2
-screw terminal on for the duration of the hold. SW1 (GPIO 3) is a real button
-with its own pull-up that drives nothing else.
+b3 uses the SuperMini's own BOOT button for the three-second OTA hold, and that
+button exists here too. But on this board GPIO 0 is Q2's gate, so the gesture
+would switch the J2 output on for the length of the hold — and GPIO 0 is more
+useful as the green LED. SW1 is a real button with its own pull-up that drives
+nothing else.
 
 ## The head, and the radar
 
-The head servo exists to give the app's **radar** widget an angle to plot
-against. The radar carries no value of its own — it reads the distance gauge
-and the head slider by id, draws rings at 10/30/100 cm with a beam on the live
-bearing, and lets detections persist and fade over five seconds. A sweep builds
-a picture of the room instead of flashing one number.
+The head servo is the one thing here that b3 does not have. It exists to give
+the app's **radar** widget a bearing to plot against: the radar carries no
+value of its own, it reads the distance gauge and the head slider by id, draws
+rings at 10/30/100 cm with a beam on the live angle, and lets detections
+persist and fade over five seconds. A sweep builds a picture of the room
+instead of flashing one number.
 
 Head angle is **not** persisted. The wheel trims are, because a trim is a
 calibration you want back after a power cycle; the head is a live control, and
 restoring yesterday's bearing at boot would point the sensor somewhere nobody
-asked for. It is echoed to the app on connect instead, so the slider and the
-radar both start out truthful.
+asked for. It is echoed to the app on connect instead.
 
 `CONFIG_SERVO_HEAD_MIN` / `_MAX` are the **mechanical** limits of your pan
-mount, not 0–180. Narrow them to what the mount actually clears — a servo told
-to go past its stop sits there stalled, drawing full stall current off the same
-rail as the C3.
+mount, not 0–180. Narrow them to what the mount clears — a servo told to go
+past its stop sits there stalled, drawing full stall current off the same rail
+as the C3.
 
 ## Panels
 
-Four, switched with the **Level** selector; the choice is kept in NVS, so a
-power cycle does not drop you back to Beginner.
+All eight of b3's, switched with the **Level** selector; the choice is kept in
+NVS. The Distance test panel gains the radar and the head slider.
 
-| panel | what it has |
-|---|---|
-| **Beginner** | D-pad, distance gauge, obstacle alert |
-| **Expert** | D-pad + joystick + speed + STOP + trim, distance gauge/graph/alert, **radar + head**, firmware, uptime, signal, button, telemetry level |
-| **Drive** | D-pad, speed, STOP, speed gauge, trim — one subsystem, for bring-up |
-| **Distance** | gauge, alert, graph, **radar + head** |
-
-Layouts are generated, not hand-edited:
+The six test panels are generated:
 
 ```bash
-python 01_software/01_app/gen_layouts.py
+python 01_software/01_app/gen_test_layouts.py
 ```
 
-It rebuilds all four blobs, splices them into `03_bit-rxy.cpp`, and **fails**
-rather than emitting a panel with overlapping zones, a widget escaping its
-group, or a widget id that has neither a handler nor a telemetry sender. The
-radar is exempt from that last check by way of a `DERIVED` set: it is fully
-driven while never being a `SET` or `UPD` target, which is a different thing
-from being decoration.
+Beginner and Expert are **not** — those are arranged in the app and exported,
+then spliced in. So the radar is on the Distance panel only; if you want it on
+Expert, arrange that panel in the app and export it the usual way.
 
 ## Build and flash
 
@@ -94,33 +99,32 @@ cd 01_software/01_app && pio run -e esp32-c3-devkitm-1 -t upload
 ```
 
 After the first USB flash, hold **SW1 for 3 seconds** to enter WiFi OTA mode.
-This board has no NeoPixels and no screen to report OTA progress on, so status
-goes to Serial only — which is enough, because the setup AP name is fixed
-(`WDIY-Robot-Setup`) and the device is reachable as `wdiy-move`. Hold to 8
-seconds to forget the saved network.
+Hold to 8 seconds to forget the saved network. The device is reachable as
+`wdiy-move`, and the setup AP is `WDIY-Robot-Setup`.
 
-BLE device name is `diy_app_mv`, distinct from b3's `diy_app_b3` and S2's
-`diy_app_s2` so the three are told apart in the scanner when more than one is
-powered on in the same room.
+BLE device name is `diy_app_mv`, distinct from b3's `diy_app_b3` so the two are
+told apart in the scanner when both are powered on in the same room.
+
+**The image is at 92% of flash.** b3's full feature set on the default
+partition table leaves about 100 KB of headroom, which is enough for the
+current work but not for another subsystem. Anything substantial from here
+wants a bigger app partition.
 
 ## Before you build one
 
-Three board facts that firmware cannot paper over — the long form is in
+Three board facts firmware cannot paper over — the long form is in
 [`02_hardware/README.md`](02_hardware/README.md):
 
-- **J1 and J6 share GPIO 1.** A head servo pulses the J1 output at 50 Hz and
-  flickers its indicator LED; a load on J1 makes the head twitch. Populate one
-  or the other, never both.
+- **J1–J4 must stay unpopulated** while anything is on J6–J9. Same nets.
 - **J6 has no level shifter.** J5, J12 and J10 run through the TXB0104 and get
-  clean 5 V logic. J6 carries the raw 3.3 V pin.
+  clean 5 V logic; J6 carries the raw 3.3 V pin. Most hobby servos accept that.
 - **The servo rail needs 470–1000 µF** at the connectors, fed from the input
   terminal rather than through the SuperMini's 5 V pin. Three drive servos on a
   rail with 100 nF browns the C3 out mid-drive, which reads as a random reboot.
 
 ## Known-stale
 
-`01_software/01_app/02_web/` is inherited from b3 and describes **b3's**
-hardware — LEDs, strip, OLED, battery — none of which is on this board. Its
+`01_software/01_app/02_web/` is b3's site and still describes b3's pin map. Its
 Pages workflow has been set to manual trigger only, so a push cannot publish a
 site that is wrong about this robot. Rewrite it before re-enabling.
 

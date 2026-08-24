@@ -1,0 +1,112 @@
+{
+ "schemaVersion": 1,
+ "title": "move - Distance test",
+ "canvas": {
+  "w": 990,
+  "h": 786
+ },
+ "widgets": [
+  {
+   "id": "grp_test",
+   "t": "group",
+   "label": "DISTANCE",
+   "color": "#ffb020",
+   "x": 56,
+   "y": 42,
+   "w": 878,
+   "h": 612,
+   "children": [
+    "gauge_distance",
+    "alert",
+    "graph_dist",
+    "radar",
+    "head",
+    "level"
+   ]
+  },
+  {
+   "id": "gauge_distance",
+   "t": "gauge",
+   "x": 80,
+   "y": 100,
+   "w": 150,
+   "h": 190,
+   "label": "Distance",
+   "max": 200,
+   "units": "cm",
+   "decimals": 0,
+   "groupId": "grp_test"
+  },
+  {
+   "id": "alert",
+   "t": "notification",
+   "x": 260,
+   "y": 110,
+   "w": 110,
+   "h": 110,
+   "label": "Obstacle",
+   "groupId": "grp_test"
+  },
+  {
+   "id": "graph_dist",
+   "t": "graph",
+   "x": 80,
+   "y": 320,
+   "w": 380,
+   "h": 200,
+   "label": "Distance cm",
+   "max": 200,
+   "groupId": "grp_test"
+  },
+  {
+   "id": "radar",
+   "t": "radar",
+   "x": 500,
+   "y": 100,
+   "w": 280,
+   "h": 280,
+   "label": "Radar",
+   "source": "gauge_distance",
+   "angleSource": "head",
+   "max": 200,
+   "model": "dots",
+   "groupId": "grp_test"
+  },
+  {
+   "id": "head",
+   "t": "slider",
+   "x": 820,
+   "y": 100,
+   "w": 90,
+   "h": 280,
+   "label": "Head",
+   "min": 10,
+   "max": 170,
+   "step": 5,
+   "value": 90,
+   "groupId": "grp_test"
+  },
+  {
+   "id": "level",
+   "t": "select",
+   "x": 80,
+   "y": 560,
+   "w": 200,
+   "h": 70,
+   "label": "Test",
+   "options": "Beginner,Expert,Motors,Distance,Lights,Sound,Display,Power",
+   "groupId": "grp_test"
+  },
+  {
+   "id": "lbl_hint",
+   "t": "label",
+   "x": 80,
+   "y": 670,
+   "w": 830,
+   "h": 60,
+   "label": "Sweep the Head slider and watch the radar fill in the room.",
+   "value": "Sweep the Head slider and watch the radar fill in the room.",
+   "model": "card"
+  }
+ ]
+}

@@ -40,20 +40,19 @@ void stopServos() {
 // Sonar head (J6)
 // ===========================================================================
 // Kept apart from moveServos() on purpose. Those two are continuous-rotation
-// servos where the "angle" is really a speed, rewritten on every loop from the
-// drive mix; this one is a positional servo that moves when the app asks it to
-// and then stays put. Sharing the rate limiter would mean the head fought the
-// drive channel for the same 20ms budget for no reason.
+// servos whose "angle" is really a speed, rewritten from the drive mix on every
+// loop; this one is positional -- it moves when asked and then stays put.
+// Sharing their rate limiter would make the head compete for the same 20ms
+// budget as the drive channel for no reason.
 
 static uint8_t s_head_angle = CONFIG_SERVO_HEAD_CENTER;
 
 // ===========================================================================
 void moveHead(int32_t angle) {
 // ===========================================================================
-  // Clamp to what the mount can physically clear, not to 0..180. A servo
-  // driven past its mechanical stop sits there stalled, drawing its full
-  // stall current off the same rail as the C3 -- which on this board is the
-  // brownout that looks like a random reboot mid-sweep.
+  // Clamped to what the mount clears, not to 0..180. A servo driven past its
+  // mechanical stop sits there stalled, pulling full stall current off the same
+  // rail as the C3 -- the brownout that reads as a random reboot mid-sweep.
   angle = constrain(angle, CONFIG_SERVO_HEAD_MIN, CONFIG_SERVO_HEAD_MAX);
 
   if ((uint8_t)angle == s_head_angle) return;   // no redundant PWM writes
@@ -70,8 +69,8 @@ void centerHead() {
 // ===========================================================================
 uint8_t headAngle() {
 // ===========================================================================
-  // The clamped value, deliberately. The radar plots blips at the angle the
-  // head is really at; echoing back the unclamped request would smear
-  // detections across arc the sensor never actually pointed at.
+  // The clamped value, deliberately. The radar plots blips at the bearing the
+  // head really reached; echoing the unclamped request back would smear
+  // detections across arc the sensor never pointed at.
   return s_head_angle;
 }

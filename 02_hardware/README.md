@@ -26,18 +26,23 @@ Read out of `v1/30_esp32_c3_move.kicad_pcb` by walking footprint pads to nets �
 **not** from the schematic, which labels every net `gpio_NN` and records nothing
 about what it drives. `00_config.h` is the firmware-side copy of this table.
 
-| GPIO | Goes to | Used for |
+| GPIO | Connector | Used for |
 |---|---|---|
 | 5 | J5, 3-pin, via TXB0104 | left drive servo |
 | 10 | J12, 3-pin, via TXB0104 | right drive servo |
 | 6 / 7 | J10, 4-pin, via TXB0104 | HC-SR04 trig / echo |
 | 1 | J6, 3-pin, **raw 3.3 V** · also Q1 gate → J1 | head servo |
+| 0 | J7, 3-pin · also Q2 gate → J2 | green LED |
+| 21 | J8, 3-pin · also Q3 gate → J3 | red LED |
+| 20 | J9, 3-pin · also Q4 gate → J4 | NeoPixel strip |
 | 3 | SW1, 10k pull-up R10 | button, OTA hold |
-| 4 | SW2, 10k pull-up R11 | spare — wired, unused |
-| 0 | Q2 gate → J2 screw terminal · also J7 | spare output |
-| 21 | Q3 gate → J3 screw terminal · also J8 | spare output |
-| 20 | Q4 gate → J4 screw terminal · also J9 | spare output |
-| **2, 8, 9** | **nowhere — module pads only** | — |
+| 4 | SW2, 10k pull-up R11 | 🔧 buzzer + battery sense, bodged to the pads |
+| **2, 8, 9** | **nowhere — module pads only** | 🔧 OLED on 8/9, four wires |
+
+The four 3-pin headers are the same nets as the FET gates, so anything on
+J6–J9 switches its paired screw terminal too. **Leave J1–J4 unpopulated.** The
+compensation is that D6–D9 become free activity indicators for whatever is on
+the header.
 
 Each switched output has a 1N4007 flyback (D1–D4), a 10k gate pull-down
 (R6–R9) and a yellow state LED (D6–D9 + R1–R4). The SK12D07VG4 slide switch
@@ -45,10 +50,11 @@ gates the input rail; J11 (screw) and J13 (JST-PH) both feed it.
 
 ## Three things to know before building one
 
-**J1 and J6 are the same GPIO.** GPIO 1 is Q1's gate *and* the J6 signal pin.
-A head servo pulses the J1 output at 50 Hz and flickers D6 continuously; a load
-on J1 makes the head twitch. Populate one or the other, never both. Firmware
-cannot arbitrate this — it is a copper fact.
+**The 3-pin headers share nets with the screw terminals.** GPIO 1 is Q1's gate
+*and* J6's signal pin; the same pairing holds for J7/J2, J8/J3 and J9/J4. A
+servo on J6 pulses the J1 output at 50 Hz and flickers D6 continuously; a load
+on J1 makes the head twitch. Populate the header or the terminal, never both.
+Firmware cannot arbitrate this — it is a copper fact.
 
 **J6 has no level shifter.** J5, J12 and J10 all run through the TXB0104 and
 get clean 5 V logic. J6 carries the raw 3.3 V pin. Most hobby servos accept

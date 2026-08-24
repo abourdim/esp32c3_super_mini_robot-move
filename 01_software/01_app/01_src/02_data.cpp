@@ -9,6 +9,8 @@ uint32_t lastDisconnectedFlash = 0;
 bool disconnectedFlashState = false;
 
 int32_t rawADCValue = 0;
+float batteryVoltage = 0.0;
+int32_t batteryPercentage = 0;
 
 bool event_connection_state_flag_bo = false;  // To track connection state changes
 
@@ -35,6 +37,9 @@ const int32_t g_interval_i32 = 500;  // 500ms
 
 uint32_t g_ultrasonic_distance_cm;
 
+int32_t g_battery_raw_adc;
+float g_battery_voltage;
+int32_t g_battery_percentage;
 
 uint32_t g_elapsed_time_startup_millis;
 uint32_t g_elapsed_time_hours;
@@ -44,7 +49,7 @@ uint32_t g_elapsed_time_seconds;
 uint32_t g_speed_s1;
 uint32_t g_speed_s2;
 
-
+int16_t g_remotexy_sound1_val;
 
 uint32_t g_joystick_speed_pct;
 
