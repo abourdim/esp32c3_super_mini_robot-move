@@ -95,7 +95,13 @@ int8_t head_offset_get(void) {
 // ===========================================================================
 void centerHead() {
 // ===========================================================================
-  moveHead(CONFIG_SERVO_HEAD_CENTER);
+  // NOT moveHead(): s_head_angle already starts at CONFIG_SERVO_HEAD_CENTER,
+  // so moveHead()'s no-redundant-writes guard makes the boot call a no-op and
+  // the head stays wherever it powered up. Centring has to be unconditional --
+  // it is the one call whose whole job is to assert a position rather than
+  // change one.
+  s_head_angle = CONFIG_SERVO_HEAD_CENTER;
+  headWrite();
 }
 
 // ===========================================================================
