@@ -155,7 +155,7 @@ Hold to 8 seconds to forget the saved network. The device is reachable as
 BLE device name is `diy_app_mv`, distinct from b3's `diy_app_b3` so the two are
 told apart in the scanner when both are powered on in the same room.
 
-**The image is at 91.4% of flash** — roughly 110 KB spare on the default
+**The image is at 91.5% of flash** — roughly 110 KB spare on the default
 partition table. Enough for tuning, not for another subsystem.
 
 Note that with native USB-CDC the serial monitor attaches *after* boot, so you
@@ -184,5 +184,14 @@ Three board facts firmware cannot paper over — the long form is in
 - **`01_software/01_app/02_web/`** is b3's site and still describes b3's pin
   map. Its Pages workflow is set to manual trigger only, so a push cannot
   publish a site that is wrong about this robot. Rewrite it before re-enabling.
+
+## Wiki
+
+A full illustrated walkthrough — clone, build, flash, verify, plus the board's
+pin map and how the sweep is paced — is on the wiki in three languages:
+
+- [Robot MV (English)](https://abourdim.github.io/wiki/robot-mv-en.html)
+- [Robot MV (Français)](https://abourdim.github.io/wiki/robot-mv.html)
+- [Robot MV (العربية)](https://abourdim.github.io/wiki/robot-mv-ar.html)
 
 Powered by [Workshop-DIY.org](https://workshop-diy.org)

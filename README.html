@@ -203,7 +203,7 @@ Hold to 8 seconds to forget the saved network. The device is reachable as
 <code>wdiy-move</code>, and the setup AP is <code>WDIY-Robot-Setup</code>.</p>
 <p>BLE device name is <code>diy_app_mv</code>, distinct from b3's <code>diy_app_b3</code> so the two are
 told apart in the scanner when both are powered on in the same room.</p>
-<p><strong>The image is at 91.4% of flash</strong> — roughly 110 KB spare on the default
+<p><strong>The image is at 91.5% of flash</strong> — roughly 110 KB spare on the default
 partition table. Enough for tuning, not for another subsystem.</p>
 <p>Note that with native USB-CDC the serial monitor attaches <em>after</em> boot, so you
 will usually see nothing at startup. That is normal, not a fault.</p>
@@ -229,6 +229,14 @@ will usually see nothing at startup. That is normal, not a fault.</p>
 <li><strong><code>01_software/01_app/02_web/</code></strong> is b3's site and still describes b3's pin
   map. Its Pages workflow is set to manual trigger only, so a push cannot
   publish a site that is wrong about this robot. Rewrite it before re-enabling.</li>
+</ul>
+<h2>Wiki</h2>
+<p>A full illustrated walkthrough — clone, build, flash, verify, plus the board's
+pin map and how the sweep is paced — is on the wiki in three languages:</p>
+<ul>
+<li><a href="https://abourdim.github.io/wiki/robot-mv-en.html">Robot MV (English)</a></li>
+<li><a href="https://abourdim.github.io/wiki/robot-mv.html">Robot MV (Français)</a></li>
+<li><a href="https://abourdim.github.io/wiki/robot-mv-ar.html">Robot MV (العربية)</a></li>
 </ul>
 <p>Powered by <a href="https://workshop-diy.org">Workshop-DIY.org</a></p>
 </body></html>
