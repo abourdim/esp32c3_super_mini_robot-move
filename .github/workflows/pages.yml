@@ -1,21 +1,16 @@
 name: Deploy Web tools to GitHub Pages
 
-# Single source of truth: 01_software/01_app/02_web/
-# This workflow mirrors that folder to GitHub Pages on every push to main,
-# so the site URL https://abourdim.github.io/esp32c3_super_mini_robot-bit-rxy/
-# always reflects HEAD.
-
+# DISABLED on push, deliberately.
+#
+# 02_web/ is inherited from b3 and still documents b3's hardware -- board LEDs,
+# a NeoPixel strip, an OLED, battery sense -- none of which exists on
+# 30_esp32_c3_move. The staging step below also copies 02_hardware/v3/, and
+# this repo's board only goes up to v2.
+#
+# Publishing it from here would put a site live that is confidently wrong about
+# this robot, so the push trigger is gone and only a manual run remains. Rewrite
+# 02_web for this board, fix the v3 paths, then restore the `push:` block.
 on:
-  push:
-    branches: [main]
-    paths:
-      - '01_software/01_app/02_web/**'
-      - '02_hardware/v3/*.svg'
-      - '02_hardware/v3/*.png'
-      - '02_hardware/v3/*.jpg'
-      - '02_hardware/v3/bom/**'
-      - '02_hardware/README.md'
-      - '.github/workflows/pages.yml'
   workflow_dispatch:   # manual trigger from Actions tab
 
 permissions:
