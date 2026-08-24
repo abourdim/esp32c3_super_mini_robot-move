@@ -15,6 +15,7 @@ bool event_connection_state_flag_bo = false;  // To track connection state chang
 // Servo objects
 Servo servoLeft;
 Servo servoRight;
+Servo servoHead;
 
 int32_t duration;
 float distance_cm;

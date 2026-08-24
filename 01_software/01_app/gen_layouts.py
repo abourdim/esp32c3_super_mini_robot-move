@@ -5,6 +5,11 @@ buzzer, NeoPixel strip, two board LEDs, OLED, battery sense -- so Beginner and
 Expert are rebuilt here without those widgets, and only the Drive and Distance
 test panels survive.
 
+What this board adds back that the servo-sonar board did not have: a head servo
+on J6, and with it the radar. The radar is the reason the head is worth having
+at all -- a distance sensor that can turn but has nowhere to draw what it saw
+is just a number that changes for reasons you cannot see.
+
 Widget ids are the ones handleWidget() in 03_bit-rxy.cpp actually handles. A
 widget whose id has no handler is worse than a missing widget: it looks live
 and does nothing, which is exactly the "lbl_hint shows 0" class of bug.
@@ -121,6 +126,24 @@ def trim(x, y, w, h):
               min=-20, max=20, step=1, value=0)]
 
 
+# The head servo on J6, and the scope it feeds. These travel together: the
+# radar carries no value of its own, it reads the distance widget and the head
+# widget by id (see rxy_web's readme). Ship one without the other and you get
+# either a scope frozen at one bearing or a head you cannot see the point of.
+#
+# The slider range is the MECHANICAL limit from 00_config.h, not 0..180. The
+# firmware clamps anyway, but a slider whose last 10 degrees do nothing is a
+# control that lies about the robot.
+def head(x, y, w, h):
+    return W("head", "slider", x, y, w, h, label="Head",
+             min=10, max=170, step=5, value=90)
+
+
+def radar(x, y, w, h):
+    return W("radar", "radar", x, y, w, h, label="Radar",
+             source="gauge_distance", angleSource="head", max=200, model="dots")
+
+
 LOGO = lambda x, y: W("logo", "image", x, y, 192, 164, label="Workshop-DIY",
                       imageSrc="assets/workshop-diy-logo.svg")
 LEVEL = lambda x, y: W("level", "select", x, y, 160, 70, label="Level", options=LEVELS)
@@ -128,7 +151,7 @@ LEVEL = lambda x, y: W("level", "select", x, y, 160, 70, label="Level", options=
 # ── BEGINNER ────────────────────────────────────────────────────────────────
 # One way to drive, one number to watch. No speed slider: at this level the
 # pad IS the speed control, and a second one only invites "why won't it move".
-beginner = build("WDIY Servo-Sonar - Beginner", [
+beginner = build("WDIY Move - Beginner", [
     ("grp_drive", "DRIVE", "#00d4ff", [
         W("dpad_drive", "dpad", 80, 100, 340, 340, label="Drive", model="classic"),
     ]),
@@ -146,7 +169,7 @@ beginner = build("WDIY Servo-Sonar - Beginner", [
 # ── EXPERT ──────────────────────────────────────────────────────────────────
 # Everything the board can do. Same three-zone shape as b3's expert panel with
 # the LIGHTS, SOUND and DISPLAY zones gone.
-expert = build("WDIY Servo-Sonar - Expert", [
+expert = build("WDIY Move - Expert", [
     ("grp_drive", "DRIVE", "#00d4ff", [
         W("dpad_drive", "dpad", 80, 100, 320, 320, label="Drive", model="classic"),
         W("joy_drive", "joystick", 440, 100, 300, 300, label="Steer"),
@@ -170,17 +193,19 @@ expert = build("WDIY Servo-Sonar - Expert", [
         W("graph_dist", "graph", 460, 760, 480, 210, label="Distance cm",
           model="grid", windowSec=30, series=1),
         W("sound_alert", "sound", 980, 770, 90, 90, label="Alert"),
+        radar(1120, 760, 280, 280),
+        head(1420, 760, 90, 280),
     ]),
     ("grp_sys", "SYSTEM", "#3ddc97", [
-        W("lbl_ver", "label", 80, 1110, 200, 70, label="Firmware", model="card"),
-        W("lbl_uptime", "label", 80, 1200, 200, 70, label="Uptime", model="card"),
-        W("upd", "select", 320, 1110, 160, 70, label="Telemetry", options="Off,Basic,All"),
-        LEVEL(320, 1200),
-        W("led_button", "led", 520, 1120, 80, 80, label="Button",
+        W("lbl_ver", "label", 80, 1230, 200, 70, label="Firmware", model="card"),
+        W("lbl_uptime", "label", 80, 1320, 200, 70, label="Uptime", model="card"),
+        W("upd", "select", 320, 1230, 160, 70, label="Telemetry", options="Off,Basic,All"),
+        LEVEL(320, 1320),
+        W("led_button", "led", 520, 1240, 80, 80, label="Button",
           model="dot", colorOn="#00ff88"),
-        W("gauge_rssi", "gauge", 640, 1110, 189, 190, label="Signal",
+        W("gauge_rssi", "gauge", 640, 1230, 189, 190, label="Signal",
           min=-100, max=-30, units="dBm", decimals=0, model="classic"),
-        LOGO(870, 1120),
+        LOGO(870, 1240),
     ]),
 ])
 
@@ -188,7 +213,7 @@ expert = build("WDIY Servo-Sonar - Expert", [
 # One subsystem each, big targets, one instruction. Rebuilt here rather than
 # carried over from b3 so they go through the same checks as the other two --
 # carrying them over unvalidated is exactly how the clipped hint shipped.
-test_drive = build("Servo-Sonar - Drive test", [
+test_drive = build("Move - Drive test", [
     ("grp_test", "MOTORS", "#00d4ff", [
         W("dpad_drive", "dpad", 80, 100, 300, 300, label="Drive", model="classic"),
         W("spd", "slider", 420, 100, 90, 200, label="Speed",
@@ -203,7 +228,7 @@ test_drive = build("Servo-Sonar - Drive test", [
 ], extra=[hint(80, 660, 710,
                "Drive forward. If it curves right, raise Trim R until it runs straight.")])
 
-test_distance = build("Servo-Sonar - Distance test", [
+test_distance = build("Move - Distance test", [
     ("grp_test", "DISTANCE", "#ffb020", [
         W("gauge_distance", "gauge", 80, 100, 150, 190, label="Distance cm",
           min=0, max=200, units="cm", decimals=0, model="classic"),
@@ -211,8 +236,11 @@ test_distance = build("Servo-Sonar - Distance test", [
         W("graph_dist", "graph", 80, 320, 380, 200, label="Distance cm",
           model="grid", windowSec=30, series=1),
         W("level", "select", 80, 560, 200, 70, label="Test", options=LEVELS),
+        radar(500, 100, 280, 280),
+        head(820, 100, 90, 280),
     ]),
-], extra=[hint(80, 670, 380, "Move your hand in front of the sensor.")])
+], extra=[hint(80, 670, 380,
+               "Sweep the Head slider and watch the radar fill in the room.")])
 
 NEW = {"BEGINNER": beginner, "EXPERT": expert,
        "TEST_DRIVE": test_drive, "TEST_DISTANCE": test_distance}
@@ -252,15 +280,20 @@ open(SRC, "w", encoding="utf-8", newline="\n").write(src)
 # Every id must have a handler or a telemetry sender; anything else is a dead
 # control on the panel.
 HANDLED = {"joy_drive", "dpad_drive", "dpad_turn", "spd", "btn_stop", "level",
-           "upd", "trim_l", "trim_r"}
+           "upd", "trim_l", "trim_r", "head"}
 SENT = {"gauge_distance", "gauge_speed", "graph_dist", "alert", "sound_alert",
         "lbl_ver", "lbl_uptime", "gauge_rssi", "led_button"}
 DECOR = {"logo", "lbl_hint"}
+# Widgets that are neither SET nor UPD targets because they render from OTHER
+# widgets' values. The radar reads gauge_distance and head by id, so it is
+# fully driven while never being addressed -- exempt from the dead-control
+# check for a different reason than the decorations are.
+DERIVED = {"radar"}
 print(f"  {'panel':14} {'was':>6} {'now':>6}  widgets")
 dead = []
 for name, was, now, ids in report:
     print(f"  {name:14} {was:6} {now:6}  {len(ids)}")
-    dead += [f"{name}:{i}" for i in ids if i not in HANDLED | SENT | DECOR]
+    dead += [f"{name}:{i}" for i in ids if i not in HANDLED | SENT | DECOR | DERIVED]
 print()
 if dead:
     print("  FAILED - widgets with no handler and no telemetry:", dead)

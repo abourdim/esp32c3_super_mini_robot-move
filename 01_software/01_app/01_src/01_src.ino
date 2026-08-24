@@ -1,7 +1,9 @@
 ///////////////////////////////////////////////
-//  esp32c3_super_mini_servo_sonar-rxy       //
-//  Two drive servos and an SR04. Nothing    //
-//  else -- see 00_config.h for the pin map. //
+//  esp32c3_super_mini_robot-move            //
+//  Board 30_esp32_c3_move v1: two drive     //
+//  servos, a panning SR04 head, two         //
+//  buttons. See 00_config.h for the pin map //
+//  and for why J1 must stay unpopulated.    //
 //////////////////////////////////////////////
 
 #include "01_includes.h"
@@ -20,21 +22,30 @@ void setup() {
   // Allocate timer for ESP32 PWM
   ESP32PWM::allocateTimer(0);
 
-  // Attach servos to their pins
+  // Attach servos to their pins. All three run at the same 50Hz, so they
+  // share the one LEDC timer allocated above -- the C3 has six channels and
+  // four timers, and three servos on one timer is well inside that.
   servoLeft.attach(CONFIG_PIN_SERVO_LEFT);
   servoRight.attach(CONFIG_PIN_SERVO_RIGHT);
+  servoHead.attach(CONFIG_PIN_SERVO_HEAD);
 
   // Stop both servos initially
   stopServos();
+
+  // Point the head straight ahead before anything else moves. servoHead was
+  // just attached, which on ESP32Servo parks it wherever the channel happened
+  // to sit -- centring makes the first radar sweep start from a known bearing
+  // instead of from whatever angle the last power cycle left.
+  centerHead();
 
   ultrasonic_init();
 
   g_ultrasonic_distance_cm=0;
   g_elapsed_time_startup_millis = millis();  // Record start time
 
-  // The BOOT button is on the SuperMini module itself, not on the carrier
-  // board, so it is still here even though this board routes nothing to
-  // GPIO0. It is what opens WiFi OTA mode -- see ota_check_long_press().
+  // SW1 on the carrier board (GPIO 3), NOT the module's BOOT button -- on
+  // this board GPIO 0 is Q2's gate, so the OTA hold gesture would switch the
+  // J2 screw terminal along with it. See ota_check_long_press().
   button_init();
 
   event_connection_state_flag_bo = remotexy_get_connect_flag();  // Set initial state

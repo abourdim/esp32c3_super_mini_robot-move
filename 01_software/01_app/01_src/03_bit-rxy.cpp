@@ -136,140 +136,151 @@
 //                              which had no bit-rxy equivalent until the
 //                              Sound widget was added
 static const char* LAYOUT_CFG_BEGINNER_BASE64 =
-  "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6IldESVkgU2Vydm8tU29uYXIgLSBCZWdpbm5l"
-  "ciIsIndpZGdldHMiOlt7ImlkIjoiZ3JwX2RyaXZlIiwidCI6Imdyb3VwIiwibGFiZWwiOiJE"
-  "UklWRSIsImNvbG9yIjoiIzAwZDRmZiIsIngiOjU2LCJ5Ijo0MiwidyI6Mzg4LCJoIjo0MjIs"
-  "ImNoaWxkcmVuIjpbImRwYWRfZHJpdmUiXX0seyJpZCI6ImdycF9zZWUiLCJ0IjoiZ3JvdXAi"
-  "LCJsYWJlbCI6IldIQVQgSVQgU0VFUyIsImNvbG9yIjoiI2ZmYjAyMCIsIngiOjQ3NiwieSI6"
-  "NDIsInciOjI2OCwiaCI6NDIyLCJjaGlsZHJlbiI6WyJnYXVnZV9kaXN0YW5jZSIsImFsZXJ0"
-  "Il19LHsiaWQiOiJncnBfc3lzIiwidCI6Imdyb3VwIiwibGFiZWwiOiJST0JPVCIsImNvbG9y"
-  "IjoiIzNkZGM5NyIsIngiOjU2LCJ5Ijo1NDIsInciOjQ0MCwiaCI6MjQ2LCJjaGlsZHJlbiI6"
-  "WyJsZXZlbCIsImxvZ28iXX0seyJpZCI6ImRwYWRfZHJpdmUiLCJ0IjoiZHBhZCIsIngiOjgw"
-  "LCJ5IjoxMDAsInciOjM0MCwiaCI6MzQwLCJsYWJlbCI6IkRyaXZlIiwibW9kZWwiOiJjbGFz"
-  "c2ljIiwiZ3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJnYXVnZV9kaXN0YW5jZSIsInQi"
-  "OiJnYXVnZSIsIngiOjUwMCwieSI6MTAwLCJ3IjoyMjAsImgiOjIwMCwibGFiZWwiOiJEaXN0"
-  "YW5jZSIsIm1pbiI6MCwibWF4IjoyMDAsInVuaXRzIjoiY20iLCJkZWNpbWFscyI6MCwibW9k"
-  "ZWwiOiJjbGFzc2ljIiwiZ3JvdXBJZCI6ImdycF9zZWUifSx7ImlkIjoiYWxlcnQiLCJ0Ijoi"
-  "bm90aWZpY2F0aW9uIiwieCI6NTAwLCJ5IjozMzAsInciOjIyMCwiaCI6MTEwLCJsYWJlbCI6"
-  "Ik9ic3RhY2xlIiwiZ3JvdXBJZCI6ImdycF9zZWUifSx7ImlkIjoibGV2ZWwiLCJ0Ijoic2Vs"
-  "ZWN0IiwieCI6ODAsInkiOjY0MCwidyI6MTYwLCJoIjo3MCwibGFiZWwiOiJMZXZlbCIsIm9w"
-  "dGlvbnMiOiJCZWdpbm5lcixFeHBlcnQsRHJpdmUsRGlzdGFuY2UiLCJncm91cElkIjoiZ3Jw"
-  "X3N5cyJ9LHsiaWQiOiJsb2dvIiwidCI6ImltYWdlIiwieCI6MjgwLCJ5Ijo2MDAsInciOjE5"
-  "MiwiaCI6MTY0LCJsYWJlbCI6IldvcmtzaG9wLURJWSIsImltYWdlU3JjIjoiYXNzZXRzL3dv"
-  "cmtzaG9wLWRpeS1sb2dvLnN2ZyIsImdyb3VwSWQiOiJncnBfc3lzIn1dLCJjYW52YXMiOnsi"
-  "dyI6ODAwLCJoIjo4NDR9fQ==";
+  "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6IldESVkgTW92ZSAtIEJlZ2lubmVyIiwid2lk"
+  "Z2V0cyI6W3siaWQiOiJncnBfZHJpdmUiLCJ0IjoiZ3JvdXAiLCJsYWJlbCI6IkRSSVZFIiwi"
+  "Y29sb3IiOiIjMDBkNGZmIiwieCI6NTYsInkiOjQyLCJ3IjozODgsImgiOjQyMiwiY2hpbGRy"
+  "ZW4iOlsiZHBhZF9kcml2ZSJdfSx7ImlkIjoiZ3JwX3NlZSIsInQiOiJncm91cCIsImxhYmVs"
+  "IjoiV0hBVCBJVCBTRUVTIiwiY29sb3IiOiIjZmZiMDIwIiwieCI6NDc2LCJ5Ijo0MiwidyI6"
+  "MjY4LCJoIjo0MjIsImNoaWxkcmVuIjpbImdhdWdlX2Rpc3RhbmNlIiwiYWxlcnQiXX0seyJp"
+  "ZCI6ImdycF9zeXMiLCJ0IjoiZ3JvdXAiLCJsYWJlbCI6IlJPQk9UIiwiY29sb3IiOiIjM2Rk"
+  "Yzk3IiwieCI6NTYsInkiOjU0MiwidyI6NDQwLCJoIjoyNDYsImNoaWxkcmVuIjpbImxldmVs"
+  "IiwibG9nbyJdfSx7ImlkIjoiZHBhZF9kcml2ZSIsInQiOiJkcGFkIiwieCI6ODAsInkiOjEw"
+  "MCwidyI6MzQwLCJoIjozNDAsImxhYmVsIjoiRHJpdmUiLCJtb2RlbCI6ImNsYXNzaWMiLCJn"
+  "cm91cElkIjoiZ3JwX2RyaXZlIn0seyJpZCI6ImdhdWdlX2Rpc3RhbmNlIiwidCI6ImdhdWdl"
+  "IiwieCI6NTAwLCJ5IjoxMDAsInciOjIyMCwiaCI6MjAwLCJsYWJlbCI6IkRpc3RhbmNlIiwi"
+  "bWluIjowLCJtYXgiOjIwMCwidW5pdHMiOiJjbSIsImRlY2ltYWxzIjowLCJtb2RlbCI6ImNs"
+  "YXNzaWMiLCJncm91cElkIjoiZ3JwX3NlZSJ9LHsiaWQiOiJhbGVydCIsInQiOiJub3RpZmlj"
+  "YXRpb24iLCJ4Ijo1MDAsInkiOjMzMCwidyI6MjIwLCJoIjoxMTAsImxhYmVsIjoiT2JzdGFj"
+  "bGUiLCJncm91cElkIjoiZ3JwX3NlZSJ9LHsiaWQiOiJsZXZlbCIsInQiOiJzZWxlY3QiLCJ4"
+  "Ijo4MCwieSI6NjQwLCJ3IjoxNjAsImgiOjcwLCJsYWJlbCI6IkxldmVsIiwib3B0aW9ucyI6"
+  "IkJlZ2lubmVyLEV4cGVydCxEcml2ZSxEaXN0YW5jZSIsImdyb3VwSWQiOiJncnBfc3lzIn0s"
+  "eyJpZCI6ImxvZ28iLCJ0IjoiaW1hZ2UiLCJ4IjoyODAsInkiOjYwMCwidyI6MTkyLCJoIjox"
+  "NjQsImxhYmVsIjoiV29ya3Nob3AtRElZIiwiaW1hZ2VTcmMiOiJhc3NldHMvd29ya3Nob3At"
+  "ZGl5LWxvZ28uc3ZnIiwiZ3JvdXBJZCI6ImdycF9zeXMifV0sImNhbnZhcyI6eyJ3Ijo4MDAs"
+  "ImgiOjg0NH19";
 
 static const char* LAYOUT_CFG_EXPERT_BASE64 =
-  "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6IldESVkgU2Vydm8tU29uYXIgLSBFeHBlcnQi"
-  "LCJ3aWRnZXRzIjpbeyJpZCI6ImdycF9kcml2ZSIsInQiOiJncm91cCIsImxhYmVsIjoiRFJJ"
-  "VkUiLCJjb2xvciI6IiMwMGQ0ZmYiLCJ4Ijo1NiwieSI6NDIsInciOjExMDgsImgiOjYxMiwi"
-  "Y2hpbGRyZW4iOlsiZHBhZF9kcml2ZSIsImpveV9kcml2ZSIsInNwZCIsImJ0bl9zdG9wIiwi"
-  "Z2F1Z2Vfc3BlZWQiLCJkcGFkX3R1cm4iLCJ0cmltX2wiLCJ0cmltX3IiXX0seyJpZCI6Imdy"
-  "cF9kaXN0IiwidCI6Imdyb3VwIiwibGFiZWwiOiJESVNUQU5DRSIsImNvbG9yIjoiI2ZmYjAy"
-  "MCIsIngiOjU2LCJ5Ijo3MDIsInciOjEwMzgsImgiOjI5MiwiY2hpbGRyZW4iOlsiZ2F1Z2Vf"
-  "ZGlzdGFuY2UiLCJhbGVydCIsImdyYXBoX2Rpc3QiLCJzb3VuZF9hbGVydCJdfSx7ImlkIjoi"
-  "Z3JwX3N5cyIsInQiOiJncm91cCIsImxhYmVsIjoiU1lTVEVNIiwiY29sb3IiOiIjM2RkYzk3"
-  "IiwieCI6NTYsInkiOjEwNTIsInciOjEwMzAsImgiOjI3MiwiY2hpbGRyZW4iOlsibGJsX3Zl"
-  "ciIsImxibF91cHRpbWUiLCJ1cGQiLCJsZXZlbCIsImxlZF9idXR0b24iLCJnYXVnZV9yc3Np"
-  "IiwibG9nbyJdfSx7ImlkIjoiZHBhZF9kcml2ZSIsInQiOiJkcGFkIiwieCI6ODAsInkiOjEw"
-  "MCwidyI6MzIwLCJoIjozMjAsImxhYmVsIjoiRHJpdmUiLCJtb2RlbCI6ImNsYXNzaWMiLCJn"
-  "cm91cElkIjoiZ3JwX2RyaXZlIn0seyJpZCI6ImpveV9kcml2ZSIsInQiOiJqb3lzdGljayIs"
-  "IngiOjQ0MCwieSI6MTAwLCJ3IjozMDAsImgiOjMwMCwibGFiZWwiOiJTdGVlciIsImdyb3Vw"
-  "SWQiOiJncnBfZHJpdmUifSx7ImlkIjoic3BkIiwidCI6InNsaWRlciIsIngiOjc5MCwieSI6"
-  "MTAwLCJ3Ijo5MCwiaCI6MjIwLCJsYWJlbCI6IlNwZWVkIiwibWluIjowLCJtYXgiOjEwMCwi"
-  "c3RlcCI6NSwidmFsdWUiOjEwMCwiZ3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJidG5f"
-  "c3RvcCIsInQiOiJidXR0b24iLCJ4Ijo3OTAsInkiOjM1MCwidyI6MTEwLCJoIjoxMTAsImxh"
-  "YmVsIjoiU1RPUCIsImdyb3VwSWQiOiJncnBfZHJpdmUifSx7ImlkIjoiZ2F1Z2Vfc3BlZWQi"
-  "LCJ0IjoiZ2F1Z2UiLCJ4Ijo5NDAsInkiOjExMCwidyI6MjAwLCJoIjoxOTAsImxhYmVsIjoi"
-  "U3BlZWQiLCJtaW4iOjAsIm1heCI6MTAwLCJkZWNpbWFscyI6MCwibW9kZWwiOiJtaW4iLCJn"
-  "cm91cElkIjoiZ3JwX2RyaXZlIn0seyJpZCI6ImRwYWRfdHVybiIsInQiOiJkcGFkIiwieCI6"
-  "ODAsInkiOjQ3MCwidyI6MzAwLCJoIjoxMjAsImxhYmVsIjoiVHVybiIsIm1vZGVsIjoibGVm"
-  "dHJpZ2h0IiwiZ3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJ0cmltX2wiLCJ0Ijoic2xp"
-  "ZGVyIiwieCI6NDQwLCJ5Ijo0NzAsInciOjkwLCJoIjoxNjAsImxhYmVsIjoiVHJpbSBMIiwi"
-  "bWluIjotMjAsIm1heCI6MjAsInN0ZXAiOjEsInZhbHVlIjowLCJncm91cElkIjoiZ3JwX2Ry"
-  "aXZlIn0seyJpZCI6InRyaW1fciIsInQiOiJzbGlkZXIiLCJ4Ijo1NTAsInkiOjQ3MCwidyI6"
-  "OTAsImgiOjE2MCwibGFiZWwiOiJUcmltIFIiLCJtaW4iOi0yMCwibWF4IjoyMCwic3RlcCI6"
-  "MSwidmFsdWUiOjAsImdyb3VwSWQiOiJncnBfZHJpdmUifSx7ImlkIjoiZ2F1Z2VfZGlzdGFu"
-  "Y2UiLCJ0IjoiZ2F1Z2UiLCJ4Ijo4MCwieSI6NzYwLCJ3IjoyMjAsImgiOjIwMCwibGFiZWwi"
-  "OiJEaXN0YW5jZSIsIm1pbiI6MCwibWF4IjoyMDAsInVuaXRzIjoiY20iLCJkZWNpbWFscyI6"
-  "MCwibW9kZWwiOiJjbGFzc2ljIiwiZ3JvdXBJZCI6ImdycF9kaXN0In0seyJpZCI6ImFsZXJ0"
-  "IiwidCI6Im5vdGlmaWNhdGlvbiIsIngiOjMzMCwieSI6NzcwLCJ3Ijo5MCwiaCI6OTAsImxh"
-  "YmVsIjoiT2JzdGFjbGUiLCJncm91cElkIjoiZ3JwX2Rpc3QifSx7ImlkIjoiZ3JhcGhfZGlz"
-  "dCIsInQiOiJncmFwaCIsIngiOjQ2MCwieSI6NzYwLCJ3Ijo0ODAsImgiOjIxMCwibGFiZWwi"
-  "OiJEaXN0YW5jZSBjbSIsIm1vZGVsIjoiZ3JpZCIsIndpbmRvd1NlYyI6MzAsInNlcmllcyI6"
-  "MSwiZ3JvdXBJZCI6ImdycF9kaXN0In0seyJpZCI6InNvdW5kX2FsZXJ0IiwidCI6InNvdW5k"
-  "IiwieCI6OTgwLCJ5Ijo3NzAsInciOjkwLCJoIjo5MCwibGFiZWwiOiJBbGVydCIsImdyb3Vw"
-  "SWQiOiJncnBfZGlzdCJ9LHsiaWQiOiJsYmxfdmVyIiwidCI6ImxhYmVsIiwieCI6ODAsInki"
-  "OjExMTAsInciOjIwMCwiaCI6NzAsImxhYmVsIjoiRmlybXdhcmUiLCJtb2RlbCI6ImNhcmQi"
-  "LCJncm91cElkIjoiZ3JwX3N5cyJ9LHsiaWQiOiJsYmxfdXB0aW1lIiwidCI6ImxhYmVsIiwi"
-  "eCI6ODAsInkiOjEyMDAsInciOjIwMCwiaCI6NzAsImxhYmVsIjoiVXB0aW1lIiwibW9kZWwi"
-  "OiJjYXJkIiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7ImlkIjoidXBkIiwidCI6InNlbGVjdCIs"
-  "IngiOjMyMCwieSI6MTExMCwidyI6MTYwLCJoIjo3MCwibGFiZWwiOiJUZWxlbWV0cnkiLCJv"
-  "cHRpb25zIjoiT2ZmLEJhc2ljLEFsbCIsImdyb3VwSWQiOiJncnBfc3lzIn0seyJpZCI6Imxl"
-  "dmVsIiwidCI6InNlbGVjdCIsIngiOjMyMCwieSI6MTIwMCwidyI6MTYwLCJoIjo3MCwibGFi"
-  "ZWwiOiJMZXZlbCIsIm9wdGlvbnMiOiJCZWdpbm5lcixFeHBlcnQsRHJpdmUsRGlzdGFuY2Ui"
-  "LCJncm91cElkIjoiZ3JwX3N5cyJ9LHsiaWQiOiJsZWRfYnV0dG9uIiwidCI6ImxlZCIsIngi"
-  "OjUyMCwieSI6MTEyMCwidyI6ODAsImgiOjgwLCJsYWJlbCI6IkJ1dHRvbiIsIm1vZGVsIjoi"
-  "ZG90IiwiY29sb3JPbiI6IiMwMGZmODgiLCJncm91cElkIjoiZ3JwX3N5cyJ9LHsiaWQiOiJn"
-  "YXVnZV9yc3NpIiwidCI6ImdhdWdlIiwieCI6NjQwLCJ5IjoxMTEwLCJ3IjoxODksImgiOjE5"
-  "MCwibGFiZWwiOiJTaWduYWwiLCJtaW4iOi0xMDAsIm1heCI6LTMwLCJ1bml0cyI6ImRCbSIs"
-  "ImRlY2ltYWxzIjowLCJtb2RlbCI6ImNsYXNzaWMiLCJncm91cElkIjoiZ3JwX3N5cyJ9LHsi"
-  "aWQiOiJsb2dvIiwidCI6ImltYWdlIiwieCI6ODcwLCJ5IjoxMTIwLCJ3IjoxOTIsImgiOjE2"
-  "NCwibGFiZWwiOiJXb3Jrc2hvcC1ESVkiLCJpbWFnZVNyYyI6ImFzc2V0cy93b3Jrc2hvcC1k"
-  "aXktbG9nby5zdmciLCJncm91cElkIjoiZ3JwX3N5cyJ9XSwiY2FudmFzIjp7InciOjEyMjAs"
-  "ImgiOjEzODB9fQ==";
+  "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6IldESVkgTW92ZSAtIEV4cGVydCIsIndpZGdl"
+  "dHMiOlt7ImlkIjoiZ3JwX2RyaXZlIiwidCI6Imdyb3VwIiwibGFiZWwiOiJEUklWRSIsImNv"
+  "bG9yIjoiIzAwZDRmZiIsIngiOjU2LCJ5Ijo0MiwidyI6MTEwOCwiaCI6NjEyLCJjaGlsZHJl"
+  "biI6WyJkcGFkX2RyaXZlIiwiam95X2RyaXZlIiwic3BkIiwiYnRuX3N0b3AiLCJnYXVnZV9z"
+  "cGVlZCIsImRwYWRfdHVybiIsInRyaW1fbCIsInRyaW1fciJdfSx7ImlkIjoiZ3JwX2Rpc3Qi"
+  "LCJ0IjoiZ3JvdXAiLCJsYWJlbCI6IkRJU1RBTkNFIiwiY29sb3IiOiIjZmZiMDIwIiwieCI6"
+  "NTYsInkiOjcwMiwidyI6MTQ3OCwiaCI6MzYyLCJjaGlsZHJlbiI6WyJnYXVnZV9kaXN0YW5j"
+  "ZSIsImFsZXJ0IiwiZ3JhcGhfZGlzdCIsInNvdW5kX2FsZXJ0IiwicmFkYXIiLCJoZWFkIl19"
+  "LHsiaWQiOiJncnBfc3lzIiwidCI6Imdyb3VwIiwibGFiZWwiOiJTWVNURU0iLCJjb2xvciI6"
+  "IiMzZGRjOTciLCJ4Ijo1NiwieSI6MTE3MiwidyI6MTAzMCwiaCI6MjcyLCJjaGlsZHJlbiI6"
+  "WyJsYmxfdmVyIiwibGJsX3VwdGltZSIsInVwZCIsImxldmVsIiwibGVkX2J1dHRvbiIsImdh"
+  "dWdlX3Jzc2kiLCJsb2dvIl19LHsiaWQiOiJkcGFkX2RyaXZlIiwidCI6ImRwYWQiLCJ4Ijo4"
+  "MCwieSI6MTAwLCJ3IjozMjAsImgiOjMyMCwibGFiZWwiOiJEcml2ZSIsIm1vZGVsIjoiY2xh"
+  "c3NpYyIsImdyb3VwSWQiOiJncnBfZHJpdmUifSx7ImlkIjoiam95X2RyaXZlIiwidCI6Impv"
+  "eXN0aWNrIiwieCI6NDQwLCJ5IjoxMDAsInciOjMwMCwiaCI6MzAwLCJsYWJlbCI6IlN0ZWVy"
+  "IiwiZ3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJzcGQiLCJ0Ijoic2xpZGVyIiwieCI6"
+  "NzkwLCJ5IjoxMDAsInciOjkwLCJoIjoyMjAsImxhYmVsIjoiU3BlZWQiLCJtaW4iOjAsIm1h"
+  "eCI6MTAwLCJzdGVwIjo1LCJ2YWx1ZSI6MTAwLCJncm91cElkIjoiZ3JwX2RyaXZlIn0seyJp"
+  "ZCI6ImJ0bl9zdG9wIiwidCI6ImJ1dHRvbiIsIngiOjc5MCwieSI6MzUwLCJ3IjoxMTAsImgi"
+  "OjExMCwibGFiZWwiOiJTVE9QIiwiZ3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJnYXVn"
+  "ZV9zcGVlZCIsInQiOiJnYXVnZSIsIngiOjk0MCwieSI6MTEwLCJ3IjoyMDAsImgiOjE5MCwi"
+  "bGFiZWwiOiJTcGVlZCIsIm1pbiI6MCwibWF4IjoxMDAsImRlY2ltYWxzIjowLCJtb2RlbCI6"
+  "Im1pbiIsImdyb3VwSWQiOiJncnBfZHJpdmUifSx7ImlkIjoiZHBhZF90dXJuIiwidCI6ImRw"
+  "YWQiLCJ4Ijo4MCwieSI6NDcwLCJ3IjozMDAsImgiOjEyMCwibGFiZWwiOiJUdXJuIiwibW9k"
+  "ZWwiOiJsZWZ0cmlnaHQiLCJncm91cElkIjoiZ3JwX2RyaXZlIn0seyJpZCI6InRyaW1fbCIs"
+  "InQiOiJzbGlkZXIiLCJ4Ijo0NDAsInkiOjQ3MCwidyI6OTAsImgiOjE2MCwibGFiZWwiOiJU"
+  "cmltIEwiLCJtaW4iOi0yMCwibWF4IjoyMCwic3RlcCI6MSwidmFsdWUiOjAsImdyb3VwSWQi"
+  "OiJncnBfZHJpdmUifSx7ImlkIjoidHJpbV9yIiwidCI6InNsaWRlciIsIngiOjU1MCwieSI6"
+  "NDcwLCJ3Ijo5MCwiaCI6MTYwLCJsYWJlbCI6IlRyaW0gUiIsIm1pbiI6LTIwLCJtYXgiOjIw"
+  "LCJzdGVwIjoxLCJ2YWx1ZSI6MCwiZ3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJnYXVn"
+  "ZV9kaXN0YW5jZSIsInQiOiJnYXVnZSIsIngiOjgwLCJ5Ijo3NjAsInciOjIyMCwiaCI6MjAw"
+  "LCJsYWJlbCI6IkRpc3RhbmNlIiwibWluIjowLCJtYXgiOjIwMCwidW5pdHMiOiJjbSIsImRl"
+  "Y2ltYWxzIjowLCJtb2RlbCI6ImNsYXNzaWMiLCJncm91cElkIjoiZ3JwX2Rpc3QifSx7Imlk"
+  "IjoiYWxlcnQiLCJ0Ijoibm90aWZpY2F0aW9uIiwieCI6MzMwLCJ5Ijo3NzAsInciOjkwLCJo"
+  "Ijo5MCwibGFiZWwiOiJPYnN0YWNsZSIsImdyb3VwSWQiOiJncnBfZGlzdCJ9LHsiaWQiOiJn"
+  "cmFwaF9kaXN0IiwidCI6ImdyYXBoIiwieCI6NDYwLCJ5Ijo3NjAsInciOjQ4MCwiaCI6MjEw"
+  "LCJsYWJlbCI6IkRpc3RhbmNlIGNtIiwibW9kZWwiOiJncmlkIiwid2luZG93U2VjIjozMCwi"
+  "c2VyaWVzIjoxLCJncm91cElkIjoiZ3JwX2Rpc3QifSx7ImlkIjoic291bmRfYWxlcnQiLCJ0"
+  "Ijoic291bmQiLCJ4Ijo5ODAsInkiOjc3MCwidyI6OTAsImgiOjkwLCJsYWJlbCI6IkFsZXJ0"
+  "IiwiZ3JvdXBJZCI6ImdycF9kaXN0In0seyJpZCI6InJhZGFyIiwidCI6InJhZGFyIiwieCI6"
+  "MTEyMCwieSI6NzYwLCJ3IjoyODAsImgiOjI4MCwibGFiZWwiOiJSYWRhciIsInNvdXJjZSI6"
+  "ImdhdWdlX2Rpc3RhbmNlIiwiYW5nbGVTb3VyY2UiOiJoZWFkIiwibWF4IjoyMDAsIm1vZGVs"
+  "IjoiZG90cyIsImdyb3VwSWQiOiJncnBfZGlzdCJ9LHsiaWQiOiJoZWFkIiwidCI6InNsaWRl"
+  "ciIsIngiOjE0MjAsInkiOjc2MCwidyI6OTAsImgiOjI4MCwibGFiZWwiOiJIZWFkIiwibWlu"
+  "IjoxMCwibWF4IjoxNzAsInN0ZXAiOjUsInZhbHVlIjo5MCwiZ3JvdXBJZCI6ImdycF9kaXN0"
+  "In0seyJpZCI6ImxibF92ZXIiLCJ0IjoibGFiZWwiLCJ4Ijo4MCwieSI6MTIzMCwidyI6MjAw"
+  "LCJoIjo3MCwibGFiZWwiOiJGaXJtd2FyZSIsIm1vZGVsIjoiY2FyZCIsImdyb3VwSWQiOiJn"
+  "cnBfc3lzIn0seyJpZCI6ImxibF91cHRpbWUiLCJ0IjoibGFiZWwiLCJ4Ijo4MCwieSI6MTMy"
+  "MCwidyI6MjAwLCJoIjo3MCwibGFiZWwiOiJVcHRpbWUiLCJtb2RlbCI6ImNhcmQiLCJncm91"
+  "cElkIjoiZ3JwX3N5cyJ9LHsiaWQiOiJ1cGQiLCJ0Ijoic2VsZWN0IiwieCI6MzIwLCJ5Ijox"
+  "MjMwLCJ3IjoxNjAsImgiOjcwLCJsYWJlbCI6IlRlbGVtZXRyeSIsIm9wdGlvbnMiOiJPZmYs"
+  "QmFzaWMsQWxsIiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7ImlkIjoibGV2ZWwiLCJ0Ijoic2Vs"
+  "ZWN0IiwieCI6MzIwLCJ5IjoxMzIwLCJ3IjoxNjAsImgiOjcwLCJsYWJlbCI6IkxldmVsIiwi"
+  "b3B0aW9ucyI6IkJlZ2lubmVyLEV4cGVydCxEcml2ZSxEaXN0YW5jZSIsImdyb3VwSWQiOiJn"
+  "cnBfc3lzIn0seyJpZCI6ImxlZF9idXR0b24iLCJ0IjoibGVkIiwieCI6NTIwLCJ5IjoxMjQw"
+  "LCJ3Ijo4MCwiaCI6ODAsImxhYmVsIjoiQnV0dG9uIiwibW9kZWwiOiJkb3QiLCJjb2xvck9u"
+  "IjoiIzAwZmY4OCIsImdyb3VwSWQiOiJncnBfc3lzIn0seyJpZCI6ImdhdWdlX3Jzc2kiLCJ0"
+  "IjoiZ2F1Z2UiLCJ4Ijo2NDAsInkiOjEyMzAsInciOjE4OSwiaCI6MTkwLCJsYWJlbCI6IlNp"
+  "Z25hbCIsIm1pbiI6LTEwMCwibWF4IjotMzAsInVuaXRzIjoiZEJtIiwiZGVjaW1hbHMiOjAs"
+  "Im1vZGVsIjoiY2xhc3NpYyIsImdyb3VwSWQiOiJncnBfc3lzIn0seyJpZCI6ImxvZ28iLCJ0"
+  "IjoiaW1hZ2UiLCJ4Ijo4NzAsInkiOjEyNDAsInciOjE5MiwiaCI6MTY0LCJsYWJlbCI6Ildv"
+  "cmtzaG9wLURJWSIsImltYWdlU3JjIjoiYXNzZXRzL3dvcmtzaG9wLWRpeS1sb2dvLnN2ZyIs"
+  "Imdyb3VwSWQiOiJncnBfc3lzIn1dLCJjYW52YXMiOnsidyI6MTU5MCwiaCI6MTUwMH19";
 
 static const char* LAYOUT_CFG_TEST_DRIVE_BASE64 =
-  "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6IlNlcnZvLVNvbmFyIC0gRHJpdmUgdGVzdCIs"
-  "IndpZGdldHMiOlt7ImlkIjoiZ3JwX3Rlc3QiLCJ0IjoiZ3JvdXAiLCJsYWJlbCI6Ik1PVE9S"
-  "UyIsImNvbG9yIjoiIzAwZDRmZiIsIngiOjU2LCJ5Ijo0MiwidyI6NzY4LCJoIjo1OTIsImNo"
-  "aWxkcmVuIjpbImRwYWRfZHJpdmUiLCJzcGQiLCJidG5fc3RvcCIsImdhdWdlX3NwZWVkIiwi"
-  "ZHBhZF90dXJuIiwibGV2ZWwiLCJ0cmltX2wiLCJ0cmltX3IiXX0seyJpZCI6ImxibF9oaW50"
-  "IiwidCI6ImxhYmVsIiwieCI6ODAsInkiOjY2MCwidyI6NzEwLCJoIjoxMTAsImxhYmVsIjoi"
-  "RHJpdmUgZm9yd2FyZC4gSWYgaXQgY3VydmVzIHJpZ2h0LCByYWlzZSBUcmltIFIgdW50aWwg"
-  "aXQgcnVucyBzdHJhaWdodC4iLCJ2YWx1ZSI6IkRyaXZlIGZvcndhcmQuIElmIGl0IGN1cnZl"
-  "cyByaWdodCwgcmFpc2UgVHJpbSBSIHVudGlsIGl0IHJ1bnMgc3RyYWlnaHQuIiwibW9kZWwi"
-  "OiJjYXJkIn0seyJpZCI6ImRwYWRfZHJpdmUiLCJ0IjoiZHBhZCIsIngiOjgwLCJ5IjoxMDAs"
-  "InciOjMwMCwiaCI6MzAwLCJsYWJlbCI6IkRyaXZlIiwibW9kZWwiOiJjbGFzc2ljIiwiZ3Jv"
-  "dXBJZCI6ImdycF90ZXN0In0seyJpZCI6InNwZCIsInQiOiJzbGlkZXIiLCJ4Ijo0MjAsInki"
-  "OjEwMCwidyI6OTAsImgiOjIwMCwibGFiZWwiOiJTcGVlZCIsIm1pbiI6MCwibWF4IjoxMDAs"
-  "InN0ZXAiOjUsInZhbHVlIjoxMDAsImdyb3VwSWQiOiJncnBfdGVzdCJ9LHsiaWQiOiJidG5f"
-  "c3RvcCIsInQiOiJidXR0b24iLCJ4Ijo0MjAsInkiOjMzMCwidyI6MTIwLCJoIjoxMjAsImxh"
-  "YmVsIjoiU1RPUCIsImdyb3VwSWQiOiJncnBfdGVzdCJ9LHsiaWQiOiJnYXVnZV9zcGVlZCIs"
-  "InQiOiJnYXVnZSIsIngiOjU3MCwieSI6MTAwLCJ3IjoxNTAsImgiOjE5MCwibGFiZWwiOiJT"
-  "cGVlZCAlIiwibWluIjowLCJtYXgiOjEwMCwiZGVjaW1hbHMiOjAsIm1vZGVsIjoibWluIiwi"
-  "Z3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6ImRwYWRfdHVybiIsInQiOiJkcGFkIiwieCI6"
-  "ODAsInkiOjQ5MCwidyI6MjYwLCJoIjoxMjAsImxhYmVsIjoiVHVybiIsIm1vZGVsIjoibGVm"
-  "dHJpZ2h0IiwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6ImxldmVsIiwidCI6InNlbGVj"
-  "dCIsIngiOjM4MCwieSI6NTA1LCJ3IjoyMDAsImgiOjcwLCJsYWJlbCI6IlRlc3QiLCJvcHRp"
-  "b25zIjoiQmVnaW5uZXIsRXhwZXJ0LERyaXZlLERpc3RhbmNlIiwiZ3JvdXBJZCI6ImdycF90"
-  "ZXN0In0seyJpZCI6InRyaW1fbCIsInQiOiJzbGlkZXIiLCJ4Ijo2MDAsInkiOjMzMCwidyI6"
-  "OTAsImgiOjIwMCwibGFiZWwiOiJUcmltIEwiLCJtaW4iOi0yMCwibWF4IjoyMCwic3RlcCI6"
-  "MSwidmFsdWUiOjAsImdyb3VwSWQiOiJncnBfdGVzdCJ9LHsiaWQiOiJ0cmltX3IiLCJ0Ijoi"
-  "c2xpZGVyIiwieCI6NzEwLCJ5IjozMzAsInciOjkwLCJoIjoyMDAsImxhYmVsIjoiVHJpbSBS"
-  "IiwibWluIjotMjAsIm1heCI6MjAsInN0ZXAiOjEsInZhbHVlIjowLCJncm91cElkIjoiZ3Jw"
-  "X3Rlc3QifV0sImNhbnZhcyI6eyJ3Ijo4ODAsImgiOjgyNn19";
+  "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6Ik1vdmUgLSBEcml2ZSB0ZXN0Iiwid2lkZ2V0"
+  "cyI6W3siaWQiOiJncnBfdGVzdCIsInQiOiJncm91cCIsImxhYmVsIjoiTU9UT1JTIiwiY29s"
+  "b3IiOiIjMDBkNGZmIiwieCI6NTYsInkiOjQyLCJ3Ijo3NjgsImgiOjU5MiwiY2hpbGRyZW4i"
+  "OlsiZHBhZF9kcml2ZSIsInNwZCIsImJ0bl9zdG9wIiwiZ2F1Z2Vfc3BlZWQiLCJkcGFkX3R1"
+  "cm4iLCJsZXZlbCIsInRyaW1fbCIsInRyaW1fciJdfSx7ImlkIjoibGJsX2hpbnQiLCJ0Ijoi"
+  "bGFiZWwiLCJ4Ijo4MCwieSI6NjYwLCJ3Ijo3MTAsImgiOjExMCwibGFiZWwiOiJEcml2ZSBm"
+  "b3J3YXJkLiBJZiBpdCBjdXJ2ZXMgcmlnaHQsIHJhaXNlIFRyaW0gUiB1bnRpbCBpdCBydW5z"
+  "IHN0cmFpZ2h0LiIsInZhbHVlIjoiRHJpdmUgZm9yd2FyZC4gSWYgaXQgY3VydmVzIHJpZ2h0"
+  "LCByYWlzZSBUcmltIFIgdW50aWwgaXQgcnVucyBzdHJhaWdodC4iLCJtb2RlbCI6ImNhcmQi"
+  "fSx7ImlkIjoiZHBhZF9kcml2ZSIsInQiOiJkcGFkIiwieCI6ODAsInkiOjEwMCwidyI6MzAw"
+  "LCJoIjozMDAsImxhYmVsIjoiRHJpdmUiLCJtb2RlbCI6ImNsYXNzaWMiLCJncm91cElkIjoi"
+  "Z3JwX3Rlc3QifSx7ImlkIjoic3BkIiwidCI6InNsaWRlciIsIngiOjQyMCwieSI6MTAwLCJ3"
+  "Ijo5MCwiaCI6MjAwLCJsYWJlbCI6IlNwZWVkIiwibWluIjowLCJtYXgiOjEwMCwic3RlcCI6"
+  "NSwidmFsdWUiOjEwMCwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6ImJ0bl9zdG9wIiwi"
+  "dCI6ImJ1dHRvbiIsIngiOjQyMCwieSI6MzMwLCJ3IjoxMjAsImgiOjEyMCwibGFiZWwiOiJT"
+  "VE9QIiwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6ImdhdWdlX3NwZWVkIiwidCI6Imdh"
+  "dWdlIiwieCI6NTcwLCJ5IjoxMDAsInciOjE1MCwiaCI6MTkwLCJsYWJlbCI6IlNwZWVkICUi"
+  "LCJtaW4iOjAsIm1heCI6MTAwLCJkZWNpbWFscyI6MCwibW9kZWwiOiJtaW4iLCJncm91cElk"
+  "IjoiZ3JwX3Rlc3QifSx7ImlkIjoiZHBhZF90dXJuIiwidCI6ImRwYWQiLCJ4Ijo4MCwieSI6"
+  "NDkwLCJ3IjoyNjAsImgiOjEyMCwibGFiZWwiOiJUdXJuIiwibW9kZWwiOiJsZWZ0cmlnaHQi"
+  "LCJncm91cElkIjoiZ3JwX3Rlc3QifSx7ImlkIjoibGV2ZWwiLCJ0Ijoic2VsZWN0IiwieCI6"
+  "MzgwLCJ5Ijo1MDUsInciOjIwMCwiaCI6NzAsImxhYmVsIjoiVGVzdCIsIm9wdGlvbnMiOiJC"
+  "ZWdpbm5lcixFeHBlcnQsRHJpdmUsRGlzdGFuY2UiLCJncm91cElkIjoiZ3JwX3Rlc3QifSx7"
+  "ImlkIjoidHJpbV9sIiwidCI6InNsaWRlciIsIngiOjYwMCwieSI6MzMwLCJ3Ijo5MCwiaCI6"
+  "MjAwLCJsYWJlbCI6IlRyaW0gTCIsIm1pbiI6LTIwLCJtYXgiOjIwLCJzdGVwIjoxLCJ2YWx1"
+  "ZSI6MCwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6InRyaW1fciIsInQiOiJzbGlkZXIi"
+  "LCJ4Ijo3MTAsInkiOjMzMCwidyI6OTAsImgiOjIwMCwibGFiZWwiOiJUcmltIFIiLCJtaW4i"
+  "Oi0yMCwibWF4IjoyMCwic3RlcCI6MSwidmFsdWUiOjAsImdyb3VwSWQiOiJncnBfdGVzdCJ9"
+  "XSwiY2FudmFzIjp7InciOjg4MCwiaCI6ODI2fX0=";
 
 static const char* LAYOUT_CFG_TEST_DISTANCE_BASE64 =
-  "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6IlNlcnZvLVNvbmFyIC0gRGlzdGFuY2UgdGVz"
-  "dCIsIndpZGdldHMiOlt7ImlkIjoiZ3JwX3Rlc3QiLCJ0IjoiZ3JvdXAiLCJsYWJlbCI6IkRJ"
-  "U1RBTkNFIiwiY29sb3IiOiIjZmZiMDIwIiwieCI6NTYsInkiOjQyLCJ3Ijo0MjgsImgiOjYx"
-  "MiwiY2hpbGRyZW4iOlsiZ2F1Z2VfZGlzdGFuY2UiLCJhbGVydCIsImdyYXBoX2Rpc3QiLCJs"
-  "ZXZlbCJdfSx7ImlkIjoibGJsX2hpbnQiLCJ0IjoibGFiZWwiLCJ4Ijo4MCwieSI6NjcwLCJ3"
-  "IjozODAsImgiOjExMCwibGFiZWwiOiJNb3ZlIHlvdXIgaGFuZCBpbiBmcm9udCBvZiB0aGUg"
-  "c2Vuc29yLiIsInZhbHVlIjoiTW92ZSB5b3VyIGhhbmQgaW4gZnJvbnQgb2YgdGhlIHNlbnNv"
-  "ci4iLCJtb2RlbCI6ImNhcmQifSx7ImlkIjoiZ2F1Z2VfZGlzdGFuY2UiLCJ0IjoiZ2F1Z2Ui"
-  "LCJ4Ijo4MCwieSI6MTAwLCJ3IjoxNTAsImgiOjE5MCwibGFiZWwiOiJEaXN0YW5jZSBjbSIs"
-  "Im1pbiI6MCwibWF4IjoyMDAsInVuaXRzIjoiY20iLCJkZWNpbWFscyI6MCwibW9kZWwiOiJj"
-  "bGFzc2ljIiwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6ImFsZXJ0IiwidCI6Im5vdGlm"
-  "aWNhdGlvbiIsIngiOjI2MCwieSI6MTEwLCJ3IjoxMTAsImgiOjExMCwibGFiZWwiOiJPYnN0"
-  "YWNsZSIsImdyb3VwSWQiOiJncnBfdGVzdCJ9LHsiaWQiOiJncmFwaF9kaXN0IiwidCI6Imdy"
-  "YXBoIiwieCI6ODAsInkiOjMyMCwidyI6MzgwLCJoIjoyMDAsImxhYmVsIjoiRGlzdGFuY2Ug"
-  "Y20iLCJtb2RlbCI6ImdyaWQiLCJ3aW5kb3dTZWMiOjMwLCJzZXJpZXMiOjEsImdyb3VwSWQi"
-  "OiJncnBfdGVzdCJ9LHsiaWQiOiJsZXZlbCIsInQiOiJzZWxlY3QiLCJ4Ijo4MCwieSI6NTYw"
-  "LCJ3IjoyMDAsImgiOjcwLCJsYWJlbCI6IlRlc3QiLCJvcHRpb25zIjoiQmVnaW5uZXIsRXhw"
-  "ZXJ0LERyaXZlLERpc3RhbmNlIiwiZ3JvdXBJZCI6ImdycF90ZXN0In1dLCJjYW52YXMiOnsi"
-  "dyI6NTQwLCJoIjo4MzZ9fQ==";
+  "eyJzY2hlbWFWZXJzaW9uIjoyLCJ0aXRsZSI6Ik1vdmUgLSBEaXN0YW5jZSB0ZXN0Iiwid2lk"
+  "Z2V0cyI6W3siaWQiOiJncnBfdGVzdCIsInQiOiJncm91cCIsImxhYmVsIjoiRElTVEFOQ0Ui"
+  "LCJjb2xvciI6IiNmZmIwMjAiLCJ4Ijo1NiwieSI6NDIsInciOjg3OCwiaCI6NjEyLCJjaGls"
+  "ZHJlbiI6WyJnYXVnZV9kaXN0YW5jZSIsImFsZXJ0IiwiZ3JhcGhfZGlzdCIsImxldmVsIiwi"
+  "cmFkYXIiLCJoZWFkIl19LHsiaWQiOiJsYmxfaGludCIsInQiOiJsYWJlbCIsIngiOjgwLCJ5"
+  "Ijo2NzAsInciOjM4MCwiaCI6MTEwLCJsYWJlbCI6IlN3ZWVwIHRoZSBIZWFkIHNsaWRlciBh"
+  "bmQgd2F0Y2ggdGhlIHJhZGFyIGZpbGwgaW4gdGhlIHJvb20uIiwidmFsdWUiOiJTd2VlcCB0"
+  "aGUgSGVhZCBzbGlkZXIgYW5kIHdhdGNoIHRoZSByYWRhciBmaWxsIGluIHRoZSByb29tLiIs"
+  "Im1vZGVsIjoiY2FyZCJ9LHsiaWQiOiJnYXVnZV9kaXN0YW5jZSIsInQiOiJnYXVnZSIsIngi"
+  "OjgwLCJ5IjoxMDAsInciOjE1MCwiaCI6MTkwLCJsYWJlbCI6IkRpc3RhbmNlIGNtIiwibWlu"
+  "IjowLCJtYXgiOjIwMCwidW5pdHMiOiJjbSIsImRlY2ltYWxzIjowLCJtb2RlbCI6ImNsYXNz"
+  "aWMiLCJncm91cElkIjoiZ3JwX3Rlc3QifSx7ImlkIjoiYWxlcnQiLCJ0Ijoibm90aWZpY2F0"
+  "aW9uIiwieCI6MjYwLCJ5IjoxMTAsInciOjExMCwiaCI6MTEwLCJsYWJlbCI6Ik9ic3RhY2xl"
+  "IiwiZ3JvdXBJZCI6ImdycF90ZXN0In0seyJpZCI6ImdyYXBoX2Rpc3QiLCJ0IjoiZ3JhcGgi"
+  "LCJ4Ijo4MCwieSI6MzIwLCJ3IjozODAsImgiOjIwMCwibGFiZWwiOiJEaXN0YW5jZSBjbSIs"
+  "Im1vZGVsIjoiZ3JpZCIsIndpbmRvd1NlYyI6MzAsInNlcmllcyI6MSwiZ3JvdXBJZCI6Imdy"
+  "cF90ZXN0In0seyJpZCI6ImxldmVsIiwidCI6InNlbGVjdCIsIngiOjgwLCJ5Ijo1NjAsInci"
+  "OjIwMCwiaCI6NzAsImxhYmVsIjoiVGVzdCIsIm9wdGlvbnMiOiJCZWdpbm5lcixFeHBlcnQs"
+  "RHJpdmUsRGlzdGFuY2UiLCJncm91cElkIjoiZ3JwX3Rlc3QifSx7ImlkIjoicmFkYXIiLCJ0"
+  "IjoicmFkYXIiLCJ4Ijo1MDAsInkiOjEwMCwidyI6MjgwLCJoIjoyODAsImxhYmVsIjoiUmFk"
+  "YXIiLCJzb3VyY2UiOiJnYXVnZV9kaXN0YW5jZSIsImFuZ2xlU291cmNlIjoiaGVhZCIsIm1h"
+  "eCI6MjAwLCJtb2RlbCI6ImRvdHMiLCJncm91cElkIjoiZ3JwX3Rlc3QifSx7ImlkIjoiaGVh"
+  "ZCIsInQiOiJzbGlkZXIiLCJ4Ijo4MjAsInkiOjEwMCwidyI6OTAsImgiOjI4MCwibGFiZWwi"
+  "OiJIZWFkIiwibWluIjoxMCwibWF4IjoxNzAsInN0ZXAiOjUsInZhbHVlIjo5MCwiZ3JvdXBJ"
+  "ZCI6ImdycF90ZXN0In1dLCJjYW52YXMiOnsidyI6OTkwLCJoIjo4MzZ9fQ==";
 
 // ===========================================================================
 // State
@@ -324,7 +335,7 @@ static bool s_joyIsXY       = false;
 // Reported to the app in the SYSTEM zone's Firmware label. Bump on release.
 // Kept the B3_ prefix so this file still diffs cleanly against b3's copy --
 // only the value distinguishes the two robots in the app's Firmware label.
-#define B3_FIRMWARE_VERSION "S2-v5"
+#define B3_FIRMWARE_VERSION "MV-v1"
 
 // ---------------------------------------------------------------------------
 // Widget state owned by the app (see 03_bit-rxy.h for the accessors).
@@ -454,6 +465,7 @@ static bool     s_verSent         = false;
 #define T_UPTIME (1u<<6)
 #define T_RSSI   (1u<<8)
 #define T_BTN    (1u<<9)
+#define T_HEAD   (1u<<10)  // the head slider echo, and with it the radar
 #define T_UPDSEL (1u<<12)
 
 static const char* const LAYOUT_BLOBS[LAYOUT_COUNT] = {
@@ -467,7 +479,7 @@ static const uint16_t LAYOUT_TELEM[LAYOUT_COUNT] = {
   /* Beginner */ T_DIST | T_SPEED,
   /* Expert   */ 0xFFFF,
   /* Drive    */ T_SPEED | T_TRIM,
-  /* Distance */ T_DIST | T_GRAPH | T_ALERT,
+  /* Distance */ T_DIST | T_GRAPH | T_ALERT | T_HEAD,
 };
 
 // Names shown in the Level select. Must match the enum order and the options
@@ -832,6 +844,13 @@ static void handleWidget(const String& id, const String& val) {
     return;
   }
 
+  // Sonar head. Not persisted to NVS the way the trims are: a trim is a
+  // calibration you set once and want back after a power cycle, whereas the
+  // head is a live control -- restoring yesterday's angle at boot would point
+  // the sensor somewhere the driver did not ask for. It is echoed on connect
+  // instead, so the slider shows where the head really is.
+  if (id == "head")        { moveHead(val.toInt()); return; }
+
   if (id == "spd")         { s_speed_cap = (uint8_t)constrain(val.toInt(), 0, 100); return; }
   if (id == "btn_stop") {
     if (val != "1") return;   // act on press, ignore the release
@@ -1129,6 +1148,10 @@ void remotexy_send_control_echo(void) {
     sendValue("trim_l", String((int)s_trim_l));
     sendValue("trim_r", String((int)s_trim_r));
   }
+  // The radar reads its angle from this widget, so the echo is not cosmetic
+  // here the way it is for a selector: without it the radar would plot every
+  // blip at the slider's default until the head was moved by hand once.
+  if (modeHas(T_HEAD)) sendValue("head", String((int)headAngle()));
 
   // `upd` only exists in the expert layout.
   if (!modeHas(T_UPDSEL)) return;

@@ -13,6 +13,8 @@ extern bool event_connection_state_flag_bo;
 // Servo objects
 extern Servo servoLeft;
 extern Servo servoRight;
+// Sonar pan servo on J6 -- see CONFIG_PIN_SERVO_HEAD for the two J6 caveats.
+extern Servo servoHead;
 
 extern int32_t duration;
 extern float distance_cm;
