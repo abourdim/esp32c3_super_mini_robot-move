@@ -56,6 +56,13 @@ def panel(title, label, color, members, hint):
     assert not errs, f"{label}: {errs}"
     return cfg
 
+# Must track CONFIG_HEAD_SERVO_ENABLED in 00_config.h. J6 is not wired yet, so
+# the head slider and the radar are left out entirely rather than shipped dead:
+# a slider that moves nothing and a scope frozen at one bearing are worse than
+# their absence, which is the whole point of the checks at the bottom of this
+# file. Flip both this and the #define together.
+HEAD_SERVO = False
+
 P = {}
 
 P["motors"] = panel("move - Motors test", "MOTORS", "#00d4ff", [
@@ -77,10 +84,13 @@ P["distance"] = panel("move - Distance test", "DISTANCE", "#ffb020", [
     W("gauge_distance","gauge", 80,100,150,190,"Distance", max=200, units="cm", decimals=0),
     W("alert","notification",  260,110,110,110,"Obstacle"),
     W("graph_dist","graph",     80,320,380,200,"Distance cm", max=200),
+] + ([
     W("radar","radar",         500,100,280,280,"Radar",
       source="gauge_distance", angleSource="head", max=200, model="dots"),
     W("head","slider",         820,100, 90,280,"Head", min=10, max=170, step=5, value=90),
-], "Sweep the Head slider and watch the radar fill in the room.")
+] if HEAD_SERVO else []),
+   "Sweep the Head slider and watch the radar fill in the room." if HEAD_SERVO
+   else "Move your hand in front of the sensor.")
 
 P["lights"] = panel("move - Lights test", "LIGHTS", "#7c5cff", [
     W("toggle_led_r","toggle",   80,100,110,110,"Red LED", model="pill"),

@@ -2,7 +2,7 @@
  "schemaVersion": 1,
  "title": "move - Distance test",
  "canvas": {
-  "w": 990,
+  "w": 540,
   "h": 786
  },
  "widgets": [
@@ -13,14 +13,12 @@
    "color": "#ffb020",
    "x": 56,
    "y": 42,
-   "w": 878,
+   "w": 428,
    "h": 612,
    "children": [
     "gauge_distance",
     "alert",
     "graph_dist",
-    "radar",
-    "head",
     "level"
    ]
   },
@@ -59,34 +57,6 @@
    "groupId": "grp_test"
   },
   {
-   "id": "radar",
-   "t": "radar",
-   "x": 500,
-   "y": 100,
-   "w": 280,
-   "h": 280,
-   "label": "Radar",
-   "source": "gauge_distance",
-   "angleSource": "head",
-   "max": 200,
-   "model": "dots",
-   "groupId": "grp_test"
-  },
-  {
-   "id": "head",
-   "t": "slider",
-   "x": 820,
-   "y": 100,
-   "w": 90,
-   "h": 280,
-   "label": "Head",
-   "min": 10,
-   "max": 170,
-   "step": 5,
-   "value": 90,
-   "groupId": "grp_test"
-  },
-  {
    "id": "level",
    "t": "select",
    "x": 80,
@@ -102,10 +72,10 @@
    "t": "label",
    "x": 80,
    "y": 670,
-   "w": 830,
+   "w": 380,
    "h": 60,
-   "label": "Sweep the Head slider and watch the radar fill in the room.",
-   "value": "Sweep the Head slider and watch the radar fill in the room.",
+   "label": "Move your hand in front of the sensor.",
+   "value": "Move your hand in front of the sensor.",
    "model": "card"
   }
  ]

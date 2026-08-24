@@ -137,7 +137,7 @@
 //                              which had no bit-rxy equivalent until the
 //                              Sound widget was added
 static const char* LAYOUT_CFG_BEGINNER_BASE64 =
-  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6IldESVkgUm9ib3QgYjMiLCJjYW52YXMiOnsi"
+  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6IldESVkgUm9ib3QgbXYiLCJjYW52YXMiOnsi"
   "dyI6ODE4LCJoIjo5MzB9LCJ3aWRnZXRzIjpbeyJpZCI6ImdycF9kcml2ZSIsInQiOiJncm91"
   "cCIsImxhYmVsIjoiRFJJVkUiLCJ4Ijo1NiwieSI6NjAsInciOjUwOCwiaCI6Mzc0LCJjb2xv"
   "ciI6IiMwMGQ0ZmYiLCJjaGlsZHJlbiI6WyJkcGFkX2RyaXZlIiwiam95X2RyaXZlIiwiYnRu"
@@ -173,16 +173,7 @@ static const char* LAYOUT_CFG_BEGINNER_BASE64 =
   "ZyIsImdyb3VwSWQiOiJncnBfc3lzIn1dfQ==";
 
 static const char* LAYOUT_CFG_EXPERT_BASE64 =
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  "eyJ0aXRsZSI6IldESVkgUm9ib3QgYjMiLCJ3aWRnZXRzIjpbeyJpZCI6ImdycF9kcml2ZSIs"
+  "eyJ0aXRsZSI6IldESVkgUm9ib3QgbXYiLCJ3aWRnZXRzIjpbeyJpZCI6ImdycF9kcml2ZSIs"
   "InQiOiJncm91cCIsImxhYmVsIjoiRFJJVkUiLCJ4IjoxOSwieSI6MTcsInciOjY5MSwiaCI6"
   "NTUxLCJjb2xvciI6IiMwMGQ0ZmYiLCJjaGlsZHJlbiI6WyJkcGFkX2RyaXZlIiwiam95X2Ry"
   "aXZlIiwic3BkIiwiYnRuX3N0b3AiLCJnYXVnZV9zcGVlZCJdLCJtb2RlbCI6InBhbmVsIiwi"
@@ -331,12 +322,7 @@ static const char* LAYOUT_CFG_EXPERT_BASE64 =
   "MzEsImgiOjE4MzN9fQ==";
 
 static const char* LAYOUT_CFG_TEST_MOTORS_BASE64 =
-  
-  
-  
-  
-  
-  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6ImIzIC0gTW90b3JzIHRlc3QiLCJjYW52YXMi"
+  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6Im12IC0gTW90b3JzIHRlc3QiLCJjYW52YXMi"
   "OnsidyI6ODAwLCJoIjo5NzB9LCJ3aWRnZXRzIjpbeyJpZCI6ImdycF90ZXN0IiwidCI6Imdy"
   "b3VwIiwibGFiZWwiOiJNT1RPUlMiLCJjb2xvciI6IiMwMGQ0ZmYiLCJ4Ijo1NiwieSI6NDIs"
   "InciOjY4OCwiaCI6NzUyLCJjaGlsZHJlbiI6WyJkcGFkX2RyaXZlIiwic3BkIiwiYnRuX3N0"
@@ -377,8 +363,7 @@ static const char* LAYOUT_CFG_TEST_MOTORS_BASE64 =
   "fV19";
 
 static const char* LAYOUT_CFG_TEST_DISTANCE_BASE64 =
-  
-  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6ImIzIC0gRGlzdGFuY2UgdGVzdCIsImNhbnZh"
+  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6Im12IC0gRGlzdGFuY2UgdGVzdCIsImNhbnZh"
   "cyI6eyJ3Ijo1NDAsImgiOjgzMH0sIndpZGdldHMiOlt7ImlkIjoiZ3JwX3Rlc3QiLCJ0Ijoi"
   "Z3JvdXAiLCJsYWJlbCI6IkRJU1RBTkNFIiwiY29sb3IiOiIjZmZiMDIwIiwieCI6NTYsInki"
   "OjQyLCJ3Ijo0MjgsImgiOjYxMiwiY2hpbGRyZW4iOlsiZ2F1Z2VfZGlzdGFuY2UiLCJhbGVy"
@@ -398,8 +383,7 @@ static const char* LAYOUT_CFG_TEST_DISTANCE_BASE64 =
   "aGUgc2Vuc29yLiIsIm1vZGVsIjoiY2FyZCJ9XX0=";
 
 static const char* LAYOUT_CFG_TEST_LIGHTS_BASE64 =
-  
-  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6ImIzIC0gTGlnaHRzIHRlc3QiLCJjYW52YXMi"
+  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6Im12IC0gTGlnaHRzIHRlc3QiLCJjYW52YXMi"
   "OnsidyI6NjMwLCJoIjo5MDB9LCJ3aWRnZXRzIjpbeyJpZCI6ImdycF90ZXN0IiwidCI6Imdy"
   "b3VwIiwibGFiZWwiOiJMSUdIVFMiLCJjb2xvciI6IiM3YzVjZmYiLCJ4Ijo1NiwieSI6NDIs"
   "InciOjUxOCwiaCI6NjgyLCJjaGlsZHJlbiI6WyJ0b2dnbGVfbGVkX3IiLCJ0b2dnbGVfbGVk"
@@ -438,8 +422,7 @@ static const char* LAYOUT_CFG_TEST_LIGHTS_BASE64 =
   "OiJjYXJkIn1dfQ==";
 
 static const char* LAYOUT_CFG_TEST_SOUND_BASE64 =
-  
-  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6ImIzIC0gU291bmQgdGVzdCIsImNhbnZhcyI6"
+  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6Im12IC0gU291bmQgdGVzdCIsImNhbnZhcyI6"
   "eyJ3Ijo1NzAsImgiOjUzMH0sIndpZGdldHMiOlt7ImlkIjoiZ3JwX3Rlc3QiLCJ0IjoiZ3Jv"
   "dXAiLCJsYWJlbCI6IlNPVU5EIiwiY29sb3IiOiIjZmY1YzhhIiwieCI6NTYsInkiOjQyLCJ3"
   "Ijo0NTgsImgiOjMxMiwiY2hpbGRyZW4iOlsiYnRuX2hvcm4iLCJidG5fYnV6eiIsInNvdW5k"
@@ -458,11 +441,7 @@ static const char* LAYOUT_CFG_TEST_SOUND_BASE64 =
   "ZmZlcmVudCBzb3VuZC4iLCJtb2RlbCI6ImNhcmQifV19";
 
 static const char* LAYOUT_CFG_TEST_DISPLAY_BASE64 =
-  
-  
-  
-  
-  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6ImIzIC0gRGlzcGxheSB0ZXN0IiwiY2FudmFz"
+  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6Im12IC0gRGlzcGxheSB0ZXN0IiwiY2FudmFz"
   "Ijp7InciOjgxNCwiaCI6NjMwfSwid2lkZ2V0cyI6W3siaWQiOiJncnBfdGVzdCIsInQiOiJn"
   "cm91cCIsImxhYmVsIjoiRElTUExBWSIsImNvbG9yIjoiIzAwZTVmZiIsIngiOjU2LCJ5Ijo0"
   "MiwidyI6Njc4LCJoIjoyNzIsImNoaWxkcmVuIjpbIm9sZWRfdGV4dCIsImxibF9vbGVkIiwi"
@@ -486,8 +465,7 @@ static const char* LAYOUT_CFG_TEST_DISPLAY_BASE64 =
   "MjIwLCJoIjo5MCwibGFiZWwiOiJFeWVzIGZvbGxvdyIsIm1vZGVsIjoicGlsbCJ9XX0=";
 
 static const char* LAYOUT_CFG_TEST_POWER_BASE64 =
-  
-  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6ImIzIC0gUG93ZXIgdGVzdCIsImNhbnZhcyI6"
+  "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6Im12IC0gUG93ZXIgdGVzdCIsImNhbnZhcyI6"
   "eyJ3Ijo2ODAsImgiOjcwMH0sIndpZGdldHMiOlt7ImlkIjoiZ3JwX3Rlc3QiLCJ0IjoiZ3Jv"
   "dXAiLCJsYWJlbCI6IlBPV0VSIiwiY29sb3IiOiIjM2RkYzk3IiwieCI6NTYsInkiOjQyLCJ3"
   "Ijo1NjgsImgiOjQ4MiwiY2hpbGRyZW4iOlsiYmF0dGVyeV9sZXZlbCIsImxibF92YmF0Iiwi"

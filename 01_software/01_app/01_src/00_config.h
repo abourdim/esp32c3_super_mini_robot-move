@@ -77,6 +77,11 @@
 // pin, so a passive buzzer solders to SW2's pads; SW2 then reads as pressed
 // whenever the line is driven low, which nothing uses. Kept on GPIO 4 because
 // that is b3's buzzer pin, so the module itself is unchanged.
+// OFF: no buzzer fitted. playTone() busy-waits the full note with
+// delayMicroseconds(), so leaving it enabled costs loop() time to make
+// silence.
+#define CONFIG_BUZZER_ENABLED 0
+
 #define CONFIG_PIN_BUZZER 4
 #define CONFIG_BUZZER_FREQ 4000
 
@@ -95,6 +100,12 @@
 
 // --------------------------------------
 // neopixel
+
+// OFF: no strip fitted. Worth compiling out rather than letting FastLED
+// write into the void -- the default French-flag effect calls delay(1000/60)
+// on EVERY loop() iteration, so an absent strip still paces the whole robot
+// at 60Hz for nothing.
+#define CONFIG_NEOPIXELS_ENABLED 0
 
 #define CONFIG_NEOPIXELS_MAX_LEDS 256      // Max supported (array size)
 
@@ -121,6 +132,13 @@
 // correct boot state. What this board lacks is copper -- GPIO 8 and 9 reach
 // the SuperMini's pads and stop. Four wires (SDA, SCL, 3V3, GND) soldered to
 // the module bring the whole screen back, eyes and all.
+// OFF: GPIO 8 and 9 are not wired on this board, so the screen is compiled
+// out entirely rather than merely detected-absent. The runtime guard would
+// work -- it does, verified on hardware -- but it still re-probes a dead bus
+// every five seconds forever. Set to 1 once the four wires are on the
+// module's pads; nothing else needs changing.
+#define CONFIG_OLED_ENABLED 0
+
 #define CONFIG_PIN_OLED_SDA 8
 #define CONFIG_PIN_OLED_SCL 9
 
@@ -155,6 +173,11 @@
 // J6 does NOT go through the TXB0104 -- it carries the raw 3.3V GPIO. Most
 // hobby servos accept that; this is the one connector where a fussy unit may
 // want the level shifter it does not have.
+// J6 is wired and the head servo is fitted. Note ESP32PWM::allocateTimer()
+// in setup(): three servos need more than the one timer b3 allocates, and
+// running short does not warn, it HALTS inside attach().
+#define CONFIG_HEAD_SERVO_ENABLED 1
+
 #define CONFIG_PIN_SERVO_HEAD 1     // J6, NOT level-shifted
 
 // Where the head points at boot and on STOP. 90 = straight ahead.
