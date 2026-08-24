@@ -1,0 +1,15 @@
+{
+  "name": "WDIY Robot (bit-rxy)",
+  "version": "B3-v1+4bfaa500f5e0",
+  "new_install_prompt_erase": true,
+  "builds": [
+    {
+      "chipFamily": "ESP32-C3",
+      "parts": [
+        { "path": "firmware/bootloader.bin", "offset": 0 },
+        { "path": "firmware/partitions.bin", "offset": 32768 },
+        { "path": "firmware/firmware.bin",   "offset": 65536 }
+      ]
+    }
+  ]
+}

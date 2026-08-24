@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>esp32c3_super_mini_servo_sonar-rxy</title>
+<style>
+  :root { --bg:#ffffff; --fg:#1b1f24; --mut:#5a6572; --line:#d8dee6;
+           --accent:#0e7490; --code:#f3f5f8; }
+  @media (prefers-color-scheme: dark) {
+    :root { --bg:#0d1117; --fg:#e6edf3; --mut:#9aa7b4; --line:#283039;
+             --accent:#39c0d8; --code:#161b22; }
+  }
+  body { background:var(--bg); color:var(--fg); margin:0 auto; padding:2.2rem 1.2rem 4rem;
+         max-width:60rem; line-height:1.65;
+         font-family:system-ui,-apple-system,Segoe UI,Roboto,sans-serif; }
+  h1 { font-size:1.8rem; line-height:1.25; }
+  h2 { margin-top:2.4rem; padding-bottom:.3rem; border-bottom:1px solid var(--line); }
+  a { color:var(--accent); }
+  code { background:var(--code); padding:.15em .4em; border-radius:4px; font-size:.9em; }
+  pre { background:var(--code); padding:1rem; border-radius:8px; overflow-x:auto; }
+  pre code { background:none; padding:0; }
+  .tw { overflow-x:auto; }
+  table { border-collapse:collapse; width:100%; margin:1rem 0; }
+  th,td { border:1px solid var(--line); padding:.5rem .7rem; text-align:left; }
+  th { background:var(--code); }
+  footer { margin-top:3rem; padding-top:1rem; border-top:1px solid var(--line); color:var(--mut); }
+</style></head><body>
+<h1>🤖 esp32c3_super_mini_servo_sonar-rxy — servos + sonar, BLE control</h1>
+<p>An ESP32-C3 SuperMini robot with <strong>two continuous-rotation drive servos and an HC-SR04 distance sensor</strong>. Nothing else. Driven over Bluetooth Low Energy from the <a href="https://github.com/abourdim/rxy_web">rxy web app</a> — no install, no account, no WiFi.</p>
+<p><strong>The robot owns the layout.</strong> The app is a generic renderer: it connects, asks the robot for its panel, and draws whatever comes back. There is no per-robot build of the app.</p>
+<h2>Relationship to b3</h2>
+<p>This is a deliberately reduced version of <a href="https://github.com/abourdim/esp32c3_super_mini_robot-bit-rxy"><code>esp32c3_super_mini_robot-bit-rxy</code></a> (&quot;b3&quot;), forked with its full history so fixes can be cherry-picked between the two rather than hand-copied.</p>
+<div class="tw"><table><thead><tr><th></th><th>b3</th><th>this board</th></tr></thead><tbody><tr><td>MCU</td><td>ESP32-C3 SuperMini</td><td>same</td></tr><tr><td>drive</td><td>2 continuous-rotation servos, GPIO 6 / 3</td><td>2 servos, <strong>GPIO 10 / 7</strong></td></tr><tr><td>HC-SR04</td><td>TRIG 21 / ECHO 20</td><td><strong>identical</strong></td></tr><tr><td>buzzer</td><td>GPIO 4</td><td>—</td></tr><tr><td>battery sense</td><td>GPIO 4</td><td>—</td></tr><tr><td>NeoPixel strip</td><td>GPIO 5 (or 10)</td><td>—</td></tr><tr><td>2 board LEDs</td><td>GPIO 10 / 1</td><td>—</td></tr><tr><td>OLED</td><td>I²C on 8 / 9</td><td>—</td></tr><tr><td>BOOT button</td><td>GPIO 0 (on the module)</td><td><strong>same</strong> — it is what opens OTA</td></tr></tbody></table></div>
+<p>GPIO 10 is available for a servo here *only because* the LEDs and the external strip are gone — on b3 that pin is <code>CONFIG_PIN_LED_RED</code> and the strip output.</p>
+<p>Schematic: <code>01_kicad/31_richa_c3_move/34_richa_c3_servo_sonar/v1</code>.</p>
+<h2>Panels</h2>
+<p>b3 serves eight panels. Five of them drive hardware that is not on this board, so four remain. Switch between them with the <strong>Level</strong> selector; the choice is kept in NVS, so a power cycle does not drop you back to Beginner.</p>
+<div class="tw"><table><thead><tr><th>panel</th><th>what it has</th></tr></thead><tbody><tr><td><strong>Beginner</strong></td><td>D-pad, distance gauge, obstacle alert</td></tr><tr><td><strong>Expert</strong></td><td>D-pad + joystick + speed + STOP, distance gauge/graph/alert, firmware, uptime, signal, button, telemetry level</td></tr><tr><td><strong>Drive</strong></td><td>D-pad, speed, STOP, speed gauge — one subsystem, for bring-up</td></tr><tr><td><strong>Distance</strong></td><td>gauge, alert, graph</td></tr></tbody></table></div>
+<p>Layouts are generated, not hand-edited:</p>
+<pre><code>python 01_software/01_app/gen_layouts.py</code></pre>
+<p>It rebuilds all four blobs, splices them into <code>03_bit-rxy.cpp</code>, and <strong>fails</strong> rather than emitting a panel with overlapping zones, a widget escaping its group, or a widget id that has neither a handler nor a telemetry sender. That last check is the important one: a control that looks live and does nothing is worse than a missing control.</p>
+<h2>Build and flash</h2>
+<pre><code>cd 01_software/01_app &amp;&amp; pio run -e esp32-c3-devkitm-1 -t upload</code></pre>
+<p>After the first USB flash, hold the module&#x27;s <strong>BOOT button for 3 seconds</strong> to enter WiFi OTA mode. b3 reports OTA progress on its NeoPixels and OLED; this board has neither, so status goes to Serial only — which is enough, because the setup AP name is fixed (<code>WDIY-Robot-Setup</code>) and the device is reachable as <code>wdiy-servo-sonar</code>. Hold to 8 seconds to forget the saved network.</p>
+<h2>Hardware note worth reading before you build a batch</h2>
+<p>The two servos share <code>VCC</code> with the ESP32, and the v1 board has only 100 nF on that rail. These are the *drive* servos — they run constantly, not occasionally — and an SG90 pulls ~700 mA stalled with a larger startup surge. 100 nF does nothing at that current: the rail dips and the C3 browns out mid-drive. Add <strong>470–1000 µF at the servo connectors</strong>, and prefer feeding servo power straight from the input terminal rather than through the SuperMini&#x27;s 5V pin, so servo current does not run through the module.</p>
+<h2>Known-stale</h2>
+<p><code>01_software/01_app/02_web/</code> is inherited from b3 and still describes b3&#x27;s hardware — LEDs, strip, OLED, battery. It is what <code>pages.yml</code> publishes, so it was left in place rather than deleted, but it should be rewritten or unpublished before anyone is pointed at it.</p>
+<p>Powered by <a href="https://workshop-diy.org">Workshop-DIY.org</a></p>
+<footer>Powered by <a href="https://workshop-diy.org">Workshop-DIY.org</a></footer>
+</body></html>
