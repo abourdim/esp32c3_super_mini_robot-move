@@ -28,8 +28,9 @@
 //
 // The two D-pad forms are unambiguous (a mask line is one byte, or starts with
 // "M "). The joystick pair is not, so see handleJoystick() for how it is told
-// apart. "GETCFGVER" is recognised but deliberately unanswered — it only
-// records which app is talking; see handleLine().
+// apart. "GETCFGVER" is answered with a CFGVER token so a phone that already
+// has this layout skips the transfer entirely; it also records which app is
+// talking. See handleLine().
 // Transport: Nordic-UART-style GATT service, roles reversed to match the
 // micro:bit's convention (0002 = notify device->app, 0003 = write app->device).
 // ===========================================================================
@@ -528,6 +529,7 @@ static String                s_rxBuffer;
 // Deferring the burst to loop() lets the host task keep servicing itself
 // concurrently, so the pool never starves.
 static volatile bool         s_getCfgRequested = false;
+static volatile bool         s_getCfgVerRequested = false;
 
 // Negotiated ATT MTU, updated by onMTUChange(). sendCfg() sizes its chunks
 // from this: the old fixed 18 came from the rxy MakeCode template, not from
@@ -559,7 +561,9 @@ static bool s_peerSawCfgVer = false;
 static bool s_joyIsXY       = false;
 
 // Reported to the app in the SYSTEM zone's Firmware label. Bump on release.
-#define B3_FIRMWARE_VERSION "MV-v1"
+// Kept the B3_ prefix so this file still diffs cleanly against b3's copy --
+// only the value distinguishes the robots in the app's Firmware label.
+#define B3_FIRMWARE_VERSION "MV-v2"
 
 // ---------------------------------------------------------------------------
 // Widget state owned by the app (see 03_bit-rxy.h for the accessors).
@@ -965,13 +969,33 @@ static void handleLine(const String& line) {
     return;
   }
 
-  // Deliberately not answered. Replying properly means reproducing the app's
-  // config-revision hash exactly, and a mismatch is silent — no error, just a
-  // permanent cache miss. The app retries 3x900ms then falls back to GETCFG on
-  // its own, which is the behaviour this firmware already had. Recording it is
-  // free, and it tells handleJoystick() which encoding to expect: only the
-  // mecanum app sends GETCFGVER, stock bit-rxy has no such command.
-  if (line == "GETCFGVER") { s_peerSawCfgVer = true; return; }
+  // Answered as of S2-v2. This used to be swallowed, on the belief that a reply
+  // had to reproduce a hash the app computes independently. It does not: the app
+  // stores whatever string arrives here verbatim and compares it verbatim on the
+  // next connect (saveCachedRemoteConfig/loadCachedRemoteConfig), so the token is
+  // entirely ours to choose. Staying silent cost every connection the app's full
+  // 3x900ms probe timeout AND the whole layout transfer afterwards.
+  //
+  // Still records the flag: it tells handleJoystick() which encoding to expect,
+  // since only the rxy app sends this command and stock bit-rxy has none.
+  if (line == "GETCFGVER") {
+    s_peerSawCfgVer = true;
+    s_getCfgVerRequested = true;   // reply from the main task, never from here
+    return;
+  }
+
+  // The app sends this instead of GETCFG when its cached copy already matches
+  // the revision we just reported. No transfer happens, so nothing else would
+  // raise s_telemForce -- and the panel it just restored from cache is drawn
+  // with no values in it. Without this every gauge would sit empty until its
+  // reading happened to change.
+  if (line.startsWith("CFGOK")) {
+    s_telemForce = true;
+    #ifdef DEF_DERIAL_DEBUG
+    Serial.println("[BLE] Client had this layout cached - transfer skipped");
+    #endif
+    return;
+  }
 
   // Defer to remotexy_handler() — do NOT call sendCfg() directly here.
   // See s_getCfgRequested above for why running the burst synchronously
@@ -1300,12 +1324,38 @@ void remotexy_init(void) {
   #endif
 }
 
+// Config revision reported to the app. FNV-1a over the layout blob that is
+// actually being served, so switching Level yields a different token and the
+// app cannot reuse the wrong panel from cache. The firmware version is folded
+// in as well: a rebuild that changes a blob's contents changes the hash, but
+// folding the version in means an edit that happens to collide still cannot
+// leave a stale panel cached on someone's phone.
+static String layoutRevision(void) {
+  uint32_t h = 2166136261u;
+  const char* p = LAYOUT_BLOBS[s_layout_level];
+  while (*p) { h ^= (uint8_t)*p++; h *= 16777619u; }
+  for (const char* v = B3_FIRMWARE_VERSION; *v; ++v) { h ^= (uint8_t)*v; h *= 16777619u; }
+  char buf[9];
+  snprintf(buf, sizeof(buf), "%08x", (unsigned)h);
+  return String(buf);
+}
+
 void remotexy_handler(void) {
   // Runs the deferred CFG burst on the ordinary Arduino task, not on
   // NimBLE's host task — see s_getCfgRequested for why that matters.
   if (s_getCfgRequested) {
     s_getCfgRequested = false;
     sendCfg();
+  }
+
+  // One short notification, and on a cache hit it replaces the entire transfer.
+  if (s_getCfgVerRequested) {
+    s_getCfgVerRequested = false;
+    const String rev = layoutRevision();
+    sendLine("CFGVER " + rev);
+    #ifdef DEF_DERIAL_DEBUG
+    Serial.printf("[BLE] CFGVER %s (layout %u)\n", rev.c_str(), (unsigned)s_layout_level);
+    #endif
   }
 }
 
