@@ -45,3 +45,7 @@ Thumbs.db
 **/*cv_*.pdf
 **/*resume_*.pdf
 **/_00_cv_*
+
+# PlatformIO preprocesses the .ino into this next to the source. Generated,
+# and it bakes in absolute temp paths from whoever built it.
+*.ino.cpp
