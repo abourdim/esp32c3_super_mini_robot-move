@@ -187,6 +187,18 @@
 
 #define CONFIG_PIN_SERVO_HEAD 1     // J6, NOT level-shifted
 
+// Mechanical centring for the head, in degrees, adjustable from the app and
+// kept in NVS. A pan mount is glued or screwed on by hand, so 90 almost
+// never points dead ahead -- this is the difference, and it is a property of
+// the robot rather than of the drive, which is why it survives a power cycle
+// while the head bearing itself does not.
+//
+// Applied where the servo is written, NOT to the bearing that gets reported:
+// the radar has to plot where the sensor is really aimed, and that is the
+// corrected direction, not the raw pulse.
+#define CONFIG_SERVO_HEAD_OFFSET 0
+#define CONFIG_SERVO_HEAD_OFFSET_LIMIT 30   // past this it is a mounting fault
+
 // Where the head points at boot and on STOP. 90 = straight ahead.
 #define CONFIG_SERVO_HEAD_CENTER 90
 

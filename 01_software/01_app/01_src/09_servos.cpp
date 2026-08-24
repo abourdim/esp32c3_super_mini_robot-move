@@ -45,7 +45,10 @@ void stopServos() {
 // Sharing their rate limiter would make the head compete for the same 20ms
 // budget as the drive channel for no reason.
 
-static uint8_t s_head_angle = CONFIG_SERVO_HEAD_CENTER;
+static void headWrite(void);   // defined below moveHead()
+
+static uint8_t s_head_angle  = CONFIG_SERVO_HEAD_CENTER;
+static int8_t  s_head_offset = CONFIG_SERVO_HEAD_OFFSET;
 
 // ===========================================================================
 void moveHead(int32_t angle) {
@@ -57,7 +60,36 @@ void moveHead(int32_t angle) {
 
   if ((uint8_t)angle == s_head_angle) return;   // no redundant PWM writes
   s_head_angle = (uint8_t)angle;
-  servoHead.write(s_head_angle);
+  headWrite();
+}
+
+// The bearing and the pulse are deliberately different numbers. s_head_angle is
+// where the sensor is AIMED, which is what the radar plots and what the app
+// echoes; the offset only exists between that and the pulse the servo gets.
+// Clamped to 0..180 separately, because a legal bearing near a limit plus a
+// large offset can still leave the servo's own range.
+static void headWrite(void) {
+  const int32_t pulse = constrain((int32_t)s_head_angle + s_head_offset, 0, 180);
+  servoHead.write((int)pulse);
+}
+
+// ===========================================================================
+void head_offset_set(int32_t deg) {
+// ===========================================================================
+  const int8_t v = (int8_t)constrain(deg, -CONFIG_SERVO_HEAD_OFFSET_LIMIT,
+                                          CONFIG_SERVO_HEAD_OFFSET_LIMIT);
+  if (v == s_head_offset) return;
+  s_head_offset = v;
+  // Rewritten immediately rather than waiting for the next moveHead(): the
+  // whole point is watching the head swing while you drag the slider, and a
+  // parked head would otherwise not move until something else commanded it.
+  headWrite();
+}
+
+// ===========================================================================
+int8_t head_offset_get(void) {
+// ===========================================================================
+  return s_head_offset;
 }
 
 // ===========================================================================

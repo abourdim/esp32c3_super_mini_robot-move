@@ -18,4 +18,8 @@ extern void head_sweep_set(bool on);
 extern bool head_sweep_get(void);
 extern void head_sweep_step(void);
 
+// Mechanical centring offset -- see CONFIG_SERVO_HEAD_OFFSET.
+extern void   head_offset_set(int32_t deg);
+extern int8_t head_offset_get(void);
+
 #endif // __DEF_INCLUDE_SERVOS_H__

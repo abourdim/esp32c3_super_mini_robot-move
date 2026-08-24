@@ -165,6 +165,14 @@ and the slider snaps back on the next pass. Leaving sweep re-centres.</p>
 <p>The bearing is published every telemetry pass. Without that the radar plots at
 whatever <code>head</code> last reported, which was its default — the head would sweep and
 the scope would show a beam frozen at 90°.</p>
+<p><strong>Head trim</strong> (<code>head_off</code>, plus H−1 / H+1 buttons) is mechanical centring: a
+pan mount is glued or screwed on by hand, so commanding 90° almost never points
+dead ahead. The offset is applied where the servo is <em>written</em>, not to the
+bearing that gets reported — the radar has to plot where the sensor is really
+aimed, which is the corrected direction. Like the wheel trims it lives in NVS,
+because it describes how the robot was assembled rather than how it is being
+driven; and like them it rides the save-settle, so dragging the slider across
+its range costs one flash write rather than sixty.</p>
 <p><code>CONFIG_SERVO_HEAD_MIN</code> / <code>_MAX</code> are the <strong>mechanical</strong> limits of your pan
 mount, not 0–180. Narrow them to what the mount clears — a servo told to go
 past its stop sits there stalled, drawing full stall current off the same rail
