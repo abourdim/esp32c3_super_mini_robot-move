@@ -34,105 +34,104 @@ WiFi.</p>
 the robot for its panel, and draws whatever comes back. There is no per-robot
 build of the app.</p>
 <h2>Faithful to b3</h2>
-<p>Every module b3 has is still here — buzzer, NeoPixels, battery sense, board
-LEDs, OLED, the two NeoPixel demos, all eight panels. Nothing was subtracted.
+<p>Every module b3 has is still in the tree — buzzer, NeoPixels, battery sense,
+board LEDs, OLED, both NeoPixel demos, all eight panels. Nothing was deleted.
 What changed is the pin map, because the two carrier boards share an MCU and
 nothing else.</p>
-<p>Three features need <strong>wires</strong>, because the board has no footprint for them.
-They are wired in software and will work the moment the hardware is attached;
-they simply have no connector to plug into.</p>
+<p>What is <strong>not fitted</strong> on this build is switched off at a single <code>#define</code>
+each, so it compiles out rather than failing at runtime:</p>
 <div class="tw"><table>
 <thead>
 <tr>
 <th>feature</th>
 <th>b3</th>
 <th>here</th>
-<th>needs</th>
+<th>state</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>drive servos</td>
+<td>left / right drive servo</td>
 <td>GPIO 6 / 3</td>
 <td><strong>5 / 10</strong> — J5 / J12, level-shifted</td>
-<td>—</td>
+<td>✅</td>
 </tr>
 <tr>
 <td>HC-SR04</td>
 <td>21 / 20</td>
 <td><strong>6 / 7</strong> — J10, level-shifted</td>
-<td>—</td>
+<td>✅</td>
 </tr>
 <tr>
 <td>head servo</td>
 <td><em>(none)</em></td>
 <td><strong>1</strong> — J6</td>
-<td>—</td>
-</tr>
-<tr>
-<td>green LED</td>
-<td>1</td>
-<td><strong>0</strong> — J7</td>
-<td>—</td>
-</tr>
-<tr>
-<td>red LED</td>
-<td>10</td>
-<td><strong>21</strong> — J8</td>
-<td>—</td>
-</tr>
-<tr>
-<td>NeoPixel strip</td>
-<td>5 (or 10)</td>
-<td><strong>20</strong> — J9</td>
-<td>—</td>
+<td>✅</td>
 </tr>
 <tr>
 <td>button / OTA</td>
 <td>0 (module BOOT)</td>
 <td><strong>3</strong> — SW1</td>
-<td>—</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>green / red LED</td>
+<td>1 / 10</td>
+<td><strong>0 / 21</strong> — J7 / J8</td>
+<td>✅</td>
+</tr>
+<tr>
+<td>NeoPixel strip</td>
+<td>5 (or 10)</td>
+<td>20 — J9</td>
+<td><code>CONFIG_NEOPIXELS_ENABLED 0</code></td>
 </tr>
 <tr>
 <td>buzzer</td>
 <td>4</td>
 <td>4 — SW2 pads</td>
-<td>🔧 a buzzer, soldered</td>
+<td><code>CONFIG_BUZZER_ENABLED 0</code></td>
 </tr>
 <tr>
 <td>battery sense</td>
 <td>4</td>
-<td>4 — SW2 pads</td>
-<td>🔧 a divider, soldered</td>
+<td>4 — SW2 pads, <strong>no divider on the board</strong></td>
+<td>reads meaningless</td>
 </tr>
 <tr>
 <td>OLED</td>
 <td>I²C 8 / 9</td>
-<td>8 / 9 — module pads</td>
-<td>🔧 4 wires to the module</td>
+<td>8 / 9 — module pads, <strong>not wired</strong></td>
+<td><code>CONFIG_OLED_ENABLED 0</code></td>
 </tr>
 </tbody>
 </table></div>
-<p>GPIO 2, 8 and 9 reach the SuperMini's pads and no connector at all, which is
-why the OLED needs wires rather than a plug. b3's own buzzer/battery pin
-collision on GPIO 4 is preserved rather than fixed — the Power panel puts a
-Buzz button next to the live voltage for exactly that reason.</p>
-<p><strong>The screen is expected here, not optional.</strong> SDA to GPIO 8, SCL to GPIO 9,
-and <strong>VCC to 3V3 rather than 5V</strong> — the module's own pull-ups follow whatever
-you feed it, and the C3 is not 5V tolerant. Full wiring and the strapping-pin
-reasoning are in <a href="02_hardware/README.md#attaching-the-oled"><code>02_hardware/README.md</code></a>.</p>
-<p>The firmware degrades gracefully if it is missing — it probes <code>0x3C</code> at boot and
-re-probes every five seconds, so a bodge wire that seats late or works loose
-recovers on its own rather than needing a power cycle. Everything else keeps
-running meanwhile. What it will not do is drive a bus with nothing on it, which
-is what hung the app at "Checking layout version" the first time out.</p>
+<p>Turning the strip off is worth more than it looks: its default French-flag
+effect calls <code>delay(1000/60)</code> on <strong>every</strong> <code>loop()</code> iteration, so an absent
+strip still paced the whole robot at 60 Hz to animate nothing.</p>
+<p>The OLED keeps its runtime presence-probe for the day the wires go on, but with
+the feature off nothing touches the I²C bus at all — not even the five-second
+re-probe, which would otherwise poke a dead bus forever. Set
+<code>CONFIG_OLED_ENABLED 1</code> once SDA/SCL/3V3/GND are on the module's pads; nothing
+else needs changing. Wiring and the strapping-pin reasoning:
+<a href="02_hardware/README.md#attaching-the-oled"><code>02_hardware/README.md</code></a>.</p>
 <p>Board source and the full netlist-derived pin map: <a href="02_hardware/"><code>02_hardware/</code></a>.</p>
+<h2>Three servos need four PWM timers</h2>
+<p>b3 allocates <strong>one</strong> LEDC timer and attaches two servos, which exactly fits.
+The head makes three, and ESP32Servo does not warn when it runs short — it
+prints <code>All PWM timers allocated! Can't accomodate 50.000 Hz</code> and <strong>halts
+inside <code>attach()</code></strong>, so <code>setup()</code> never returns.</p>
+<p>That failure is invisible from outside. NimBLE has already started on its own
+task by then, so the robot still advertises and the app still connects; it just
+never answers anything, because <code>remotexy_handler()</code> lives in <code>loop()</code> and
+<code>loop()</code> has never run. It presents as a protocol bug and is not one.</p>
+<p><code>setup()</code> now allocates all four.</p>
 <h2>The 3-pin headers double as FET gates</h2>
 <p>J6, J7, J8 and J9 carry the same nets as Q1–Q4's gates, which drive the J1–J4
 screw terminals and their yellow indicator LEDs. Anything plugged into a 3-pin
 header switches its paired screw terminal in sympathy, so <strong>leave J1–J4
 unpopulated</strong>. The upside is free activity indicators: D6–D9 light along with
-whatever is on the header, which makes the link LEDs visible even with nothing
+whatever is on the header, so the link LEDs are visible even with nothing
 plugged in.</p>
 <h2>Why the button moved off GPIO 0</h2>
 <p>b3 uses the SuperMini's own BOOT button for the three-second OTA hold, and that
@@ -140,30 +139,54 @@ button exists here too. But on this board GPIO 0 is Q2's gate, so the gesture
 would switch the J2 output on for the length of the hold — and GPIO 0 is more
 useful as the green LED. SW1 is a real button with its own pull-up that drives
 nothing else.</p>
-<h2>The head, and the radar</h2>
-<p>The head servo is the one thing here that b3 does not have. It exists to give
-the app's <strong>radar</strong> widget a bearing to plot against: the radar carries no
-value of its own, it reads the distance gauge and the head slider by id, draws
-rings at 10/30/100 cm with a beam on the live angle, and lets detections
-persist and fade over five seconds. A sweep builds a picture of the room
-instead of flashing one number.</p>
-<p>Head angle is <strong>not</strong> persisted. The wheel trims are, because a trim is a
-calibration you want back after a power cycle; the head is a live control, and
-restoring yesterday's bearing at boot would point the sensor somewhere nobody
-asked for. It is echoed to the app on connect instead.</p>
+<h2>Drive direction</h2>
+<p><code>CONFIG_SERVO_INVERT_DRIVE</code> flips both channels. Both wheels ran backwards on
+this chassis — that is motor polarity, not a left/right mix-up, and swapping
+the two pins would have given a robot that spins instead. The flip is applied
+to the command before the mix becomes pulses, so trim and the speed cap stay in
+the frame they were written for, and it corrects the steering with it: with the
+polarity wrong, a spin-left command was coming out as spin-right.</p>
+<h2>The head, the radar, and sweep</h2>
+<p>The head servo is the one thing here that b3 does not have. It gives the app's
+<strong>radar</strong> widget a bearing to plot against — the radar carries no value of its
+own, it reads the distance gauge and the head slider by id.</p>
+<p><strong>Sweep</strong> is a toggle in the DISTANCE group. The head steps one notch per
+telemetry pass rather than on a timer of its own, and the step happens <em>after</em>
+the pass has sent this cycle's distance and angle. That ordering is the point:
+the radar plots (angle, distance) pairs, and stepping independently would paint
+readings at bearings the sensor was not pointing at when they were taken. Each
+step then gets a full 500 ms to settle before the next measurement. 15° steps
+across 10–170° is about 5.5 s per sweep.</p>
+<p>Reversal happens <strong>at</strong> each limit, not past it. <code>moveHead()</code> clamps anyway,
+but bouncing off the clamp parks the head on its end stop for an extra pass
+every sweep — a stutter on the scope, and a stalled servo while it lasts.</p>
+<p>Dragging the slider takes the head off sweep, otherwise the servo fights you
+and the slider snaps back on the next pass. Leaving sweep re-centres.</p>
+<p>The bearing is published every telemetry pass. Without that the radar plots at
+whatever <code>head</code> last reported, which was its default — the head would sweep and
+the scope would show a beam frozen at 90°.</p>
 <p><code>CONFIG_SERVO_HEAD_MIN</code> / <code>_MAX</code> are the <strong>mechanical</strong> limits of your pan
 mount, not 0–180. Narrow them to what the mount clears — a servo told to go
 past its stop sits there stalled, drawing full stall current off the same rail
 as the C3.</p>
 <h2>Panels</h2>
 <p>All eight of b3's, switched with the <strong>Level</strong> selector; the choice is kept in
-NVS. The Distance test panel gains the radar and the head slider.</p>
-<p>The six test panels are generated:</p>
-<pre><code class="language-bash">python 01_software/01_app/gen_test_layouts.py
-</code></pre>
-<p>Beginner and Expert are <strong>not</strong> — those are arranged in the app and exported,
-then spliced in. So the radar is on the Distance panel only; if you want it on
-Expert, arrange that panel in the app and export it the usual way.</p>
+NVS. Expert has been cut down to what this board actually has:</p>
+<ul>
+<li><strong>removed</strong> — the DISPLAY group (no OLED) and the SOUND group (no buzzer)</li>
+<li><strong>removed</strong> — the six strip widgets from LIGHTS; the two board LEDs stay,
+  they are real, and their J7/J8 headers light the onboard yellows too</li>
+<li><strong>moved</strong> — TRIM is no longer its own group; all eight widgets sit inside
+  DRIVE, which is where you use them, tuning while driving and watching the pull</li>
+<li><strong>added</strong> — the head slider, the sweep toggle, and the radar, in DISTANCE</li>
+</ul>
+<blockquote>
+<p>⚠️ <strong><code>gen_test_layouts.py</code> writes <code>test_decls.h</code>, which nothing includes.</strong>
+The live blobs are hardcoded in <code>03_bit-rxy.cpp</code>, so running the generator
+changes nothing that reaches the board. It needs a splice step — S2's
+<code>gen_layouts.py</code> has the logic to copy — or it should be deleted. Until then,
+layout edits go into the blobs directly.</p>
+</blockquote>
 <h2>Build and flash</h2>
 <pre><code class="language-bash">cd 01_software/01_app &amp;&amp; pio run -e esp32-c3-devkitm-1 -t upload
 </code></pre>
@@ -172,10 +195,10 @@ Hold to 8 seconds to forget the saved network. The device is reachable as
 <code>wdiy-move</code>, and the setup AP is <code>WDIY-Robot-Setup</code>.</p>
 <p>BLE device name is <code>diy_app_mv</code>, distinct from b3's <code>diy_app_b3</code> so the two are
 told apart in the scanner when both are powered on in the same room.</p>
-<p><strong>The image is at 92% of flash.</strong> b3's full feature set on the default
-partition table leaves about 100 KB of headroom, which is enough for the
-current work but not for another subsystem. Anything substantial from here
-wants a bigger app partition.</p>
+<p><strong>The image is at 91.4% of flash</strong> — roughly 110 KB spare on the default
+partition table. Enough for tuning, not for another subsystem.</p>
+<p>Note that with native USB-CDC the serial monitor attaches <em>after</em> boot, so you
+will usually see nothing at startup. That is normal, not a fault.</p>
 <h2>Before you build one</h2>
 <p>Three board facts firmware cannot paper over — the long form is in
 <a href="02_hardware/README.md"><code>02_hardware/README.md</code></a>:</p>
@@ -187,9 +210,17 @@ wants a bigger app partition.</p>
   terminal rather than through the SuperMini's 5 V pin. Three drive servos on a
   rail with 100 nF browns the C3 out mid-drive, which reads as a random reboot.</li>
 </ul>
-<h2>Known-stale</h2>
-<p><code>01_software/01_app/02_web/</code> is b3's site and still describes b3's pin map. Its
-Pages workflow has been set to manual trigger only, so a push cannot publish a
-site that is wrong about this robot. Rewrite it before re-enabling.</p>
+<h2>Known issues</h2>
+<ul>
+<li><strong>Trim is applied with the wrong sign</strong>, inherited from b3. It is added to
+  both wheels, but the right channel's pulse range is inverted, so a positive
+  trim pushes the two wheels in <em>opposite</em> physical directions. With b3's
+  defaults of <code>5</code>/<code>5</code> an idle robot slowly rotates on the spot. Either zero the
+  two <code>CONFIG_SERVO_SPEED_STOP_*_OFFSET</code> values or port S2's fix (<code>10c1468</code>),
+  which subtracts on the inverted side.</li>
+<li><strong><code>01_software/01_app/02_web/</code></strong> is b3's site and still describes b3's pin
+  map. Its Pages workflow is set to manual trigger only, so a push cannot
+  publish a site that is wrong about this robot. Rewrite it before re-enabling.</li>
+</ul>
 <p>Powered by <a href="https://workshop-diy.org">Workshop-DIY.org</a></p>
 </body></html>
