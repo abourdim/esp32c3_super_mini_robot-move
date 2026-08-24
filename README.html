@@ -178,8 +178,17 @@ mount, not 0–180. Narrow them to what the mount clears — a servo told to go
 past its stop sits there stalled, drawing full stall current off the same rail
 as the C3.</p>
 <h2>Panels</h2>
-<p>All eight of b3's, switched with the <strong>Level</strong> selector; the choice is kept in
-NVS. Expert has been cut down to what this board actually has:</p>
+<p>b3's eight, plus a ninth — <strong>Radar</strong> — switched with the <strong>Level</strong> selector;
+the choice is kept in NVS. The Radar panel is one subsystem on its own: the
+scope, the head slider, Sweep, the head trim, and the distance readout the
+radar is plotting, so the panel explains itself — you can see the number each
+blip came from.</p>
+<p>The new level is appended to the enum rather than inserted, because the level
+index lives in NVS: renumbering the existing entries would silently move an
+upgraded robot to a different panel. And since every layout carries its own
+copy of the selector's options, all nine blobs were rewritten — otherwise the
+new level would be unreachable from wherever you happened to be.</p>
+<p>Expert has been cut down to what this board actually has:</p>
 <ul>
 <li><strong>removed</strong> — the DISPLAY group (no OLED) and the SOUND group (no buzzer)</li>
 <li><strong>removed</strong> — the six strip widgets from LIGHTS; the two board LEDs stay,

@@ -70,6 +70,7 @@ enum {
   LAYOUT_TEST_SOUND,
   LAYOUT_TEST_DISPLAY,
   LAYOUT_TEST_POWER,
+  LAYOUT_TEST_RADAR,
   LAYOUT_COUNT
 };
 extern uint8_t remotexy_get_layout_level(void);

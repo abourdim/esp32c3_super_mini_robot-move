@@ -126,8 +126,19 @@ as the C3.
 
 ## Panels
 
-All eight of b3's, switched with the **Level** selector; the choice is kept in
-NVS. Expert has been cut down to what this board actually has:
+b3's eight, plus a ninth — **Radar** — switched with the **Level** selector;
+the choice is kept in NVS. The Radar panel is one subsystem on its own: the
+scope, the head slider, Sweep, the head trim, and the distance readout the
+radar is plotting, so the panel explains itself — you can see the number each
+blip came from.
+
+The new level is appended to the enum rather than inserted, because the level
+index lives in NVS: renumbering the existing entries would silently move an
+upgraded robot to a different panel. And since every layout carries its own
+copy of the selector's options, all nine blobs were rewritten — otherwise the
+new level would be unreachable from wherever you happened to be.
+
+Expert has been cut down to what this board actually has:
 
 - **removed** — the DISPLAY group (no OLED) and the SOUND group (no buzzer)
 - **removed** — the six strip widgets from LIGHTS; the two board LEDs stay,
