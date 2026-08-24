@@ -38,19 +38,42 @@ void setup() {
   // first radar sweep start from a known bearing.
   centerHead();
 
-    // Set custom I2C pins
+  // Set custom I2C pins
   Wire.begin(CONFIG_PIN_OLED_SDA, CONFIG_PIN_OLED_SCL);
 
-  // Initialize OLED
-  if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
-    #ifdef DEF_DERIAL_DEBUG
-    Serial.println(F("SSD1306 allocation failed"));
-    #endif
-    // for (;;);
-  }
+  // Probe before initialising. On b3 the screen is soldered on and this
+  // question never arises, but here the OLED is a bodge to the module's pads
+  // (GPIO 8/9 reach no connector), so it is usually absent -- and an absent
+  // SSD1306 is far from harmless. Every frame is ~1KB of I2C transactions
+  // that each have to time out on a bus with no device and no pull-ups, and
+  // oled_update() runs every 100ms. That starves loop() hard enough that
+  // remotexy_handler() stops answering GETCFGVER, and the app sits forever on
+  // "Checking layout version" with the robot showing as connected.
+  //
+  // One short transaction settles it. Everything downstream then honours
+  // oled_present(), so the whole screen feature stays compiled in and starts
+  // working the moment four wires are attached.
+  Wire.beginTransmission(0x3C);
+  const bool oledFound = (Wire.endTransmission() == 0);
+  oled_set_present(oledFound);
 
-  display.clearDisplay();
-  display.setTextColor(SSD1306_WHITE);
+  #ifdef DEF_DERIAL_DEBUG
+  Serial.printf("[OLED] %s on I2C %d/%d\n",
+                oledFound ? "found" : "absent - screen disabled",
+                CONFIG_PIN_OLED_SDA, CONFIG_PIN_OLED_SCL);
+  #endif
+
+  if (oledFound) {
+    if (!display.begin(SSD1306_SWITCHCAPVCC, 0x3C)) {
+      #ifdef DEF_DERIAL_DEBUG
+      Serial.println(F("SSD1306 allocation failed"));
+      #endif
+      oled_set_present(false);
+    } else {
+      display.clearDisplay();
+      display.setTextColor(SSD1306_WHITE);
+    }
+  }
 
   leds_init();
   oled_init();

@@ -22,6 +22,13 @@ void oled_text_set(const char* s) {
 
 // Adafruit_SSD1306 display = Adafruit_SSD1306(128, 32, &Wire);
 
+// Set once from setup(), after probing the bus. Defaults true so that any
+// board which never calls the setter behaves exactly as b3 always did.
+static bool s_oled_present = true;
+
+void oled_set_present(bool present) { s_oled_present = present; }
+bool oled_present(void) { return s_oled_present; }
+
 // ===========================================================================
 void oled_init(void) {
 // ===========================================================================
@@ -547,6 +554,10 @@ static void panel_dim(bool d) {
 // transfer time again. sendCfg() calls this about twenty times across the
 // burst, which is smooth enough to watch and costs well under a second.
 void oled_draw_progress(const char* title, unsigned done, unsigned total) {
+  if (!s_oled_present) return;   // and this one matters most: it is called
+                                 // from inside sendCfg()'s blocking burst,
+                                 // so a dead bus here slows the transfer
+                                 // the progress bar is meant to be showing.
   if (total == 0) return;
   // A transfer is activity: it must never sleep or dim part-way through, and
   // if the panel had already gone dark this is what brings it back.
@@ -683,6 +694,8 @@ uint8_t l_count;
 // ===========================================================================
 void oled_update( ) {
 // ===========================================================================
+  if (!s_oled_present) return;   // no screen on the bus -- see oled_set_present()
+
   const uint32_t now = millis();
 
   // Wheels turning and the button are the two deliberate acts that do not
