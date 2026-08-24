@@ -123,6 +123,14 @@ void tasks_joysticks(void) {
     leftSpeed = 0;
   }
 
+  #if CONFIG_SERVO_INVERT_DRIVE
+  // Whole-robot direction flip -- see CONFIG_SERVO_INVERT_DRIVE. Applied to the
+  // command, before the mix is turned into pulses, so trim and the speed cap
+  // below stay in the frame they were written for.
+  leftSpeed  = -leftSpeed;
+  rightSpeed = -rightSpeed;
+  #endif
+
   // Map -100 to 100 into servo signals: 0 to 180
   // Assuming 90 = stop, <90 = reverse, >90 = forward
   int leftPulse = map(leftSpeed , -100, 100, 0, 180);
@@ -180,6 +188,11 @@ void tasks_remotexy(void) {
   remotexy_send_control_echo();
   remotexy_send_oled_mirror();
   remotexy_send_led_state();
+  // Publishes the head bearing, and advances the sweep by one step. Must run
+  // AFTER the distance was read this pass, so the reading just sent belongs
+  // to the angle just sent -- the step then has a full pass to settle before
+  // the next measurement.
+  remotexy_send_head_and_sweep();
   // Must stay last: ends the forced full refresh that follows a CFG transfer.
   // Same pass: the deferred trim write and the echo between a wheel's four
   // controls. Both are cheap and both are no-ops unless something moved.

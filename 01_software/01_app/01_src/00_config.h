@@ -162,6 +162,13 @@
 // Drive servos. Both go through the TXB0104, so they see real 5V pulses.
 // Swap these two if the robot drives backwards or spins on the spot: which
 // physical connector is "left" depends on how the servos are mounted.
+// Both wheels ran backwards: pressing forward drove the robot in reverse.
+// That is motor polarity, not a left/right mix-up -- swapping the two pins
+// would give a robot that spins instead. Inverting both channels fixes the
+// steering with it: with the polarity wrong, a spin-left command was also
+// coming out as spin-right, and correcting the sign corrects both.
+#define CONFIG_SERVO_INVERT_DRIVE 1
+
 #define CONFIG_PIN_SERVO_LEFT  5    // J5,  level-shifted
 #define CONFIG_PIN_SERVO_RIGHT 10   // J12, level-shifted
 
@@ -187,6 +194,13 @@
 // told to go past its stop sits there stalled, drawing full stall current off
 // the same rail as the C3 -- which is the brownout that reads as a random
 // reboot mid-sweep. Narrow these to what your mount actually clears.
+// Sweep mode: the head steps one notch per telemetry pass rather than on a
+// timer of its own, so each (angle, distance) pair the radar plots was
+// measured with the head already settled at that bearing. Stepping faster
+// than the sonar is read just paints readings at angles the sensor was not
+// actually pointing at when they were taken.
+#define CONFIG_SERVO_HEAD_SWEEP_STEP 15
+
 #define CONFIG_SERVO_HEAD_MIN 10
 #define CONFIG_SERVO_HEAD_MAX 170
 

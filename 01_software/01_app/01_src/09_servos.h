@@ -11,4 +11,11 @@ extern void moveHead(int32_t angle);
 extern void centerHead();
 extern uint8_t headAngle();
 
+// Sweep mode. head_sweep_step() advances one notch and reverses at each
+// mechanical limit; it is a no-op while sweep is off, so the manual slider
+// keeps working untouched.
+extern void head_sweep_set(bool on);
+extern bool head_sweep_get(void);
+extern void head_sweep_step(void);
+
 #endif // __DEF_INCLUDE_SERVOS_H__

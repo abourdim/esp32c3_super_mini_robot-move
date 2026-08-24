@@ -74,3 +74,51 @@ uint8_t headAngle() {
   // detections across arc the sensor never pointed at.
   return s_head_angle;
 }
+
+// ===========================================================================
+// Sweep mode
+// ===========================================================================
+// A distance sensor on a fixed head gives one number that changes for reasons
+// you cannot see. Sweeping it turns the same sensor into a picture of the
+// room, which is the whole reason the radar widget exists.
+//
+// Deliberately stepped by the caller rather than on its own timer -- see the
+// call site in tasks_remotexy(). The radar plots (angle, distance) pairs, and
+// those two have to have been true at the same moment: stepping independently
+// would smear readings across bearings the sensor was not pointing at.
+
+static bool   s_sweep_on  = false;
+static int8_t s_sweep_dir = +1;
+
+// ===========================================================================
+void head_sweep_set(bool on) {
+// ===========================================================================
+  if (on == s_sweep_on) return;
+  s_sweep_on = on;
+  // Leaving sweep parks the head straight ahead rather than abandoning it at
+  // whatever bearing the last step reached -- otherwise switching to manual
+  // starts from a position the slider does not agree with.
+  if (!on) centerHead();
+}
+
+// ===========================================================================
+bool head_sweep_get(void) {
+// ===========================================================================
+  return s_sweep_on;
+}
+
+// ===========================================================================
+void head_sweep_step(void) {
+// ===========================================================================
+  if (!s_sweep_on) return;
+
+  int32_t next = (int32_t)headAngle() + (int32_t)s_sweep_dir * CONFIG_SERVO_HEAD_SWEEP_STEP;
+
+  // Reverse AT the limit, not past it. moveHead() clamps anyway, but bouncing
+  // off the clamp would make the head sit at the end stop for one extra pass
+  // every sweep -- visible as a stutter, and a stalled servo while it lasts.
+  if (next >= CONFIG_SERVO_HEAD_MAX) { next = CONFIG_SERVO_HEAD_MAX; s_sweep_dir = -1; }
+  else if (next <= CONFIG_SERVO_HEAD_MIN) { next = CONFIG_SERVO_HEAD_MIN; s_sweep_dir = +1; }
+
+  moveHead(next);
+}

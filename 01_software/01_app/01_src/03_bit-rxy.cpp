@@ -180,101 +180,103 @@ static const char* LAYOUT_CFG_EXPERT_BASE64 =
   "biIsInRyaW1fbF91cCIsInRyaW1fbF9udW0iLCJ0cmltX3IiLCJ0cmltX3JfZG4iLCJ0cmlt"
   "X3JfdXAiLCJ0cmltX3JfbnVtIl0sIm1vZGVsIjoicGFuZWwiLCJwYWRkaW5nIjoxOH0seyJp"
   "ZCI6ImdycF9kaXN0IiwidCI6Imdyb3VwIiwibGFiZWwiOiJESVNUQU5DRSIsIngiOjc0NCwi"
-  "eSI6MjEsInciOjQ2NywiaCI6ODQzLCJjb2xvciI6IiNmZmIwMjAiLCJjaGlsZHJlbiI6WyJn"
-  "YXVnZV9kaXN0YW5jZSIsImFsZXJ0IiwiZ3JhcGhfZGlzdCIsImhlYWQiLCJyYWRhciJdLCJt"
-  "b2RlbCI6InBhbmVsIiwicGFkZGluZyI6MTh9LHsiaWQiOiJncnBfbGlnaHQiLCJ0IjoiZ3Jv"
-  "dXAiLCJsYWJlbCI6IkxJR0hUUyIsIngiOjE5LCJ5Ijo5MDAsInciOjQwMCwiaCI6Mjg0LCJj"
-  "b2xvciI6IiM3YzVjZmYiLCJjaGlsZHJlbiI6WyJ0b2dnbGVfbGVkX3IiLCJ0b2dnbGVfbGVk"
-  "X2ciLCJsZWRfcl9zdGF0ZSIsImxlZF9nX3N0YXRlIl0sIm1vZGVsIjoicGFuZWwiLCJwYWRk"
-  "aW5nIjoxOH0seyJpZCI6ImdycF9zeXMiLCJ0IjoiZ3JvdXAiLCJsYWJlbCI6IlNZU1RFTSIs"
-  "IngiOjEwLCJ5IjoxMjIwLCJ3IjoxMTg2LCJoIjoyNTQsImNvbG9yIjoiIzNkZGM5NyIsImNo"
-  "aWxkcmVuIjpbImJhdHRlcnlfbGV2ZWwiLCJsYmxfdmVyIiwibGJsX3VwdGltZSIsImxibF92"
-  "YmF0IiwidXBkIiwibGV2ZWwiLCJsZWRfYnV0dG9uIiwiZ2F1Z2VfcnNzaSIsImxvZ28iXSwi"
-  "bW9kZWwiOiJwYW5lbCIsInBhZGRpbmciOjE4fSx7ImlkIjoic2VwX2NvbHMiLCJ0Ijoic2Vw"
-  "YXJhdG9yIiwieCI6NzE5LCJ5IjoyMiwidyI6MTAsImgiOjg0MiwibW9kZWwiOiJzdWJ0bGUi"
-  "LCJvcmllbnRhdGlvbiI6InZlcnRpY2FsIiwidGhpY2tuZXNzIjoxfSx7ImlkIjoic2VwX2Iy"
-  "IiwidCI6InNlcGFyYXRvciIsIngiOjMyLCJ5IjoxMTk1LCJ3IjoxMTc2LCJoIjoxMCwibW9k"
-  "ZWwiOiJzdWJ0bGUiLCJvcmllbnRhdGlvbiI6Imhvcml6b250YWwiLCJ0aGlja25lc3MiOjF9"
-  "LHsiaWQiOiJkcGFkX2RyaXZlIiwidCI6ImRwYWQiLCJ4Ijo0MywieSI6NzUsInciOjQxNiwi"
-  "aCI6NDc0LCJsYWJlbCI6IkRyaXZlIiwibW9kZWwiOiJjbGFzc2ljIiwiZ3JvdXBJZCI6Imdy"
-  "cF9kcml2ZSJ9LHsiaWQiOiJqb3lfZHJpdmUiLCJ0Ijoiam95c3RpY2siLCJ4Ijo0NzQsInki"
-  "OjcyLCJ3IjoyMjYsImgiOjIyMSwibGFiZWwiOiJEcml2ZSIsImdyb3VwSWQiOiJncnBfZHJp"
-  "dmUiLCJtb2RlbCI6ImNsYXNzaWMifSx7ImlkIjoic3BkIiwidCI6InNsaWRlciIsIngiOjYx"
-  "NywieSI6MzAzLCJ3Ijo3MywiaCI6MjQ2LCJsYWJlbCI6Ik1heCBzcGVlZCIsIm1heCI6MTAw"
-  "LCJ2YWx1ZSI6MTAwLCJncm91cElkIjoiZ3JwX2RyaXZlIiwibW9kZWwiOiJ0cmFjayIsIm1p"
-  "biI6MCwic3RlcCI6MX0seyJpZCI6ImJ0bl9zdG9wIiwidCI6ImJ1dHRvbiIsIngiOjE4OCwi"
-  "eSI6MjQzLCJ3IjoxMjUsImgiOjEzOCwibGFiZWwiOiJTVE9QIiwibW9kZWwiOiJmbGF0Iiwi"
-  "Z3JvdXBJZCI6ImdycF9kcml2ZSJ9LHsiaWQiOiJnYXVnZV9zcGVlZCIsInQiOiJnYXVnZSIs"
-  "IngiOjQ2NCwieSI6Mzg4LCJ3IjoxNTAsImgiOjE2NCwibGFiZWwiOiJTcGVlZCIsIm1pbiI6"
-  "MCwibWF4IjoxMDAsInVuaXRzIjoiJSIsImRlY2ltYWxzIjowLCJtb2RlbCI6ImNsYXNzaWMi"
-  "LCJncm91cElkIjoiZ3JwX2RyaXZlIn0seyJpZCI6ImdhdWdlX2Rpc3RhbmNlIiwidCI6Imdh"
-  "dWdlIiwieCI6NzgxLCJ5IjozMywidyI6MTk1LCJoIjoxNzMsImxhYmVsIjoiRGlzdGFuY2Ui"
-  "LCJtaW4iOjAsIm1heCI6MjAwLCJ1bml0cyI6ImNtIiwiZGVjaW1hbHMiOjAsIm1vZGVsIjoi"
-  "Y2xhc3NpYyIsImdyb3VwSWQiOiJncnBfZGlzdCJ9LHsiaWQiOiJhbGVydCIsInQiOiJub3Rp"
-  "ZmljYXRpb24iLCJ4IjoxMDQ3LCJ5Ijo5MCwidyI6OTAsImgiOjkwLCJsYWJlbCI6Ik9ic3Rh"
-  "Y2xlIiwiZ3JvdXBJZCI6ImdycF9kaXN0In0seyJpZCI6ImdyYXBoX2Rpc3QiLCJ0IjoiZ3Jh"
-  "cGgiLCJ4Ijo3NzAsInkiOjIzNCwidyI6NDMxLCJoIjozMzMsImxhYmVsIjoiRGlzdGFuY2Ug"
-  "Y20iLCJtYXgiOjIwMCwiZ3JvdXBJZCI6ImdycF9kaXN0IiwibW9kZWwiOiJncmlkIiwic2Vy"
-  "aWVzIjoxLCJ3aW5kb3dTZWMiOjMwLCJhdXRvU2NhbGUiOnRydWUsIm1pbiI6MCwic2hvd0xl"
-  "Z2VuZCI6dHJ1ZX0seyJpZCI6InRvZ2dsZV9sZWRfciIsInQiOiJ0b2dnbGUiLCJ4Ijo0NCwi"
-  "eSI6OTYwLCJ3IjoxMDgsImgiOjEwMCwibGFiZWwiOiJSZWQgTEVEIiwibW9kZWwiOiJwaWxs"
-  "IiwiZ3JvdXBJZCI6ImdycF9saWdodCJ9LHsiaWQiOiJ0b2dnbGVfbGVkX2ciLCJ0IjoidG9n"
-  "Z2xlIiwieCI6MTY4LCJ5Ijo5NjAsInciOjEwNywiaCI6MTAwLCJsYWJlbCI6IkdyZWVuIExF"
-  "RCIsIm1vZGVsIjoicGlsbCIsImdyb3VwSWQiOiJncnBfbGlnaHQifSx7ImlkIjoiYmF0dGVy"
-  "eV9sZXZlbCIsInQiOiJiYXR0ZXJ5IiwieCI6NTQ2LCJ5IjoxMzQwLCJ3Ijo5NSwiaCI6ODYs"
-  "ImxhYmVsIjoiQmF0dGVyeSIsIm1vZGVsIjoidmVydGljYWwiLCJncm91cElkIjoiZ3JwX3N5"
-  "cyJ9LHsiaWQiOiJsYmxfdmVyIiwidCI6ImxhYmVsIiwieCI6MjUsInkiOjEyNzAsInciOjIw"
-  "MCwiaCI6NTAsImxhYmVsIjoiRmlybXdhcmUiLCJtb2RlbCI6ImNhcmQiLCJncm91cElkIjoi"
-  "Z3JwX3N5cyJ9LHsiaWQiOiJsYmxfdXB0aW1lIiwidCI6ImxhYmVsIiwieCI6MjM1LCJ5Ijox"
-  "MjcyLCJ3IjoyMDAsImgiOjUwLCJsYWJlbCI6IlVwdGltZSIsIm1vZGVsIjoiY2FyZCIsImdy"
-  "b3VwSWQiOiJncnBfc3lzIn0seyJpZCI6ImxibF92YmF0IiwidCI6ImxhYmVsIiwieCI6NDUy"
-  "LCJ5IjoxMjcyLCJ3IjoyMDAsImgiOjUwLCJsYWJlbCI6IkJhdHRlcnkgViIsIm1vZGVsIjoi"
-  "Y2FyZCIsImdyb3VwSWQiOiJncnBfc3lzIn0seyJpZCI6InVwZCIsInQiOiJzZWxlY3QiLCJ4"
-  "IjoyNywieSI6MTM1MCwidyI6MTYwLCJoIjo3MCwibGFiZWwiOiJUZWxlbWV0cnkiLCJvcHRp"
-  "b25zIjoiT2ZmLEJhc2ljLEFsbCIsImdyb3VwSWQiOiJncnBfc3lzIn0seyJpZCI6ImxldmVs"
-  "IiwidCI6InNlbGVjdCIsIngiOjIzMywieSI6MTM1MiwidyI6MTYwLCJoIjo3MCwibGFiZWwi"
-  "OiJMZXZlbCIsIm9wdGlvbnMiOiJCZWdpbm5lcixFeHBlcnQsTW90b3JzLERpc3RhbmNlLExp"
-  "Z2h0cyxTb3VuZCxEaXNwbGF5LFBvd2VyIiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7ImlkIjoi"
-  "bGVkX2J1dHRvbiIsInQiOiJsZWQiLCJ4Ijo0MjksInkiOjEzNDYsInciOjgyLCJoIjo3Nywi"
-  "bGFiZWwiOiJCdXR0b24iLCJtb2RlbCI6ImRvdCIsImNvbG9yT24iOiIjMDBmZjg4IiwiZ3Jv"
-  "dXBJZCI6ImdycF9zeXMiLCJjb2xvck9mZiI6IiMyYTJhM2EifSx7ImlkIjoiZ2F1Z2VfcnNz"
-  "aSIsInQiOiJnYXVnZSIsIngiOjY2OCwieSI6MTI3OSwidyI6MjIxLCJoIjoxNzgsImxhYmVs"
-  "IjoiU2lnbmFsIiwibWluIjotMTAwLCJtYXgiOi0zMCwidW5pdHMiOiJkQm0iLCJkZWNpbWFs"
-  "cyI6MCwibW9kZWwiOiJjbGFzc2ljIiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7ImlkIjoibG9n"
-  "byIsInQiOiJpbWFnZSIsIngiOjkwOSwieSI6MTI3OCwidyI6MjYxLCJoIjoxNzIsImxhYmVs"
-  "IjoiV29ya3Nob3AtRElZIiwiaW1hZ2VTcmMiOiJhc3NldHMvd29ya3Nob3AtZGl5LWxvZ28u"
-  "c3ZnIiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7ImlkIjoibGVkX3Jfc3RhdGUiLCJ0IjoibGVk"
-  "IiwieCI6NTIsInkiOjEwODAsInciOjgwLCJoIjo4MCwibGFiZWwiOiJSZWQgc3RhdHVzIiwi"
-  "bW9kZWwiOiJkb3QiLCJjb2xvck9uIjoiI2ZmNTI1MiIsImdyb3VwSWQiOiJncnBfbGlnaHQi"
-  "LCJjb2xvck9mZiI6IiMyYTJhM2EifSx7ImlkIjoibGVkX2dfc3RhdGUiLCJ0IjoibGVkIiwi"
-  "eCI6MTc4LCJ5IjoxMDgwLCJ3Ijo4MCwiaCI6ODAsImxhYmVsIjoiR3JlZW4gc3RhdHVzIiwi"
-  "bW9kZWwiOiJkb3QiLCJjb2xvck9uIjoiIzAwZmY4OCIsImdyb3VwSWQiOiJncnBfbGlnaHQi"
-  "LCJjb2xvck9mZiI6IiMyYTJhM2EifSx7ImlkIjoidHJpbV9sIiwidCI6InNsaWRlciIsIngi"
-  "OjUwLCJ5Ijo2MDAsInciOjcwLCJoIjoxNjAsImxhYmVsIjoiVHJpbSBMIiwibWluIjotMjAs"
-  "Im1heCI6MjAsInN0ZXAiOjEsInZhbHVlIjowLCJncm91cElkIjoiZ3JwX2RyaXZlIiwibW9k"
-  "ZWwiOiJ0cmFjayJ9LHsiaWQiOiJ0cmltX2xfZG4iLCJ0IjoiYnV0dG9uIiwieCI6MTQwLCJ5"
-  "Ijo2MTAsInciOjkwLCJoIjo3MCwibGFiZWwiOiJMIC0gMSIsImdyb3VwSWQiOiJncnBfZHJp"
-  "dmUiLCJtb2RlbCI6Im5lbyJ9LHsiaWQiOiJ0cmltX2xfdXAiLCJ0IjoiYnV0dG9uIiwieCI6"
-  "MTQwLCJ5Ijo3MDAsInciOjkwLCJoIjo3MCwibGFiZWwiOiJMICsgMSIsImdyb3VwSWQiOiJn"
-  "cnBfZHJpdmUiLCJtb2RlbCI6Im5lbyJ9LHsiaWQiOiJ0cmltX2xfbnVtIiwidCI6ImVkaXRm"
-  "aWVsZCIsIngiOjUwLCJ5Ijo3ODAsInciOjE4MCwiaCI6NjAsImxhYmVsIjoiTCA9IiwiZ3Jv"
-  "dXBJZCI6ImdycF9kcml2ZSIsInBsYWNlaG9sZGVyIjoiVHlwZSBoZXJlLi4uIn0seyJpZCI6"
-  "InRyaW1fciIsInQiOiJzbGlkZXIiLCJ4IjozOTAsInkiOjYwMCwidyI6NzAsImgiOjE2MCwi"
-  "bGFiZWwiOiJUcmltIFIiLCJtaW4iOi0yMCwibWF4IjoyMCwic3RlcCI6MSwidmFsdWUiOjAs"
-  "Imdyb3VwSWQiOiJncnBfZHJpdmUiLCJtb2RlbCI6InRyYWNrIn0seyJpZCI6InRyaW1fcl9k"
-  "biIsInQiOiJidXR0b24iLCJ4Ijo0ODAsInkiOjYxMCwidyI6OTAsImgiOjcwLCJsYWJlbCI6"
-  "IlIgLSAxIiwiZ3JvdXBJZCI6ImdycF9kcml2ZSIsIm1vZGVsIjoibmVvIn0seyJpZCI6InRy"
-  "aW1fcl91cCIsInQiOiJidXR0b24iLCJ4Ijo0ODAsInkiOjcwMCwidyI6OTAsImgiOjcwLCJs"
-  "YWJlbCI6IlIgKyAxIiwiZ3JvdXBJZCI6ImdycF9kcml2ZSIsIm1vZGVsIjoibmVvIn0seyJp"
-  "ZCI6InRyaW1fcl9udW0iLCJ0IjoiZWRpdGZpZWxkIiwieCI6MzkwLCJ5Ijo3ODAsInciOjE4"
-  "MCwiaCI6NjAsImxhYmVsIjoiUiA9IiwiZ3JvdXBJZCI6ImdycF9kcml2ZSIsInBsYWNlaG9s"
-  "ZGVyIjoiVHlwZSBoZXJlLi4uIn0seyJpZCI6ImhlYWQiLCJ0Ijoic2xpZGVyIiwieCI6Nzcw"
-  "LCJ5Ijo2MDAsInciOjgwLCJoIjoyMDAsImxhYmVsIjoiSGVhZCIsIm1pbiI6MTAsIm1heCI6"
-  "MTcwLCJzdGVwIjo1LCJ2YWx1ZSI6OTAsImdyb3VwSWQiOiJncnBfZGlzdCJ9LHsiaWQiOiJy"
-  "YWRhciIsInQiOiJyYWRhciIsIngiOjg4MCwieSI6NjAwLCJ3IjozMDAsImgiOjI0MCwibGFi"
-  "ZWwiOiJSYWRhciIsInNvdXJjZSI6ImdhdWdlX2Rpc3RhbmNlIiwiYW5nbGVTb3VyY2UiOiJo"
-  "ZWFkIiwibWF4IjoyMDAsIm1vZGVsIjoiZG90cyIsImdyb3VwSWQiOiJncnBfZGlzdCJ9XSwi"
-  "Y2FudmFzIjp7InciOjEyMzEsImgiOjE1MjB9fQ==";
+  "eSI6MjEsInciOjQ2NywiaCI6OTA5LCJjb2xvciI6IiNmZmIwMjAiLCJjaGlsZHJlbiI6WyJn"
+  "YXVnZV9kaXN0YW5jZSIsImFsZXJ0IiwiZ3JhcGhfZGlzdCIsImhlYWQiLCJyYWRhciIsInN3"
+  "ZWVwIl0sIm1vZGVsIjoicGFuZWwiLCJwYWRkaW5nIjoxOH0seyJpZCI6ImdycF9saWdodCIs"
+  "InQiOiJncm91cCIsImxhYmVsIjoiTElHSFRTIiwieCI6MTksInkiOjkwMCwidyI6NDAwLCJo"
+  "IjoyODQsImNvbG9yIjoiIzdjNWNmZiIsImNoaWxkcmVuIjpbInRvZ2dsZV9sZWRfciIsInRv"
+  "Z2dsZV9sZWRfZyIsImxlZF9yX3N0YXRlIiwibGVkX2dfc3RhdGUiXSwibW9kZWwiOiJwYW5l"
+  "bCIsInBhZGRpbmciOjE4fSx7ImlkIjoiZ3JwX3N5cyIsInQiOiJncm91cCIsImxhYmVsIjoi"
+  "U1lTVEVNIiwieCI6MTAsInkiOjEyMjAsInciOjExODYsImgiOjI1NCwiY29sb3IiOiIjM2Rk"
+  "Yzk3IiwiY2hpbGRyZW4iOlsiYmF0dGVyeV9sZXZlbCIsImxibF92ZXIiLCJsYmxfdXB0aW1l"
+  "IiwibGJsX3ZiYXQiLCJ1cGQiLCJsZXZlbCIsImxlZF9idXR0b24iLCJnYXVnZV9yc3NpIiwi"
+  "bG9nbyJdLCJtb2RlbCI6InBhbmVsIiwicGFkZGluZyI6MTh9LHsiaWQiOiJzZXBfY29scyIs"
+  "InQiOiJzZXBhcmF0b3IiLCJ4Ijo3MTksInkiOjIyLCJ3IjoxMCwiaCI6ODQyLCJtb2RlbCI6"
+  "InN1YnRsZSIsIm9yaWVudGF0aW9uIjoidmVydGljYWwiLCJ0aGlja25lc3MiOjF9LHsiaWQi"
+  "OiJzZXBfYjIiLCJ0Ijoic2VwYXJhdG9yIiwieCI6MzIsInkiOjExOTUsInciOjExNzYsImgi"
+  "OjEwLCJtb2RlbCI6InN1YnRsZSIsIm9yaWVudGF0aW9uIjoiaG9yaXpvbnRhbCIsInRoaWNr"
+  "bmVzcyI6MX0seyJpZCI6ImRwYWRfZHJpdmUiLCJ0IjoiZHBhZCIsIngiOjQzLCJ5Ijo3NSwi"
+  "dyI6NDE2LCJoIjo0NzQsImxhYmVsIjoiRHJpdmUiLCJtb2RlbCI6ImNsYXNzaWMiLCJncm91"
+  "cElkIjoiZ3JwX2RyaXZlIn0seyJpZCI6ImpveV9kcml2ZSIsInQiOiJqb3lzdGljayIsIngi"
+  "OjQ3NCwieSI6NzIsInciOjIyNiwiaCI6MjIxLCJsYWJlbCI6IkRyaXZlIiwiZ3JvdXBJZCI6"
+  "ImdycF9kcml2ZSIsIm1vZGVsIjoiY2xhc3NpYyJ9LHsiaWQiOiJzcGQiLCJ0Ijoic2xpZGVy"
+  "IiwieCI6NjE3LCJ5IjozMDMsInciOjczLCJoIjoyNDYsImxhYmVsIjoiTWF4IHNwZWVkIiwi"
+  "bWF4IjoxMDAsInZhbHVlIjoxMDAsImdyb3VwSWQiOiJncnBfZHJpdmUiLCJtb2RlbCI6InRy"
+  "YWNrIiwibWluIjowLCJzdGVwIjoxfSx7ImlkIjoiYnRuX3N0b3AiLCJ0IjoiYnV0dG9uIiwi"
+  "eCI6MTg4LCJ5IjoyNDMsInciOjEyNSwiaCI6MTM4LCJsYWJlbCI6IlNUT1AiLCJtb2RlbCI6"
+  "ImZsYXQiLCJncm91cElkIjoiZ3JwX2RyaXZlIn0seyJpZCI6ImdhdWdlX3NwZWVkIiwidCI6"
+  "ImdhdWdlIiwieCI6NDY0LCJ5IjozODgsInciOjE1MCwiaCI6MTY0LCJsYWJlbCI6IlNwZWVk"
+  "IiwibWluIjowLCJtYXgiOjEwMCwidW5pdHMiOiIlIiwiZGVjaW1hbHMiOjAsIm1vZGVsIjoi"
+  "Y2xhc3NpYyIsImdyb3VwSWQiOiJncnBfZHJpdmUifSx7ImlkIjoiZ2F1Z2VfZGlzdGFuY2Ui"
+  "LCJ0IjoiZ2F1Z2UiLCJ4Ijo3ODEsInkiOjMzLCJ3IjoxOTUsImgiOjE3MywibGFiZWwiOiJE"
+  "aXN0YW5jZSIsIm1pbiI6MCwibWF4IjoyMDAsInVuaXRzIjoiY20iLCJkZWNpbWFscyI6MCwi"
+  "bW9kZWwiOiJjbGFzc2ljIiwiZ3JvdXBJZCI6ImdycF9kaXN0In0seyJpZCI6ImFsZXJ0Iiwi"
+  "dCI6Im5vdGlmaWNhdGlvbiIsIngiOjEwNDcsInkiOjkwLCJ3Ijo5MCwiaCI6OTAsImxhYmVs"
+  "IjoiT2JzdGFjbGUiLCJncm91cElkIjoiZ3JwX2Rpc3QifSx7ImlkIjoiZ3JhcGhfZGlzdCIs"
+  "InQiOiJncmFwaCIsIngiOjc3MCwieSI6MjM0LCJ3Ijo0MzEsImgiOjMzMywibGFiZWwiOiJE"
+  "aXN0YW5jZSBjbSIsIm1heCI6MjAwLCJncm91cElkIjoiZ3JwX2Rpc3QiLCJtb2RlbCI6Imdy"
+  "aWQiLCJzZXJpZXMiOjEsIndpbmRvd1NlYyI6MzAsImF1dG9TY2FsZSI6dHJ1ZSwibWluIjow"
+  "LCJzaG93TGVnZW5kIjp0cnVlfSx7ImlkIjoidG9nZ2xlX2xlZF9yIiwidCI6InRvZ2dsZSIs"
+  "IngiOjQ0LCJ5Ijo5NjAsInciOjEwOCwiaCI6MTAwLCJsYWJlbCI6IlJlZCBMRUQiLCJtb2Rl"
+  "bCI6InBpbGwiLCJncm91cElkIjoiZ3JwX2xpZ2h0In0seyJpZCI6InRvZ2dsZV9sZWRfZyIs"
+  "InQiOiJ0b2dnbGUiLCJ4IjoxNjgsInkiOjk2MCwidyI6MTA3LCJoIjoxMDAsImxhYmVsIjoi"
+  "R3JlZW4gTEVEIiwibW9kZWwiOiJwaWxsIiwiZ3JvdXBJZCI6ImdycF9saWdodCJ9LHsiaWQi"
+  "OiJiYXR0ZXJ5X2xldmVsIiwidCI6ImJhdHRlcnkiLCJ4Ijo1NDYsInkiOjEzNDAsInciOjk1"
+  "LCJoIjo4NiwibGFiZWwiOiJCYXR0ZXJ5IiwibW9kZWwiOiJ2ZXJ0aWNhbCIsImdyb3VwSWQi"
+  "OiJncnBfc3lzIn0seyJpZCI6ImxibF92ZXIiLCJ0IjoibGFiZWwiLCJ4IjoyNSwieSI6MTI3"
+  "MCwidyI6MjAwLCJoIjo1MCwibGFiZWwiOiJGaXJtd2FyZSIsIm1vZGVsIjoiY2FyZCIsImdy"
+  "b3VwSWQiOiJncnBfc3lzIn0seyJpZCI6ImxibF91cHRpbWUiLCJ0IjoibGFiZWwiLCJ4Ijoy"
+  "MzUsInkiOjEyNzIsInciOjIwMCwiaCI6NTAsImxhYmVsIjoiVXB0aW1lIiwibW9kZWwiOiJj"
+  "YXJkIiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7ImlkIjoibGJsX3ZiYXQiLCJ0IjoibGFiZWwi"
+  "LCJ4Ijo0NTIsInkiOjEyNzIsInciOjIwMCwiaCI6NTAsImxhYmVsIjoiQmF0dGVyeSBWIiwi"
+  "bW9kZWwiOiJjYXJkIiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7ImlkIjoidXBkIiwidCI6InNl"
+  "bGVjdCIsIngiOjI3LCJ5IjoxMzUwLCJ3IjoxNjAsImgiOjcwLCJsYWJlbCI6IlRlbGVtZXRy"
+  "eSIsIm9wdGlvbnMiOiJPZmYsQmFzaWMsQWxsIiwiZ3JvdXBJZCI6ImdycF9zeXMifSx7Imlk"
+  "IjoibGV2ZWwiLCJ0Ijoic2VsZWN0IiwieCI6MjMzLCJ5IjoxMzUyLCJ3IjoxNjAsImgiOjcw"
+  "LCJsYWJlbCI6IkxldmVsIiwib3B0aW9ucyI6IkJlZ2lubmVyLEV4cGVydCxNb3RvcnMsRGlz"
+  "dGFuY2UsTGlnaHRzLFNvdW5kLERpc3BsYXksUG93ZXIiLCJncm91cElkIjoiZ3JwX3N5cyJ9"
+  "LHsiaWQiOiJsZWRfYnV0dG9uIiwidCI6ImxlZCIsIngiOjQyOSwieSI6MTM0NiwidyI6ODIs"
+  "ImgiOjc3LCJsYWJlbCI6IkJ1dHRvbiIsIm1vZGVsIjoiZG90IiwiY29sb3JPbiI6IiMwMGZm"
+  "ODgiLCJncm91cElkIjoiZ3JwX3N5cyIsImNvbG9yT2ZmIjoiIzJhMmEzYSJ9LHsiaWQiOiJn"
+  "YXVnZV9yc3NpIiwidCI6ImdhdWdlIiwieCI6NjY4LCJ5IjoxMjc5LCJ3IjoyMjEsImgiOjE3"
+  "OCwibGFiZWwiOiJTaWduYWwiLCJtaW4iOi0xMDAsIm1heCI6LTMwLCJ1bml0cyI6ImRCbSIs"
+  "ImRlY2ltYWxzIjowLCJtb2RlbCI6ImNsYXNzaWMiLCJncm91cElkIjoiZ3JwX3N5cyJ9LHsi"
+  "aWQiOiJsb2dvIiwidCI6ImltYWdlIiwieCI6OTA5LCJ5IjoxMjc4LCJ3IjoyNjEsImgiOjE3"
+  "MiwibGFiZWwiOiJXb3Jrc2hvcC1ESVkiLCJpbWFnZVNyYyI6ImFzc2V0cy93b3Jrc2hvcC1k"
+  "aXktbG9nby5zdmciLCJncm91cElkIjoiZ3JwX3N5cyJ9LHsiaWQiOiJsZWRfcl9zdGF0ZSIs"
+  "InQiOiJsZWQiLCJ4Ijo1MiwieSI6MTA4MCwidyI6ODAsImgiOjgwLCJsYWJlbCI6IlJlZCBz"
+  "dGF0dXMiLCJtb2RlbCI6ImRvdCIsImNvbG9yT24iOiIjZmY1MjUyIiwiZ3JvdXBJZCI6Imdy"
+  "cF9saWdodCIsImNvbG9yT2ZmIjoiIzJhMmEzYSJ9LHsiaWQiOiJsZWRfZ19zdGF0ZSIsInQi"
+  "OiJsZWQiLCJ4IjoxNzgsInkiOjEwODAsInciOjgwLCJoIjo4MCwibGFiZWwiOiJHcmVlbiBz"
+  "dGF0dXMiLCJtb2RlbCI6ImRvdCIsImNvbG9yT24iOiIjMDBmZjg4IiwiZ3JvdXBJZCI6Imdy"
+  "cF9saWdodCIsImNvbG9yT2ZmIjoiIzJhMmEzYSJ9LHsiaWQiOiJ0cmltX2wiLCJ0Ijoic2xp"
+  "ZGVyIiwieCI6NTAsInkiOjYwMCwidyI6NzAsImgiOjE2MCwibGFiZWwiOiJUcmltIEwiLCJt"
+  "aW4iOi0yMCwibWF4IjoyMCwic3RlcCI6MSwidmFsdWUiOjAsImdyb3VwSWQiOiJncnBfZHJp"
+  "dmUiLCJtb2RlbCI6InRyYWNrIn0seyJpZCI6InRyaW1fbF9kbiIsInQiOiJidXR0b24iLCJ4"
+  "IjoxNDAsInkiOjYxMCwidyI6OTAsImgiOjcwLCJsYWJlbCI6IkwgLSAxIiwiZ3JvdXBJZCI6"
+  "ImdycF9kcml2ZSIsIm1vZGVsIjoibmVvIn0seyJpZCI6InRyaW1fbF91cCIsInQiOiJidXR0"
+  "b24iLCJ4IjoxNDAsInkiOjcwMCwidyI6OTAsImgiOjcwLCJsYWJlbCI6IkwgKyAxIiwiZ3Jv"
+  "dXBJZCI6ImdycF9kcml2ZSIsIm1vZGVsIjoibmVvIn0seyJpZCI6InRyaW1fbF9udW0iLCJ0"
+  "IjoiZWRpdGZpZWxkIiwieCI6NTAsInkiOjc4MCwidyI6MTgwLCJoIjo2MCwibGFiZWwiOiJM"
+  "ID0iLCJncm91cElkIjoiZ3JwX2RyaXZlIiwicGxhY2Vob2xkZXIiOiJUeXBlIGhlcmUuLi4i"
+  "fSx7ImlkIjoidHJpbV9yIiwidCI6InNsaWRlciIsIngiOjM5MCwieSI6NjAwLCJ3Ijo3MCwi"
+  "aCI6MTYwLCJsYWJlbCI6IlRyaW0gUiIsIm1pbiI6LTIwLCJtYXgiOjIwLCJzdGVwIjoxLCJ2"
+  "YWx1ZSI6MCwiZ3JvdXBJZCI6ImdycF9kcml2ZSIsIm1vZGVsIjoidHJhY2sifSx7ImlkIjoi"
+  "dHJpbV9yX2RuIiwidCI6ImJ1dHRvbiIsIngiOjQ4MCwieSI6NjEwLCJ3Ijo5MCwiaCI6NzAs"
+  "ImxhYmVsIjoiUiAtIDEiLCJncm91cElkIjoiZ3JwX2RyaXZlIiwibW9kZWwiOiJuZW8ifSx7"
+  "ImlkIjoidHJpbV9yX3VwIiwidCI6ImJ1dHRvbiIsIngiOjQ4MCwieSI6NzAwLCJ3Ijo5MCwi"
+  "aCI6NzAsImxhYmVsIjoiUiArIDEiLCJncm91cElkIjoiZ3JwX2RyaXZlIiwibW9kZWwiOiJu"
+  "ZW8ifSx7ImlkIjoidHJpbV9yX251bSIsInQiOiJlZGl0ZmllbGQiLCJ4IjozOTAsInkiOjc4"
+  "MCwidyI6MTgwLCJoIjo2MCwibGFiZWwiOiJSID0iLCJncm91cElkIjoiZ3JwX2RyaXZlIiwi"
+  "cGxhY2Vob2xkZXIiOiJUeXBlIGhlcmUuLi4ifSx7ImlkIjoiaGVhZCIsInQiOiJzbGlkZXIi"
+  "LCJ4Ijo3NzAsInkiOjYwMCwidyI6ODAsImgiOjIwMCwibGFiZWwiOiJIZWFkIiwibWluIjox"
+  "MCwibWF4IjoxNzAsInN0ZXAiOjUsInZhbHVlIjo5MCwiZ3JvdXBJZCI6ImdycF9kaXN0In0s"
+  "eyJpZCI6InJhZGFyIiwidCI6InJhZGFyIiwieCI6ODk1LCJ5Ijo2MDAsInciOjI5MCwiaCI6"
+  "MzAwLCJsYWJlbCI6IlJhZGFyIiwic291cmNlIjoiZ2F1Z2VfZGlzdGFuY2UiLCJhbmdsZVNv"
+  "dXJjZSI6ImhlYWQiLCJtYXgiOjIwMCwibW9kZWwiOiJkb3RzIiwiZ3JvdXBJZCI6ImdycF9k"
+  "aXN0In0seyJpZCI6InN3ZWVwIiwidCI6InRvZ2dsZSIsIngiOjc3MCwieSI6ODE2LCJ3Ijox"
+  "MTAsImgiOjkwLCJsYWJlbCI6IlN3ZWVwIiwibW9kZWwiOiJwaWxsIiwiZ3JvdXBJZCI6Imdy"
+  "cF9kaXN0In1dLCJjYW52YXMiOnsidyI6MTIzMSwiaCI6MTUyMH19";
 
 static const char* LAYOUT_CFG_TEST_MOTORS_BASE64 =
   "eyJzY2hlbWFWZXJzaW9uIjoxLCJ0aXRsZSI6Im12IC0gTW90b3JzIHRlc3QiLCJjYW52YXMi"
@@ -496,7 +498,7 @@ static bool s_joyIsXY       = false;
 // Reported to the app in the SYSTEM zone's Firmware label. Bump on release.
 // Kept the B3_ prefix so this file still diffs cleanly against b3's copy --
 // only the value distinguishes the robots in the app's Firmware label.
-#define B3_FIRMWARE_VERSION "MV-v3"
+#define B3_FIRMWARE_VERSION "MV-v4"
 
 // ---------------------------------------------------------------------------
 // Widget state owned by the app (see 03_bit-rxy.h for the accessors).
@@ -1078,7 +1080,15 @@ static void handleWidget(const String& id, const String& val) {
   // you want back after a power cycle, whereas the head is a live control --
   // restoring yesterday's bearing at boot would point the sensor somewhere
   // nobody asked for. Echoed on connect instead, so the slider starts honest.
-  if (id == "head")        { moveHead(val.toInt()); return; }
+  if (id == "head") {
+    // A manual drag takes the head back off sweep. Leaving sweep running
+    // under a slider the user is dragging means the servo fights them and
+    // the slider snaps back on the next pass.
+    head_sweep_set(false);
+    moveHead(val.toInt());
+    return;
+  }
+  if (id == "sweep")       { head_sweep_set(val == "1"); return; }
 
   if (id == "spd")         { s_speed_cap = (uint8_t)constrain(val.toInt(), 0, 100); return; }
   if (id == "btn_stop") {
@@ -1546,7 +1556,8 @@ static bool echoEntry(uint8_t i, String& id, String& val) {
   // The radar reads its bearing from this widget, so this echo is not
   // cosmetic the way a selector's is: without it the radar would plot every
   // blip at the slider default until the head was moved by hand once.
-  ECHO_ENTRY(modeHas(T_HEAD), "head", String((int)headAngle()));
+  ECHO_ENTRY(modeHas(T_HEAD), "head",  String((int)headAngle()));
+  ECHO_ENTRY(modeHas(T_HEAD), "sweep", head_sweep_get() ? "1" : "0");
 
   ECHO_ENTRY(modeHas(T_OLED), "screen_mode", oled_screen_mode_name());
   ECHO_ENTRY(modeHas(T_OLED), "face_style",  oled_face_style_name());
@@ -1585,6 +1596,29 @@ void remotexy_send_control_echo(void) {
 // Called once at the end of each telemetry pass. Clearing the force flag here
 // rather than inside a particular sender means the "send everything" pass is
 // exactly one full cycle, whichever widgets happen to be in the layout.
+// The radar plots its beam at whatever the `head` widget last reported, so
+// without this it sat at the slider's default bearing forever -- the sweep
+// would run on the robot and the scope would show a line frozen at 90.
+//
+// Sends on change only. In sweep mode that is every pass by definition; with
+// the head parked it is silent, which is what the deadband on every other
+// sender is for too.
+void remotexy_send_head_and_sweep(void) {
+  if (!modeHas(T_HEAD)) return;       // no head widget on this panel
+  if (s_upd_level == UPD_OFF) return;
+
+  static int16_t s_lastHead = -1;
+  const int16_t now = (int16_t)headAngle();
+  if (s_telemForce || now != s_lastHead) {
+    s_lastHead = now;
+    sendValue("head", String((int)now));
+  }
+
+  // Stepped last, so the angle published above is the one the distance this
+  // pass was actually measured at. The step then gets a full pass to settle.
+  head_sweep_step();
+}
+
 void remotexy_telemetry_end(void) {
   s_telemForce = false;
 }
